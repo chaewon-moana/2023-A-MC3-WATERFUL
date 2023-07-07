@@ -20,6 +20,7 @@
 		793C6B8B2A57EAE100CC5043 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		793C6B8E2A57EAE100CC5043 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		793C6B902A57EAE100CC5043 /* GitSetKey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GitSetKey.entitlements; sourceTree = "<group>"; };
+		793C6B962A57EF7600CC5043 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +37,7 @@
 		793C6B7B2A57EAE000CC5043 = {
 			isa = PBXGroup;
 			children = (
+				793C6B962A57EF7600CC5043 /* README.md */,
 				793C6B862A57EAE000CC5043 /* GitSetKey */,
 				793C6B852A57EAE000CC5043 /* Products */,
 			);
