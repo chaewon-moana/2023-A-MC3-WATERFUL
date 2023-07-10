@@ -1,2 +1,2 @@
-#  GitSetKey
+#  GitSetKit
 
