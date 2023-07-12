@@ -8,11 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		7926082C2A5BDEF50008C589 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926082B2A5BDEF50008C589 /* FileHelper.swift */; };
+		7926C1EE2A5E8420003B7D36 /* GitSetKit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */; };
+		7926C1FB2A5E8C44003B7D36 /* InputField+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1EF2A5E8C44003B7D36 /* InputField+CoreDataClass.swift */; };
+		7926C1FC2A5E8C44003B7D36 /* InputField+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F02A5E8C44003B7D36 /* InputField+CoreDataProperties.swift */; };
+		7926C1FD2A5E8C44003B7D36 /* DateField+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F12A5E8C44003B7D36 /* DateField+CoreDataClass.swift */; };
+		7926C1FE2A5E8C44003B7D36 /* DateField+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F22A5E8C44003B7D36 /* DateField+CoreDataProperties.swift */; };
+		7926C1FF2A5E8C44003B7D36 /* Field+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F32A5E8C44003B7D36 /* Field+CoreDataClass.swift */; };
+		7926C2002A5E8C44003B7D36 /* Field+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F42A5E8C44003B7D36 /* Field+CoreDataProperties.swift */; };
+		7926C2012A5E8C44003B7D36 /* Option+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F52A5E8C44003B7D36 /* Option+CoreDataClass.swift */; };
+		7926C2022A5E8C44003B7D36 /* Option+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F62A5E8C44003B7D36 /* Option+CoreDataProperties.swift */; };
+		7926C2032A5E8C44003B7D36 /* OptionField+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F72A5E8C44003B7D36 /* OptionField+CoreDataClass.swift */; };
+		7926C2042A5E8C44003B7D36 /* OptionField+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F82A5E8C44003B7D36 /* OptionField+CoreDataProperties.swift */; };
+		7926C2052A5E8C44003B7D36 /* Team+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1F92A5E8C44003B7D36 /* Team+CoreDataClass.swift */; };
+		7926C2062A5E8C44003B7D36 /* Team+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1FA2A5E8C44003B7D36 /* Team+CoreDataProperties.swift */; };
+		7926C20A2A5E8CDB003B7D36 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */; };
 		79694F352A5AB08F009F3C69 /* GitSetKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F342A5AB08F009F3C69 /* GitSetKitApp.swift */; };
 		79694F372A5AB08F009F3C69 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F362A5AB08F009F3C69 /* ContentView.swift */; };
 		79694F392A5AB090009F3C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79694F382A5AB090009F3C69 /* Assets.xcassets */; };
-		79694F452A5AB0ED009F3C69 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F442A5AB0ED009F3C69 /* Team.swift */; };
-		79694F472A5AB361009F3C69 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F462A5AB361009F3C69 /* Field.swift */; };
 		79694F4B2A5AB904009F3C69 /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4A2A5AB904009F3C69 /* TeamView.swift */; };
 		79694F4D2A5AB936009F3C69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79694F4C2A5AB936009F3C69 /* Localizable.strings */; };
 		79694F4F2A5ABF8A009F3C69 /* ConventionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */; };
@@ -20,13 +32,25 @@
 
 /* Begin PBXFileReference section */
 		7926082B2A5BDEF50008C589 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
+		7926C1ED2A5E8420003B7D36 /* GitSetKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitSetKit.xcdatamodel; sourceTree = "<group>"; };
+		7926C1EF2A5E8C44003B7D36 /* InputField+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputField+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7926C1F02A5E8C44003B7D36 /* InputField+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputField+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7926C1F12A5E8C44003B7D36 /* DateField+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateField+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7926C1F22A5E8C44003B7D36 /* DateField+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateField+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7926C1F32A5E8C44003B7D36 /* Field+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Field+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7926C1F42A5E8C44003B7D36 /* Field+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Field+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7926C1F52A5E8C44003B7D36 /* Option+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Option+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7926C1F62A5E8C44003B7D36 /* Option+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Option+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7926C1F72A5E8C44003B7D36 /* OptionField+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionField+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7926C1F82A5E8C44003B7D36 /* OptionField+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionField+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7926C1F92A5E8C44003B7D36 /* Team+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7926C1FA2A5E8C44003B7D36 /* Team+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		79694F312A5AB08F009F3C69 /* GitSetKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitSetKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79694F342A5AB08F009F3C69 /* GitSetKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitSetKitApp.swift; sourceTree = "<group>"; };
 		79694F362A5AB08F009F3C69 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		79694F382A5AB090009F3C69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79694F3D2A5AB090009F3C69 /* GitSetKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GitSetKit.entitlements; sourceTree = "<group>"; };
-		79694F442A5AB0ED009F3C69 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
-		79694F462A5AB361009F3C69 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		79694F4A2A5AB904009F3C69 /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
 		79694F4C2A5AB936009F3C69 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConventionView.swift; sourceTree = "<group>"; };
@@ -49,6 +73,26 @@
 				7926082B2A5BDEF50008C589 /* FileHelper.swift */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		7926C2082A5E8C6A003B7D36 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7926C1EF2A5E8C44003B7D36 /* InputField+CoreDataClass.swift */,
+				7926C1F02A5E8C44003B7D36 /* InputField+CoreDataProperties.swift */,
+				7926C1F12A5E8C44003B7D36 /* DateField+CoreDataClass.swift */,
+				7926C1F22A5E8C44003B7D36 /* DateField+CoreDataProperties.swift */,
+				7926C1F32A5E8C44003B7D36 /* Field+CoreDataClass.swift */,
+				7926C1F42A5E8C44003B7D36 /* Field+CoreDataProperties.swift */,
+				7926C1F52A5E8C44003B7D36 /* Option+CoreDataClass.swift */,
+				7926C1F62A5E8C44003B7D36 /* Option+CoreDataProperties.swift */,
+				7926C1F72A5E8C44003B7D36 /* OptionField+CoreDataClass.swift */,
+				7926C1F82A5E8C44003B7D36 /* OptionField+CoreDataProperties.swift */,
+				7926C1F92A5E8C44003B7D36 /* Team+CoreDataClass.swift */,
+				7926C1FA2A5E8C44003B7D36 /* Team+CoreDataProperties.swift */,
+				7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 		79694F282A5AB08F009F3C69 = {
@@ -74,22 +118,14 @@
 				79694F382A5AB090009F3C69 /* Assets.xcassets */,
 				79694F3D2A5AB090009F3C69 /* GitSetKit.entitlements */,
 				79694F4C2A5AB936009F3C69 /* Localizable.strings */,
-				79694F362A5AB08F009F3C69 /* ContentView.swift */,
-				79694F432A5AB0DE009F3C69 /* Model */,
+				7926C2082A5E8C6A003B7D36 /* Data */,
 				7926082A2A5BC9030008C589 /* Tool */,
+				79694F362A5AB08F009F3C69 /* ContentView.swift */,
 				79694F4A2A5AB904009F3C69 /* TeamView.swift */,
 				79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */,
+				7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */,
 			);
 			path = GitSetKit;
-			sourceTree = "<group>";
-		};
-		79694F432A5AB0DE009F3C69 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				79694F442A5AB0ED009F3C69 /* Team.swift */,
-				79694F462A5AB361009F3C69 /* Field.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,13 +199,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79694F452A5AB0ED009F3C69 /* Team.swift in Sources */,
+				7926C20A2A5E8CDB003B7D36 /* PersistenceController.swift in Sources */,
+				7926C2042A5E8C44003B7D36 /* OptionField+CoreDataProperties.swift in Sources */,
 				79694F372A5AB08F009F3C69 /* ContentView.swift in Sources */,
+				7926C2032A5E8C44003B7D36 /* OptionField+CoreDataClass.swift in Sources */,
+				7926C2012A5E8C44003B7D36 /* Option+CoreDataClass.swift in Sources */,
+				7926C2052A5E8C44003B7D36 /* Team+CoreDataClass.swift in Sources */,
+				7926C1FD2A5E8C44003B7D36 /* DateField+CoreDataClass.swift in Sources */,
 				79694F4B2A5AB904009F3C69 /* TeamView.swift in Sources */,
+				7926C1FB2A5E8C44003B7D36 /* InputField+CoreDataClass.swift in Sources */,
 				79694F4F2A5ABF8A009F3C69 /* ConventionView.swift in Sources */,
-				79694F472A5AB361009F3C69 /* Field.swift in Sources */,
 				7926082C2A5BDEF50008C589 /* FileHelper.swift in Sources */,
+				7926C2002A5E8C44003B7D36 /* Field+CoreDataProperties.swift in Sources */,
+				7926C1FC2A5E8C44003B7D36 /* InputField+CoreDataProperties.swift in Sources */,
+				7926C2062A5E8C44003B7D36 /* Team+CoreDataProperties.swift in Sources */,
+				7926C1EE2A5E8420003B7D36 /* GitSetKit.xcdatamodeld in Sources */,
+				7926C1FE2A5E8C44003B7D36 /* DateField+CoreDataProperties.swift in Sources */,
 				79694F352A5AB08F009F3C69 /* GitSetKitApp.swift in Sources */,
+				7926C2022A5E8C44003B7D36 /* Option+CoreDataProperties.swift in Sources */,
+				7926C1FF2A5E8C44003B7D36 /* Field+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +415,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7926C1ED2A5E8420003B7D36 /* GitSetKit.xcdatamodel */,
+			);
+			currentVersion = 7926C1ED2A5E8420003B7D36 /* GitSetKit.xcdatamodel */;
+			path = GitSetKit.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 79694F292A5AB08F009F3C69 /* Project object */;
 }
