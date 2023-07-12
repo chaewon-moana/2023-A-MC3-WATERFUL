@@ -101,13 +101,6 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
-		7926C2432A5E98D9003B7D36 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		79694F282A5AB08F009F3C69 = {
 			isa = PBXGroup;
 			children = (
@@ -133,7 +126,6 @@
 				79694F4C2A5AB936009F3C69 /* Localizable.strings */,
 				7926C2082A5E8C6A003B7D36 /* Data */,
 				7926082A2A5BC9030008C589 /* Tool */,
-				7926C2432A5E98D9003B7D36 /* Data */,
 				79694F362A5AB08F009F3C69 /* ContentView.swift */,
 				79694F4A2A5AB904009F3C69 /* TeamView.swift */,
 				79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */,
