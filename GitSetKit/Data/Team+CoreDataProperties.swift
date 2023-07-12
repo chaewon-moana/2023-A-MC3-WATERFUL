@@ -20,7 +20,24 @@ extension Team {
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
     @NSManaged public var template: String?
-    @NSManaged public var fields: Field?
+    @NSManaged public var fields: NSSet?
+
+}
+
+// MARK: Generated accessors for fields
+extension Team {
+
+    @objc(addFieldsObject:)
+    @NSManaged public func addToFields(_ value: Field)
+
+    @objc(removeFieldsObject:)
+    @NSManaged public func removeFromFields(_ value: Field)
+
+    @objc(addFields:)
+    @NSManaged public func addToFields(_ values: NSSet)
+
+    @objc(removeFields:)
+    @NSManaged public func removeFromFields(_ values: NSSet)
 
 }
 

@@ -17,11 +17,7 @@ extension Option {
     }
 
     @NSManaged public var desc: String?
-    @NSManaged public var id: UUID?
-    @NSManaged public var title: String?
     @NSManaged public var value: String?
-    @NSManaged public var dateField: DateField?
-    @NSManaged public var inputField: InputField?
     @NSManaged public var optionField: OptionField?
 
 }

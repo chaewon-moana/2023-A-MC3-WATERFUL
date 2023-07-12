@@ -18,10 +18,12 @@ extension Field {
 
     @NSManaged public var desc: String?
     @NSManaged public var fieldName: String?
+    @NSManaged public var type: String?
     @NSManaged public var dateField: DateField?
     @NSManaged public var inputField: InputField?
     @NSManaged public var optionField: OptionField?
     @NSManaged public var team: Team?
+    @NSManaged public var constantField: ConstantField?
 
 }
 
