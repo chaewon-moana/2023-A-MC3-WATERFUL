@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // MARK: Side Bar
-            TeamView(teams: $teams, selected: $selected)
+            TeamView(teams: $teams, selected: $selected) 
             
         } detail: {
             // MARK: Detail
