@@ -12,7 +12,7 @@ struct TeamCell: View {
     
     var body: some View {
         VStack {
-            Text(team.name)
+            Text(team.name ?? "")
             
             if let desc = team.desc {
                 Text(desc)
