@@ -126,12 +126,20 @@
 				79694F4C2A5AB936009F3C69 /* Localizable.strings */,
 				7926C2082A5E8C6A003B7D36 /* Data */,
 				7926082A2A5BC9030008C589 /* Tool */,
-				79694F362A5AB08F009F3C69 /* ContentView.swift */,
-				79694F4A2A5AB904009F3C69 /* TeamView.swift */,
-				79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */,
+				79D78B7B2A5FE92600B8AA79 /* Window */,
 				7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */,
 			);
 			path = GitSetKit;
+			sourceTree = "<group>";
+		};
+		79D78B7B2A5FE92600B8AA79 /* Window */ = {
+			isa = PBXGroup;
+			children = (
+				79694F362A5AB08F009F3C69 /* ContentView.swift */,
+				79694F4A2A5AB904009F3C69 /* TeamView.swift */,
+				79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */,
+			);
+			path = Window;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
