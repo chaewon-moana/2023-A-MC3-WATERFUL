@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		628C51702A6196AD005292E3 /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C516F2A6196AD005292E3 /* TeamViewModel.swift */; };
 		79694F392A5AB090009F3C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79694F382A5AB090009F3C69 /* Assets.xcassets */; };
 		79694F4D2A5AB936009F3C69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79694F4C2A5AB936009F3C69 /* Localizable.strings */; };
 		79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F342A5AB08F009F3C69 /* GitSetKitApp.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		628C516F2A6196AD005292E3 /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		7926082B2A5BDEF50008C589 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		7926C1ED2A5E8420003B7D36 /* GitSetKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitSetKit.xcdatamodel; sourceTree = "<group>"; };
 		7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersistenceController.swift; path = Data/PersistenceController.swift; sourceTree = "<group>"; };
@@ -71,15 +73,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7926082A2A5BC9030008C589 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-				7926082B2A5BDEF50008C589 /* FileHelper.swift */,
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
-		7926C2082A5E8C6A003B7D36 /* Data */ = {
+		628C514D2A61766D005292E3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				7926C2272A5E98D3003B7D36 /* Option+CoreDataClass.swift */,
@@ -96,7 +90,24 @@
 				7926C2322A5E98D3003B7D36 /* ConstantField+CoreDataProperties.swift */,
 				7926C2332A5E98D3003B7D36 /* DateField+CoreDataClass.swift */,
 				7926C2342A5E98D3003B7D36 /* DateField+CoreDataProperties.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		7926082A2A5BC9030008C589 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				7926082B2A5BDEF50008C589 /* FileHelper.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		7926C2082A5E8C6A003B7D36 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				628C514D2A61766D005292E3 /* CoreData */,
 				7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */,
+				628C516F2A6196AD005292E3 /* TeamViewModel.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -216,6 +227,7 @@
 				79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */,
 				79D78B7D2A5FEDE800B8AA79 /* Option+CoreDataClass.swift in Sources */,
 				79D78B7E2A5FEDE800B8AA79 /* Option+CoreDataProperties.swift in Sources */,
+				628C51702A6196AD005292E3 /* TeamViewModel.swift in Sources */,
 				79D78B7F2A5FEDE800B8AA79 /* Team+CoreDataClass.swift in Sources */,
 				79D78B802A5FEDE800B8AA79 /* Team+CoreDataProperties.swift in Sources */,
 				79D78B812A5FEDE800B8AA79 /* InputField+CoreDataClass.swift in Sources */,
@@ -363,7 +375,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = VA3J8597P8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -391,7 +403,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = VA3J8597P8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
