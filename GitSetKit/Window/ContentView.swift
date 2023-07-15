@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @FetchRequest(
+@FetchRequest(
         entity: Team.entity(),
         sortDescriptors: [
             NSSortDescriptor(keyPath: \Team.name, ascending: true)
@@ -37,8 +36,29 @@ struct ContentView: View {
                     Text("not_selected")
                 }
             }
+            
+            Button("Add Test") {
+                teamVM.name = "name"
+                teamVM.desc = "desc"
+                teamVM.template = "teamplate"
+                
+                teamVM.createTeam()
+                teamVM.clearStates()
+            }
+            //: - Side Bar
+        } detail: {
+            // MARK: - Detail
+            //            if let selected = selected {
+            //                ConventionView(selected: $selected)
+            //            } else {
+            //                VStack(spacing: 16) {
+            //                    Image(systemName: "tray")
+            //                        .resizable()
+            //                        .aspectRatio(contentMode: .fit)
+            //                        .frame(width: 64, height: 64)
+            //                    Text("not_selected")
+            //: - Detail
         }
-
     }
 }
 
