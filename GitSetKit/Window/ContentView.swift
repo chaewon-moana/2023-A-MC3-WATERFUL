@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-@FetchRequest(
+    @FetchRequest(
         entity: Team.entity(),
         sortDescriptors: [
             NSSortDescriptor(keyPath: \Team.name, ascending: true)
         ]
     ) var teams: FetchedResults<Team>
+    
+    @StateObject var teamVM: TeamViewModel = TeamViewModel ()
     
     @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State private var selected: Team?
@@ -46,7 +48,6 @@ struct ContentView: View {
                 teamVM.clearStates()
             }
             //: - Side Bar
-        } detail: {
             // MARK: - Detail
             //            if let selected = selected {
             //                ConventionView(selected: $selected)
