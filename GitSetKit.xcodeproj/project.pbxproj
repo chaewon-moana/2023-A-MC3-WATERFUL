@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		628C51702A6196AD005292E3 /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C516F2A6196AD005292E3 /* TeamViewModel.swift */; };
 		79694F392A5AB090009F3C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79694F382A5AB090009F3C69 /* Assets.xcassets */; };
 		79694F4D2A5AB936009F3C69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79694F4C2A5AB936009F3C69 /* Localizable.strings */; };
 		79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F342A5AB08F009F3C69 /* GitSetKitApp.swift */; };
@@ -30,9 +31,11 @@
 		79D78B8E2A5FEDE800B8AA79 /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4A2A5AB904009F3C69 /* TeamView.swift */; };
 		79D78B8F2A5FEDE800B8AA79 /* ConventionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */; };
 		79D78B902A5FEDE800B8AA79 /* GitSetKit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */; };
+		79F9A9F32A6203A100C6D920 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 79F9A9F22A6203A100C6D920 /* WrappingHStack */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		628C516F2A6196AD005292E3 /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		7926082B2A5BDEF50008C589 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		7926C1ED2A5E8420003B7D36 /* GitSetKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitSetKit.xcdatamodel; sourceTree = "<group>"; };
 		7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersistenceController.swift; path = Data/PersistenceController.swift; sourceTree = "<group>"; };
@@ -65,21 +68,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F9A9F32A6203A100C6D920 /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7926082A2A5BC9030008C589 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-				7926082B2A5BDEF50008C589 /* FileHelper.swift */,
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
-		7926C2082A5E8C6A003B7D36 /* Data */ = {
+		628C514D2A61766D005292E3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				7926C2272A5E98D3003B7D36 /* Option+CoreDataClass.swift */,
@@ -96,7 +92,24 @@
 				7926C2322A5E98D3003B7D36 /* ConstantField+CoreDataProperties.swift */,
 				7926C2332A5E98D3003B7D36 /* DateField+CoreDataClass.swift */,
 				7926C2342A5E98D3003B7D36 /* DateField+CoreDataProperties.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		7926082A2A5BC9030008C589 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				7926082B2A5BDEF50008C589 /* FileHelper.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		7926C2082A5E8C6A003B7D36 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				628C514D2A61766D005292E3 /* CoreData */,
 				7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */,
+				628C516F2A6196AD005292E3 /* TeamViewModel.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -158,6 +171,9 @@
 			dependencies = (
 			);
 			name = GitSetKit;
+			packageProductDependencies = (
+				79F9A9F22A6203A100C6D920 /* WrappingHStack */,
+			);
 			productName = GitSetKit;
 			productReference = 79694F312A5AB08F009F3C69 /* GitSetKit.app */;
 			productType = "com.apple.product-type.application";
@@ -187,6 +203,9 @@
 				ko,
 			);
 			mainGroup = 79694F282A5AB08F009F3C69;
+			packageReferences = (
+				79F9A9F12A6203A100C6D920 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+			);
 			productRefGroup = 79694F322A5AB08F009F3C69 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -216,6 +235,7 @@
 				79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */,
 				79D78B7D2A5FEDE800B8AA79 /* Option+CoreDataClass.swift in Sources */,
 				79D78B7E2A5FEDE800B8AA79 /* Option+CoreDataProperties.swift in Sources */,
+				628C51702A6196AD005292E3 /* TeamViewModel.swift in Sources */,
 				79D78B7F2A5FEDE800B8AA79 /* Team+CoreDataClass.swift in Sources */,
 				79D78B802A5FEDE800B8AA79 /* Team+CoreDataProperties.swift in Sources */,
 				79D78B812A5FEDE800B8AA79 /* InputField+CoreDataClass.swift in Sources */,
@@ -431,6 +451,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		79F9A9F12A6203A100C6D920 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		79F9A9F22A6203A100C6D920 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79F9A9F12A6203A100C6D920 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */ = {

@@ -6,9 +6,14 @@
   
 */
 
+"app_name" = "GitSetKit";
+
 // MARK: - ContentView
 "add_team" = "팀 추가";
 "not_selected" = "팀을 생성하거나 선택해주세요";
 
 // MARK: - TeamView
 "section_team" = "나의 팀";
+
+// MARK: - ConventionView
+"convention_section_template" = "템플릿 설정";

@@ -11,19 +11,21 @@ struct TeamCell: View {
     var team: Team
     
     var body: some View {
-        VStack {
-            Text(team.name ?? "")
+        HStack {
+            Text(team.name ?? "no content")
+                .font(.body)
             
-            if let desc = team.desc {
-                Text(desc)
-                    .font(.caption)
-            }
+            Spacer()
+            
+            Image(systemName: "pin.fill")
         }
     }
 }
 
 struct TeamView: View {
-    @Binding var teams: [Team]
+    
+    var teams: [Team]
+    
     @Binding var selected: Team?
     
     var body: some View {
@@ -42,7 +44,26 @@ struct TeamView: View {
 }
 
 struct TeamView_Previews: PreviewProvider {
+    static func getTeams() -> [Team] {
+        var teams: [Team] = Array()
+        
+        for i in 0..<5 {
+            let team = Team(context: PersistenceController.shared.container.viewContext)
+            team.id = UUID()
+            team.name = "🍪 team \(i)"
+            team.desc = "This is an example of team \(i)"
+            teams.append(team)
+        }
+        
+        return teams
+    }
+    
     static var previews: some View {
-        ContentView()
+        NavigationSplitView {
+            TeamView(teams: getTeams(), selected: .constant(nil))
+        } detail: {
+            Text("Detail")
+        }
+
     }
 }
