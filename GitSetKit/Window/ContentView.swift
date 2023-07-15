@@ -8,21 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
+@FetchRequest(
+        entity: Team.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Team.name, ascending: true)
+        ]
+    ) var teams: FetchedResults<Team>
     
-    @StateObject var teamVM: TeamViewModel = TeamViewModel()
+    @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
+    @State private var selected: Team?
     
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
-            // MARK: - Side Bar
-            //            TeamView(teams: $teams, selected: $selected)
-            ForEach(teamVM.teams) { team in
-                HStack {
-                    Text("\(team.name ?? "Unknown Team")")
-                    Text("\(team.desc ?? "Unknown Desc")")
-                }
-                .onTapGesture {
-                    teamVM.deleteTeam(team: team)
+            // MARK: Side Bar
+            TeamView(teams: teams.map({ $0 }), selected: $selected)
+            
+        } detail: {
+            // MARK: Detail
+            if selected != nil {
+                ConventionView(selected: $selected)
+            } else {
+                VStack(spacing: 16) {
+                    Image(systemName: "tray")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 64, height: 64)
+                    Text("not_selected")
                 }
             }
             
