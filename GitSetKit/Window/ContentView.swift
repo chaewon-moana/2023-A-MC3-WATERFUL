@@ -9,19 +9,24 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
+    @FetchRequest(
+        entity: Team.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Team.name, ascending: true)
+        ]
+    ) var teams: FetchedResults<Team>
     
-    @State private var teams: [Team] = []
+    @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State private var selected: Team?
     
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // MARK: Side Bar
-            TeamView(teams: $teams, selected: $selected)
+            TeamView(teams: teams.map({ $0 }), selected: $selected)
             
         } detail: {
             // MARK: Detail
-            if let selected = selected {
+            if selected != nil {
                 ConventionView(selected: $selected)
             } else {
                 VStack(spacing: 16) {
