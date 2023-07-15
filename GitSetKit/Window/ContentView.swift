@@ -28,7 +28,10 @@ struct ContentView: View {
         } detail: {
             // MARK: Detail
             if selected != nil {
-                ConventionView(selected: $selected)
+                NavigationStack {
+                    ConventionView(selected: $selected)
+                }
+                
             } else {
                 VStack(spacing: 16) {
                     Image(systemName: "tray")

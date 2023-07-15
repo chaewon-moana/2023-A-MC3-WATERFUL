@@ -14,3 +14,6 @@
 
 // MARK: - TeamView
 "section_team" = "나의 팀";
+
+// MARK: - ConventionView
+"convention_section_template" = "템플릿 설정";

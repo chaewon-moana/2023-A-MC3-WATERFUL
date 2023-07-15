@@ -31,6 +31,7 @@
 		79D78B8E2A5FEDE800B8AA79 /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4A2A5AB904009F3C69 /* TeamView.swift */; };
 		79D78B8F2A5FEDE800B8AA79 /* ConventionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */; };
 		79D78B902A5FEDE800B8AA79 /* GitSetKit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */; };
+		79F9A9F32A6203A100C6D920 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 79F9A9F22A6203A100C6D920 /* WrappingHStack */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F9A9F32A6203A100C6D920 /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +171,9 @@
 			dependencies = (
 			);
 			name = GitSetKit;
+			packageProductDependencies = (
+				79F9A9F22A6203A100C6D920 /* WrappingHStack */,
+			);
 			productName = GitSetKit;
 			productReference = 79694F312A5AB08F009F3C69 /* GitSetKit.app */;
 			productType = "com.apple.product-type.application";
@@ -198,6 +203,9 @@
 				ko,
 			);
 			mainGroup = 79694F282A5AB08F009F3C69;
+			packageReferences = (
+				79F9A9F12A6203A100C6D920 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+			);
 			productRefGroup = 79694F322A5AB08F009F3C69 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -443,6 +451,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		79F9A9F12A6203A100C6D920 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		79F9A9F22A6203A100C6D920 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79F9A9F12A6203A100C6D920 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */ = {
