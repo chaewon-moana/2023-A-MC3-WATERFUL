@@ -17,3 +17,10 @@
 
 // MARK: - ConventionView
 "convention_section_template" = "템플릿 설정";
+// MARK: OptionView
+"option_block_type" = "Block Type";
+"option_block_type_text" = "텍스트";
+"option_block_type_date" = "날짜";
+"option_block_type_option" = "선택";
+"option_block_title" = "Block Title";
+"option_block_desc" = "Block Description";

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		628C51702A6196AD005292E3 /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C516F2A6196AD005292E3 /* TeamViewModel.swift */; };
+		791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A324D2A63FABA004A61A1 /* TemplateView.swift */; };
 		79694F392A5AB090009F3C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79694F382A5AB090009F3C69 /* Assets.xcassets */; };
 		79694F4D2A5AB936009F3C69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79694F4C2A5AB936009F3C69 /* Localizable.strings */; };
 		79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F342A5AB08F009F3C69 /* GitSetKitApp.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		628C516F2A6196AD005292E3 /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
+		791A324D2A63FABA004A61A1 /* TemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateView.swift; sourceTree = "<group>"; };
 		7926082B2A5BDEF50008C589 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		7926C1ED2A5E8420003B7D36 /* GitSetKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitSetKit.xcdatamodel; sourceTree = "<group>"; };
 		7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersistenceController.swift; path = Data/PersistenceController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				79694F362A5AB08F009F3C69 /* ContentView.swift */,
 				79694F4A2A5AB904009F3C69 /* TeamView.swift */,
 				79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */,
+				791A324D2A63FABA004A61A1 /* TemplateView.swift */,
 			);
 			path = Window;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				79D78B882A5FEDE800B8AA79 /* ConstantField+CoreDataProperties.swift in Sources */,
 				79D78B892A5FEDE800B8AA79 /* DateField+CoreDataClass.swift in Sources */,
 				79D78B8A2A5FEDE800B8AA79 /* DateField+CoreDataProperties.swift in Sources */,
+				791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */,
 				79D78B8B2A5FEDE800B8AA79 /* PersistenceController.swift in Sources */,
 				79D78B8C2A5FEDE800B8AA79 /* FileHelper.swift in Sources */,
 				79D78B8D2A5FEDE800B8AA79 /* ContentView.swift in Sources */,

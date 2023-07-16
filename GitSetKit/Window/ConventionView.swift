@@ -6,38 +6,30 @@
 //
 
 import SwiftUI
-import WrappingHStack
-
-fileprivate struct TemplateCell: View {
-    var field: Field
-    
-    var body: some View {
-        Text(field.fieldName ?? "")
-    }
-}
-
-fileprivate struct TemplateView: View {
-    var fields: [Field]
-    
-    var body: some View {
-        WrappingHStack {
-            Text("git commit -m \"")
-            Text("\"")
-        }
-    }
-}
 
 struct ConventionView: View {
     @Binding var selected: Team!
     
     
     var body: some View {
-        LazyVStack {
+        VStack {
+            // MARK: - Template View
             HStack {
                 Text("convention_section_template")
                     .font(.title3.bold())
                 Spacer()
             }
+            TemplateView(fields: [])
+            // : - Template View
+            
+            // MARK: - Inspector View
+            HStack {
+                Text("convention_section_template")
+                    .font(.title3.bold())
+                Spacer()
+            }
+            .padding(.top, 24)
+            // : - Inspector View
         }
         .padding()
         .navigationTitle(Text("app_name"))
