@@ -40,17 +40,17 @@ struct TemplateView: View {
         )
     }
     
+    // MARK: - Template View
     var template: some View {
-        VStack {
-            WrappingHStack {
-                Text("git commit -m \"")
-                Text("\"")
-            }
+        LazyVStack {
+            FlowStack(contents: fields)
             .padding()
         }
         .foregroundColor(.white)
     }
+    //: - Template View
     
+    // MARK: - Option View
     var option: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -78,5 +78,32 @@ struct TemplateView: View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.gray)
         )
+    }
+    //: - Option View
+}
+
+struct ConventionView_Preview1s: PreviewProvider {
+    static func getTeams() -> [Team] {
+        var teams: [Team] = Array()
+        
+        for i in 0..<5 {
+            let team = Team(context: PersistenceController.shared.container.viewContext)
+            team.id = UUID()
+            team.name = "🍪 team \(i)"
+            team.desc = "This is an example of team \(i)"
+            teams.append(team)
+        }
+        
+        return teams
+    }
+    
+    static var previews: some View {
+        NavigationSplitView {
+            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
+        } detail: {
+            NavigationStack {
+                ConventionView(selected: .constant(getTeams()[0]))
+            }
+        }
     }
 }

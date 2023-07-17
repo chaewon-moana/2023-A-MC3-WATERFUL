@@ -50,19 +50,9 @@ struct ContentView: View {
                 teamVM.createTeam()
                 teamVM.clearStates()
             }
-            //: - Side Bar
-            // MARK: - Detail
-            //            if let selected = selected {
-            //                ConventionView(selected: $selected)
-            //            } else {
-            //                VStack(spacing: 16) {
-            //                    Image(systemName: "tray")
-            //                        .resizable()
-            //                        .aspectRatio(contentMode: .fit)
-            //                        .frame(width: 64, height: 64)
-            //                    Text("not_selected")
             //: - Detail
         }
+        .frame(minWidth: 720, maxHeight: 640)
     }
 }
 

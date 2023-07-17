@@ -12,26 +12,30 @@ struct ConventionView: View {
     
     
     var body: some View {
-        VStack {
-            // MARK: - Template View
-            HStack {
-                Text("convention_section_template")
-                    .font(.title3.bold())
-                Spacer()
+        GeometryReader { proxy in
+            VStack(spacing: 0) {
+                // MARK: - Template View
+                GroupBox {
+                    TemplateView(fields: [])
+                } label: {
+                    Text("convention_section_template")
+                        .font(.title3.bold())
+                }
+                .groupBoxStyle(TransparentGroupBox())
+                .frame(height: proxy.size.height / 2)
+                // : - Template View
+                
+                // MARK: - Inspector View
+                GroupBox {
+                    BlockSettingView()
+                } label: {
+                    Text("convention_section_block")
+                        .font(.title3.bold())
+                }
+                .frame(height: proxy.size.height / 2)
+                // : - Inspector View
             }
-            TemplateView(fields: [])
-            // : - Template View
-            
-            // MARK: - Inspector View
-            HStack {
-                Text("convention_section_template")
-                    .font(.title3.bold())
-                Spacer()
-            }
-            .padding(.top, 24)
-            // : - Inspector View
         }
-        .padding()
         .navigationTitle(Text("app_name"))
     }
 }

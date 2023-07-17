@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		628C51702A6196AD005292E3 /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C516F2A6196AD005292E3 /* TeamViewModel.swift */; };
 		791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A324D2A63FABA004A61A1 /* TemplateView.swift */; };
+		791A32542A63FEA8004A61A1 /* BlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A32532A63FEA8004A61A1 /* BlockSettingView.swift */; };
 		79694F392A5AB090009F3C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79694F382A5AB090009F3C69 /* Assets.xcassets */; };
 		79694F4D2A5AB936009F3C69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79694F4C2A5AB936009F3C69 /* Localizable.strings */; };
 		79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F342A5AB08F009F3C69 /* GitSetKitApp.swift */; };
@@ -32,12 +33,15 @@
 		79D78B8E2A5FEDE800B8AA79 /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4A2A5AB904009F3C69 /* TeamView.swift */; };
 		79D78B8F2A5FEDE800B8AA79 /* ConventionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */; };
 		79D78B902A5FEDE800B8AA79 /* GitSetKit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */; };
+		79EE65492A650A5D0099F722 /* TransparentGroupBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */; };
+		79EE654B2A6515530099F722 /* FlowStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE654A2A6515530099F722 /* FlowStack.swift */; };
 		79F9A9F32A6203A100C6D920 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 79F9A9F22A6203A100C6D920 /* WrappingHStack */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		628C516F2A6196AD005292E3 /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		791A324D2A63FABA004A61A1 /* TemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateView.swift; sourceTree = "<group>"; };
+		791A32532A63FEA8004A61A1 /* BlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockSettingView.swift; sourceTree = "<group>"; };
 		7926082B2A5BDEF50008C589 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		7926C1ED2A5E8420003B7D36 /* GitSetKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitSetKit.xcdatamodel; sourceTree = "<group>"; };
 		7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersistenceController.swift; path = Data/PersistenceController.swift; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 		79694F4A2A5AB904009F3C69 /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
 		79694F4C2A5AB936009F3C69 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConventionView.swift; sourceTree = "<group>"; };
+		79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGroupBox.swift; sourceTree = "<group>"; };
+		79EE654A2A6515530099F722 /* FlowStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +148,7 @@
 				7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */,
 				7926C2082A5E8C6A003B7D36 /* Data */,
 				7926082A2A5BC9030008C589 /* Tool */,
+				79EE65472A650A470099F722 /* Component */,
 				79D78B7B2A5FE92600B8AA79 /* Window */,
 			);
 			path = GitSetKit;
@@ -154,8 +161,18 @@
 				79694F4A2A5AB904009F3C69 /* TeamView.swift */,
 				79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */,
 				791A324D2A63FABA004A61A1 /* TemplateView.swift */,
+				791A32532A63FEA8004A61A1 /* BlockSettingView.swift */,
 			);
 			path = Window;
+			sourceTree = "<group>";
+		};
+		79EE65472A650A470099F722 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */,
+				79EE654A2A6515530099F722 /* FlowStack.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,14 +265,17 @@
 				79D78B852A5FEDE800B8AA79 /* OptionField+CoreDataClass.swift in Sources */,
 				79D78B862A5FEDE800B8AA79 /* OptionField+CoreDataProperties.swift in Sources */,
 				79D78B872A5FEDE800B8AA79 /* ConstantField+CoreDataClass.swift in Sources */,
+				79EE65492A650A5D0099F722 /* TransparentGroupBox.swift in Sources */,
 				79D78B882A5FEDE800B8AA79 /* ConstantField+CoreDataProperties.swift in Sources */,
 				79D78B892A5FEDE800B8AA79 /* DateField+CoreDataClass.swift in Sources */,
 				79D78B8A2A5FEDE800B8AA79 /* DateField+CoreDataProperties.swift in Sources */,
 				791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */,
+				79EE654B2A6515530099F722 /* FlowStack.swift in Sources */,
 				79D78B8B2A5FEDE800B8AA79 /* PersistenceController.swift in Sources */,
 				79D78B8C2A5FEDE800B8AA79 /* FileHelper.swift in Sources */,
 				79D78B8D2A5FEDE800B8AA79 /* ContentView.swift in Sources */,
 				79D78B8E2A5FEDE800B8AA79 /* TeamView.swift in Sources */,
+				791A32542A63FEA8004A61A1 /* BlockSettingView.swift in Sources */,
 				79D78B8F2A5FEDE800B8AA79 /* ConventionView.swift in Sources */,
 				79D78B902A5FEDE800B8AA79 /* GitSetKit.xcdatamodeld in Sources */,
 			);

@@ -17,6 +17,7 @@
 
 // MARK: - ConventionView
 "convention_section_template" = "템플릿 설정";
+"convention_section_block" = "블럭 설정";
 // MARK: OptionView
 "option_block_type" = "Block Type";
 "option_block_type_text" = "텍스트";
