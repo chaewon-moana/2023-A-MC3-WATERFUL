@@ -20,6 +20,7 @@ enum BlockType: String {
     case text
     case date
     case option
+    case constant
 }
 
 struct TemplateView: View {
@@ -56,6 +57,8 @@ struct TemplateView: View {
             VStack(alignment: .leading) {
                 Text("option_block_type")
                 Picker("", selection: $blockType) {
+                    Text("option_block_type_constant")
+                        .tag(BlockType.constant)
                     Text("option_block_type_text")
                         .tag(BlockType.text)
                     Text("option_block_type_date")
@@ -99,7 +102,7 @@ struct ConventionView_Preview1s: PreviewProvider {
     
     static var previews: some View {
         NavigationSplitView {
-            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
+            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]), teamVM: TeamViewModel())
         } detail: {
             NavigationStack {
                 ConventionView(selected: .constant(getTeams()[0]))

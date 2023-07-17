@@ -57,7 +57,7 @@ struct ConventionView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationSplitView {
-            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
+            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]), teamVM: TeamViewModel())
         } detail: {
             NavigationStack {
                 ConventionView(selected: .constant(getTeams()[0]))

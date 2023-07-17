@@ -15,7 +15,7 @@ struct ContentView: View {
         ]
     ) var teams: FetchedResults<Team>
     
-    @StateObject var teamVM: TeamViewModel = TeamViewModel ()
+    @StateObject var teamVM: TeamViewModel = TeamViewModel()
     
     @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State private var selected: Team?
@@ -23,7 +23,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // MARK: Side Bar
-            TeamView(teams: teams.map({ $0 }), selected: $selected)
+            TeamView(teams: teams.map({ $0 }), selected: $selected, teamVM: teamVM)
             
         } detail: {
             // MARK: Detail
