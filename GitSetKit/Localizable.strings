@@ -30,3 +30,9 @@
 "option_block_type_option" = "선택";
 "option_block_title" = "Block Title";
 "option_block_desc" = "Block Description";
+
+// MARK: - BlockSettingView
+// MARK: OptionBlockView
+"option_block_field_value" = "Value";
+"option_block_field_short" = "Short Desc";
+"option_block_field_detail" = "Detail Desc";

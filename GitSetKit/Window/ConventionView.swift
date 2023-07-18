@@ -22,6 +22,7 @@ struct ConventionView: View {
                         .font(.title3.bold())
                 }
                 .groupBoxStyle(TransparentGroupBox())
+                .padding()
                 .frame(height: proxy.size.height / 2)
                 // : - Template View
                 
@@ -32,6 +33,8 @@ struct ConventionView: View {
                     Text("convention_section_block")
                         .font(.title3.bold())
                 }
+                .groupBoxStyle(TransparentGroupBox())
+                .padding()
                 .frame(height: proxy.size.height / 2)
                 // : - Inspector View
             }

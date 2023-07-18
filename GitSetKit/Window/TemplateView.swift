@@ -33,6 +33,8 @@ struct TemplateView: View {
     var body: some View {
         VStack {
             template
+                .padding()
+            Spacer()
             option
         }
         .background(
@@ -43,13 +45,24 @@ struct TemplateView: View {
     
     // MARK: - Template View
     var template: some View {
-        LazyVStack {
-            FlowStack(contents: fields)
-            .padding()
+#if DEBUG
+        WrappingHStack(0..<30, id: \.self, alignment: .leading, spacing: .constant(8), lineSpacing: 8) { i in
+            Text("\(i)")
         }
         .foregroundColor(.white)
+#else
+        ScrollView {
+            LazyVStack {
+                WrappingHStack(0..<300, id: \.self, alignment: .leading, spacing: .constant(8), lineSpacing: 8) { i in
+                    Text("\(i)")
+                }
+                .foregroundColor(.white)
+            }
+        }
+#endif
     }
-    //: - Template View
+    
+//: - Template View
     
     // MARK: - Option View
     var option: some View {
@@ -70,10 +83,16 @@ struct TemplateView: View {
             VStack(alignment: .leading) {
                 Text("option_block_title")
                 TextField("", text: $title)
+                    .background(
+                        RoundedRectangle(cornerRadius: 4)
+                    )
             }
             VStack(alignment: .leading) {
                 Text("option_block_desc")
                 TextField("", text: $desc)
+                    .background(
+                        RoundedRectangle(cornerRadius: 4)
+                    )
             }
         }
         .padding()
