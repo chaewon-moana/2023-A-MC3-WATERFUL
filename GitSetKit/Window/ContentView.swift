@@ -29,7 +29,7 @@ struct ContentView: View {
             // MARK: Detail
             if selected != nil {
                 NavigationStack {
-                    ConventionView(selected: $selected)
+                    ConventionView(selected: $selected, teamVM: teamVM)
                 }
                 
             } else {

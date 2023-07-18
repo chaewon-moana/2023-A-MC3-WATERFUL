@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConventionView: View {
     @Binding var selected: Team!
-    
+    @StateObject var teamVM: TeamViewModel
     
     var body: some View {
         GeometryReader { proxy in
@@ -63,7 +63,7 @@ struct ConventionView_Previews: PreviewProvider {
             TeamView(teams: getTeams(), selected: .constant(getTeams()[0]), teamVM: TeamViewModel())
         } detail: {
             NavigationStack {
-                ConventionView(selected: .constant(getTeams()[0]))
+                ConventionView(selected: .constant(getTeams()[0]), teamVM: TeamViewModel())
             }
         }
     }
