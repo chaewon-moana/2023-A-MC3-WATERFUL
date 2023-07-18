@@ -8,6 +8,10 @@
 
 "app_name" = "GitSetKit";
 
+// MARK: - General Texts
+"delete" = "삭제";
+"edit" = "수정";
+
 // MARK: - ContentView
 "add_team" = "팀 추가";
 "not_selected" = "팀을 생성하거나 선택해주세요";
@@ -17,3 +21,18 @@
 
 // MARK: - ConventionView
 "convention_section_template" = "템플릿 설정";
+"convention_section_block" = "블럭 설정";
+// MARK: OptionView
+"option_block_type" = "Block Type";
+"option_block_type_constant" = "고정 텍스트";
+"option_block_type_text" = "텍스트";
+"option_block_type_date" = "날짜";
+"option_block_type_option" = "선택";
+"option_block_title" = "Block Title";
+"option_block_desc" = "Block Description";
+
+// MARK: - BlockSettingView
+// MARK: OptionBlockView
+"option_block_field_value" = "Value";
+"option_block_field_short" = "Short Desc";
+"option_block_field_detail" = "Detail Desc";

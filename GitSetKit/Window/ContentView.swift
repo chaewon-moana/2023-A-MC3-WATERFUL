@@ -15,7 +15,7 @@ struct ContentView: View {
         ]
     ) var teams: FetchedResults<Team>
     
-    @StateObject var teamVM: TeamViewModel = TeamViewModel ()
+    @StateObject var teamVM: TeamViewModel = TeamViewModel()
     
     @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State private var selected: Team?
@@ -23,13 +23,13 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // MARK: Side Bar
-            TeamView(teams: teams.map({ $0 }), selected: $selected)
+            TeamView(teams: teams.map({ $0 }), selected: $selected, teamVM: teamVM)
             
         } detail: {
             // MARK: Detail
             if selected != nil {
                 NavigationStack {
-                    ConventionView(selected: $selected)
+                    ConventionView(selected: $selected, teamVM: teamVM)
                 }
                 
             } else {
@@ -50,19 +50,9 @@ struct ContentView: View {
                 teamVM.createTeam()
                 teamVM.clearStates()
             }
-            //: - Side Bar
-            // MARK: - Detail
-            //            if let selected = selected {
-            //                ConventionView(selected: $selected)
-            //            } else {
-            //                VStack(spacing: 16) {
-            //                    Image(systemName: "tray")
-            //                        .resizable()
-            //                        .aspectRatio(contentMode: .fit)
-            //                        .frame(width: 64, height: 64)
-            //                    Text("not_selected")
             //: - Detail
         }
+        .frame(minWidth: 720, maxHeight: 640)
     }
 }
 
