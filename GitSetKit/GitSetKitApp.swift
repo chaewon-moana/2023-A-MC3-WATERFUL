@@ -14,5 +14,8 @@ struct GitSetKitApp: App {
         WindowGroup {
             ContentView()
         }
+        .commands {
+            
+        }
     }
 }

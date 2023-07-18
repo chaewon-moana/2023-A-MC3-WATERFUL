@@ -35,6 +35,11 @@ class TeamViewModel: ObservableObject {
         getAllTeams()
     }
     
+    func updateTeam(team: Team) {
+        persistenceShare.teamUpdate(team: team, name: name, desc: desc, template: template)
+        getAllTeams()
+    }
+    
     func clearStates() {
         name = ""
         desc = ""
