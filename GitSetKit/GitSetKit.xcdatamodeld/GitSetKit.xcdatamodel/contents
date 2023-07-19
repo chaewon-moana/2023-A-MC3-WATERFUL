@@ -1,42 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ConstantField" representedClassName="ConstantField" syncable="YES">
-        <attribute name="string" attributeType="String"/>
-        <relationship name="field" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Field" inverseName="constantField" inverseEntity="Field"/>
-    </entity>
-    <entity name="DateField" representedClassName="DateField" syncable="YES">
-        <attribute name="format" attributeType="String"/>
-        <relationship name="field" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Field" inverseName="dateField" inverseEntity="Field"/>
-    </entity>
     <entity name="Field" representedClassName="Field" syncable="YES">
-        <attribute name="desc" attributeType="String"/>
-        <attribute name="fieldName" attributeType="String"/>
-        <attribute name="type" attributeType="String"/>
-        <relationship name="constantField" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConstantField" inverseName="field" inverseEntity="ConstantField"/>
-        <relationship name="dateField" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DateField" inverseName="field" inverseEntity="DateField"/>
-        <relationship name="inputField" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InputField" inverseName="field" inverseEntity="InputField"/>
-        <relationship name="optionField" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OptionField" inverseName="field" inverseEntity="OptionField"/>
-        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="fields" inverseEntity="Team"/>
-    </entity>
-    <entity name="InputField" representedClassName="InputField" syncable="YES">
-        <attribute name="placeHolder" attributeType="String"/>
-        <relationship name="field" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Field" inverseName="inputField" inverseEntity="Field"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="typeBasedString" optional="YES" attributeType="String"/>
+        <relationship name="options" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Option"/>
     </entity>
     <entity name="Option" representedClassName="Option" syncable="YES">
-        <attribute name="desc" optional="YES" attributeType="String"/>
-        <attribute name="value" attributeType="String"/>
-        <relationship name="optionField" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OptionField" inverseName="options" inverseEntity="OptionField"/>
-    </entity>
-    <entity name="OptionField" representedClassName="OptionField" syncable="YES">
-        <attribute name="multiple" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <relationship name="field" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Field" inverseName="optionField" inverseEntity="Field"/>
-        <relationship name="options" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Option" inverseName="optionField" inverseEntity="Option"/>
+        <attribute name="detailDesc" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="shortDesc" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Team" representedClassName="Team" syncable="YES">
-        <attribute name="desc" attributeType="String"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" attributeType="String"/>
-        <attribute name="template" attributeType="String"/>
-        <relationship name="fields" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Field" inverseName="team" inverseEntity="Field"/>
+        <attribute name="emoticon" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="pinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="touch" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="fields" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Field"/>
     </entity>
 </model>
