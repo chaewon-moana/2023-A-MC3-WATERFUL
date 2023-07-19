@@ -12,7 +12,7 @@ struct TemplateCell: View {
     var field: Field
     
     var body: some View {
-        Text(field.fieldName ?? "")
+        Text(field.wrappedName)
     }
 }
 
@@ -104,15 +104,16 @@ struct TemplateView: View {
     //: - Option View
 }
 
-struct ConventionView_Preview1s: PreviewProvider {
+struct ConventionView_Previews1: PreviewProvider {
     static func getTeams() -> [Team] {
         var teams: [Team] = Array()
         
         for i in 0..<5 {
             let team = Team(context: PersistenceController.shared.container.viewContext)
-            team.id = UUID()
-            team.name = "🍪 team \(i)"
-            team.desc = "This is an example of team \(i)"
+            team.name = "team \(i)"
+            team.emoticon = "🍪"
+            team.touch = Date()
+            team.pinned = false
             teams.append(team)
         }
         
@@ -121,7 +122,7 @@ struct ConventionView_Preview1s: PreviewProvider {
     
     static var previews: some View {
         NavigationSplitView {
-            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]), teamVM: TeamViewModel())
+            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
         } detail: {
             NavigationStack {
                 ConventionView(selected: .constant(getTeams()[0]))

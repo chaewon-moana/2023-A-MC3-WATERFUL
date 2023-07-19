@@ -26,7 +26,7 @@ struct FlowStack: View {
         
         return ZStack(alignment: .topLeading) {
             ForEach(self.contents, id: \.id) { content in
-                self.item(for: content.fieldName ?? "")
+                self.item(for: content.wrappedName)
                     .padding([.horizontal, .vertical], 4)
                     .alignmentGuide(.leading, computeValue: { d in
                         if (abs(width - d.width) > g.size.width)

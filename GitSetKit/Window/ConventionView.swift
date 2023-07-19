@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ConventionView: View {
     @Binding var selected: Team!
-    @StateObject var teamVM: TeamViewModel
     
     var body: some View {
         GeometryReader { proxy in
@@ -49,9 +48,10 @@ struct ConventionView_Previews: PreviewProvider {
         
         for i in 0..<5 {
             let team = Team(context: PersistenceController.shared.container.viewContext)
-            team.id = UUID()
-            team.name = "🍪 team \(i)"
-            team.desc = "This is an example of team \(i)"
+            team.name = "team \(i)"
+            team.emoticon = "🍪"
+            team.touch = Date()
+            team.pinned = false
             teams.append(team)
         }
         
@@ -60,10 +60,10 @@ struct ConventionView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationSplitView {
-            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]), teamVM: TeamViewModel())
+            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
         } detail: {
             NavigationStack {
-                ConventionView(selected: .constant(getTeams()[0]), teamVM: TeamViewModel())
+                ConventionView(selected: .constant(getTeams()[0]))
             }
         }
     }
