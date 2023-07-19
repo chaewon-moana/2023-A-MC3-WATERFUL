@@ -24,6 +24,31 @@ extension Team {
 
 }
 
+// MARK: Relationship Type Casting
+extension Team {
+    public var wrappedFields: [Field] {
+        guard let fields = fields?.array as? [Field] else {
+            return []
+        }
+        
+        return fields.sorted { f1, f2 in
+            return f1.order > f2.order
+        }
+    }
+    
+    public var wrappedName: String {
+        return name ?? "Unknown Name"
+    }
+    
+    public var wrappedEmoticon: String {
+        return emoticon ?? " "
+    }
+    
+    public var wrappedTouch: Date {
+        return touch ?? Date()
+    }
+}
+
 // MARK: Generated accessors for fields
 extension Team {
 
