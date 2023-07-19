@@ -24,6 +24,26 @@ extension Team {
 
 }
 
+// MARK: Relationship Casting
+extension Team {
+    public var wrappedFields: [String : Field] {
+        guard let fields = fields as? Set<Field> else {
+            print(#function, "nil fields")
+            return [:]
+        }
+        
+        var fieldDic: [String : Field] = [:]
+        
+        for f in fields {
+            if let fieldName = f.fieldName {
+                fieldDic[fieldName] = f
+            }
+        }
+        
+        return fieldDic
+    }
+}
+
 // MARK: Generated accessors for fields
 extension Team {
 
