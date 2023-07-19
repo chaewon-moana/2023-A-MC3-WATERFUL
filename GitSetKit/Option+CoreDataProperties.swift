@@ -2,7 +2,7 @@
 //  Option+CoreDataProperties.swift
 //  GitSetKit
 //
-//  Created by 최명근 on 2023/07/12.
+//  Created by 송재훈 on 2023/07/19.
 //
 //
 
@@ -16,9 +16,10 @@ extension Option {
         return NSFetchRequest<Option>(entityName: "Option")
     }
 
-    @NSManaged public var desc: String?
     @NSManaged public var value: String?
-    @NSManaged public var optionField: OptionField?
+    @NSManaged public var shortDesc: String?
+    @NSManaged public var detailDesc: String?
+    @NSManaged public var order: Int16
 
 }
 
