@@ -6,40 +6,39 @@
 //
 
 import SwiftUI
-import WrappingHStack
-
-fileprivate struct TemplateCell: View {
-    var field: Field
-    
-    var body: some View {
-        Text(field.fieldName ?? "")
-    }
-}
-
-fileprivate struct TemplateView: View {
-    var fields: [Field]
-    
-    var body: some View {
-        WrappingHStack {
-            Text("git commit -m \"")
-            Text("\"")
-        }
-    }
-}
 
 struct ConventionView: View {
     @Binding var selected: Team!
-    
+    @StateObject var teamVM: TeamViewModel
     
     var body: some View {
-        LazyVStack {
-            HStack {
-                Text("convention_section_template")
-                    .font(.title3.bold())
-                Spacer()
+        GeometryReader { proxy in
+            VStack(spacing: 0) {
+                // MARK: - Template View
+                GroupBox {
+                    TemplateView(fields: [])
+                } label: {
+                    Text("convention_section_template")
+                        .font(.title3.bold())
+                }
+                .groupBoxStyle(TransparentGroupBox())
+                .padding()
+                .frame(height: proxy.size.height / 2)
+                // : - Template View
+                
+                // MARK: - Inspector View
+                GroupBox {
+                    BlockSettingView()
+                } label: {
+                    Text("convention_section_block")
+                        .font(.title3.bold())
+                }
+                .groupBoxStyle(TransparentGroupBox())
+                .padding()
+                .frame(height: proxy.size.height / 2)
+                // : - Inspector View
             }
         }
-        .padding()
         .navigationTitle(Text("app_name"))
     }
 }
@@ -61,10 +60,10 @@ struct ConventionView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationSplitView {
-            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
+            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]), teamVM: TeamViewModel())
         } detail: {
             NavigationStack {
-                ConventionView(selected: .constant(getTeams()[0]))
+                ConventionView(selected: .constant(getTeams()[0]), teamVM: TeamViewModel())
             }
         }
     }
