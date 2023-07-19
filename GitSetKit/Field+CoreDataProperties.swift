@@ -24,6 +24,55 @@ extension Field {
 
 }
 
+// MARK: Relationship Type Casting
+extension Field {
+    
+    public var wrappedOptions: [Option] {
+        guard let options = options?.array as? [Option] else {
+            return []
+        }
+        
+        return options.sorted { o1, o2 in
+            return o1.order > o2.order
+        }
+    }
+    
+    public var wrappedName: String {
+        return name ?? "Unknown"
+    }
+    
+    public var wrappedType: FieldType {
+        return FieldType(rawValue: type) ?? .constant
+    }
+    
+    public var wrappedTypeBasedString: String {
+        return typeBasedString ?? ""
+    }
+    
+    public var converted: Any {
+        switch wrappedType {
+        case .constant:
+            return ConstantField(string: wrappedTypeBasedString)
+        case .option:
+            return OptionField(options: wrappedOptions)
+        case .input:
+            return InputField(placeholder: wrappedTypeBasedString)
+        case .date:
+            return DateField(format: wrappedTypeBasedString)
+        }
+    }
+}
+
+// MARK: Field Type
+extension Field {
+    public enum FieldType: Int16 {
+        case constant = 1
+        case option = 2
+        case input = 3
+        case date = 4
+    }
+}
+
 // MARK: Generated accessors for options
 extension Field {
 
