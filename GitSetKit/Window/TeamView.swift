@@ -13,8 +13,7 @@ struct TeamCell: View {
         case edit
     }
     
-    @ObservedObject var team: Team
-    @StateObject var teamVM: TeamViewModel
+    var team: Team
     
     @State private var editing: Bool = false
     @State private var newName: String = ""
@@ -26,13 +25,13 @@ struct TeamCell: View {
             TextField("", text: $newName)
                 .focused($field, equals: .edit)
                 .onSubmit {
-                    teamVM.clearStates()
-                    team.name = newName.isEmpty ? (team.name ?? "no name") : newName
-                    teamVM.name = team.name ?? "no name"
-                    teamVM.desc = team.desc ?? ""
-                    teamVM.template = team.template ?? ""
-                    teamVM.updateTeam(team: team)
-                    teamVM.clearStates()
+//                    teamVM.clearStates()
+//                    team.name = newName.isEmpty ? (team.name ?? "no name") : newName
+//                    teamVM.name = team.name ?? "no name"
+//                    teamVM.desc = team.desc ?? ""
+//                    teamVM.template = team.template ?? ""
+//                    teamVM.updateTeam(team: team)
+//                    teamVM.clearStates()
                     
                     editing = false
                 }
@@ -58,7 +57,7 @@ struct TeamCell: View {
                 
                 // MARK: Delete Button
                 Button(role: .destructive) {
-                    teamVM.deleteTeam(team: team)
+//                    teamVM.deleteTeam(team: team)
                     
                 } label: {
                     Label("delete", systemImage: "trash.fill")
@@ -76,16 +75,15 @@ struct TeamView: View {
     var teams: [Team]
     
     @Binding var selected: Team?
-    @StateObject var teamVM: TeamViewModel
     
     @FocusState private var editState: Team?
     
     var body: some View {
         List(selection: $selected) {
             Section("section_team") {
-                ForEach(teamVM.teams) { team in
+                ForEach(teams) { team in
                     NavigationLink(value: team) {
-                        TeamCell(team: team, teamVM: teamVM)
+                        TeamCell(team: team)
                     }
                 }
             }
@@ -99,15 +97,16 @@ struct TeamView: View {
 
 
 // MARK: - Preview
-struct TeamView_Previews: PreviewProvider {
+struct ConventionView_Previews2: PreviewProvider {
     static func getTeams() -> [Team] {
         var teams: [Team] = Array()
         
         for i in 0..<5 {
             let team = Team(context: PersistenceController.shared.container.viewContext)
-            team.id = UUID()
-            team.name = "🍪 team \(i)"
-            team.desc = "This is an example of team \(i)"
+            team.name = "team \(i)"
+            team.emoticon = "🍪"
+            team.touch = Date()
+            team.pinned = false
             teams.append(team)
         }
         
@@ -116,11 +115,12 @@ struct TeamView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationSplitView {
-            TeamView(teams: getTeams(), selected: .constant(nil), teamVM: TeamViewModel())
+            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
         } detail: {
-            Text("Detail")
+            NavigationStack {
+                ConventionView(selected: .constant(getTeams()[0]))
+            }
         }
-        
     }
 }
 //: - Preview
