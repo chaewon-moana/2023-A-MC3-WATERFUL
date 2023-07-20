@@ -20,13 +20,8 @@ struct TrayView: View {
         ]
     ) var teams: FetchedResults<Team>
     
-    @StateObject var teamVM: TeamViewModel = TeamViewModel ()
-    
     //dummy data
     @State private var teamNames = ["team1", "team2", "team3", "team4"]
-    
-    
-    
     
     let SourcePro = "SourceCodePro-Light"
     
