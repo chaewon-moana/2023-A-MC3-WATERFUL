@@ -10,9 +10,12 @@ import SwiftUI
 @main
 struct GitSetKitApp: App {
     
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .commands {
             
