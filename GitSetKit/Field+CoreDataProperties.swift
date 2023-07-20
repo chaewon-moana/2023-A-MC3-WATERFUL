@@ -33,7 +33,7 @@ extension Field {
         }
         
         return options.sorted { o1, o2 in
-            return o1.order > o2.order
+            return o2.order > o1.order
         }
     }
     
