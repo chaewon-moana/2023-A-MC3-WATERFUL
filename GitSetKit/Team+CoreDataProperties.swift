@@ -11,7 +11,7 @@ import CoreData
 
 
 extension Team {
-
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Team> {
         return NSFetchRequest<Team>(entityName: "Team")
     }
@@ -32,7 +32,7 @@ extension Team {
         }
         
         return fields.sorted { f1, f2 in
-            return f1.order > f2.order
+            return f2.order > f1.order
         }
     }
     
