@@ -15,7 +15,7 @@ struct ConventionView: View {
             VStack(spacing: 0) {
                 // MARK: - Template View
                 GroupBox {
-                    TemplateView(fields: [])
+                    TemplateView(team: selected, fields: selected.wrappedFields)
                 } label: {
                     Text("convention_section_template")
                         .font(.title3.bold())
@@ -39,10 +39,22 @@ struct ConventionView: View {
             }
         }
         .navigationTitle(Text("app_name"))
+        .frame(minWidth: 960, minHeight: 640)
     }
 }
 
 struct ConventionView_Previews: PreviewProvider {
+    static var team: Team {
+        let team = Team(context: PersistenceController.shared.container.viewContext)
+        
+        team.emoticon = "🍪"
+        team.name = "촉촉단"
+        team.pinned = false
+        team.touch = Date()
+        
+        return team
+    }
+    
     static func getTeams() -> [Team] {
         var teams: [Team] = Array()
         
@@ -63,7 +75,7 @@ struct ConventionView_Previews: PreviewProvider {
             TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
         } detail: {
             NavigationStack {
-                ConventionView(selected: .constant(getTeams()[0]))
+                ConventionView(selected: .constant(team))
             }
         }
     }
