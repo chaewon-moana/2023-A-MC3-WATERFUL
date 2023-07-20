@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		628C51702A6196AD005292E3 /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C516F2A6196AD005292E3 /* TeamViewModel.swift */; };
 		628C51792A67D3B6005292E3 /* Team+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C51732A67D3B6005292E3 /* Team+CoreDataClass.swift */; };
 		628C517A2A67D3B6005292E3 /* Team+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C51742A67D3B6005292E3 /* Team+CoreDataProperties.swift */; };
 		628C517B2A67D3B6005292E3 /* Option+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C51752A67D3B6005292E3 /* Option+CoreDataClass.swift */; };
@@ -37,7 +36,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		628C516F2A6196AD005292E3 /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		628C51732A67D3B6005292E3 /* Team+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataClass.swift"; sourceTree = "<group>"; };
 		628C51742A67D3B6005292E3 /* Team+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		628C51752A67D3B6005292E3 /* Option+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Option+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 			children = (
 				628C514D2A61766D005292E3 /* CoreData */,
 				7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */,
-				628C516F2A6196AD005292E3 /* TeamViewModel.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -270,7 +267,6 @@
 				628C51792A67D3B6005292E3 /* Team+CoreDataClass.swift in Sources */,
 				79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */,
 				628C517B2A67D3B6005292E3 /* Option+CoreDataClass.swift in Sources */,
-				628C51702A6196AD005292E3 /* TeamViewModel.swift in Sources */,
 				79EE65492A650A5D0099F722 /* TransparentGroupBox.swift in Sources */,
 				791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */,
 				79EE654B2A6515530099F722 /* FlowStack.swift in Sources */,
@@ -417,7 +413,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = VA3J8597P8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -446,7 +442,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = VA3J8597P8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
