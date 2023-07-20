@@ -15,7 +15,7 @@ struct ConventionView: View {
             VStack(spacing: 0) {
                 // MARK: - Template View
                 GroupBox {
-                    TemplateView(fields: selected.wrappedFields)
+                    TemplateView(team: selected, fields: selected.wrappedFields)
                 } label: {
                     Text("convention_section_template")
                         .font(.title3.bold())

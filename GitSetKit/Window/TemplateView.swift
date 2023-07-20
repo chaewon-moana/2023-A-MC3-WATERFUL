@@ -40,17 +40,15 @@ fileprivate enum BlockType: String {
 
 // MARK: - TemplateView
 struct TemplateView: View {
-    var fields: [Field]
+    var team: Team
+    @State var fields: [Field]
     
     @State private var blockType: BlockType = .text
     @State private var title: String = ""
     
-    @State private var selected: Field
+    @State private var selected: Field?
     
-    init(fields: [Field]) {
-        self.fields = fields
-        self.selected = fields[0]
-    }
+    @State private var renderId: UUID = UUID()
     
     var body: some View {
         VStack {
@@ -68,22 +66,84 @@ struct TemplateView: View {
     // MARK: - Blocks View
     var blocksView: some View {
         ScrollView {
-            LazyVStack {
-                WrappingHStack(alignment: .leading, spacing: .constant(8), lineSpacing: 8) {
-                    TextCell(text: "git commit -m \"")
-                    
-                    ForEach(fields) { field in
-                        BlockCell(field: field, selected: selected.id == field.id)
-                            .padding(.horizontal, 4)
-                            .onTapGesture {
-                                selected = field
+            WrappingHStack(alignment: .leading, spacing: .constant(8), lineSpacing: 8) {
+                // PlaceHolder
+                TextCell(text: "git commit -m \"")
+                
+                // Actual Fields
+                ForEach(fields.indices, id: \.self) { i in
+                    // Block Cell
+                    BlockCell(field: fields[i], selected: selected?.id == fields[i].id)
+                        .padding(.horizontal, 4)
+                        .onTapGesture {
+                            selected = fields[i]
+                        }
+                        .contextMenu {
+                            // Move Left Button
+                            Button(role: .none) {
+                                fields.move(fromOffsets: IndexSet(integer: i), toOffset: i - 1)
+                                team.fields = NSOrderedSet(array: self.fields)
+                                PersistenceController.shared.saveContext()
+                                
+                                renderId = UUID()
+                                
+                            } label: {
+                                Label("block_context_move_left", systemImage: "arrow.left")
                             }
+                            .disabled(i <= 0)
+                            
+                            // Move Right Button
+                            Button(role: .none) {
+                                fields.move(fromOffsets: IndexSet(integer: i), toOffset: i + 1)
+                                team.fields = NSOrderedSet(array: self.fields)
+                                PersistenceController.shared.saveContext()
+                                
+                                renderId = UUID()
+                                
+                            } label: {
+                                Label("block_context_move_right", systemImage: "arrow.right")
+                            }
+                            .disabled(i >= fields.count - 1)
+                            
+                            // Delete Button
+                            Button(role: .none) {
+                                PersistenceController.shared.saveContext()
+                                
+                                renderId = UUID()
+                                
+                            } label: {
+                                Label("block_context_delete", systemImage: "trash.fill")
+                            }
+
+                        }
+                }
+                .onLoad {
+                    guard let first = fields.first else {
+                        return
                     }
                     
-                    TextCell(text: "\"")
+                    selected = first
                 }
-                .foregroundColor(.white)
+                
+                
+                Button {
+                    
+                } label: {
+                    Text("+")
+                        .foregroundColor(.white)
+                }
+                .buttonStyle(.plain)
+                .frame(width: 24, height: 24)
+                .background(
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color.gray)
+                )
+
+                
+                TextCell(text: "\"")
             }
+            .id(renderId)
+            .foregroundColor(.white)
         }
     }
     //: - Blocks View

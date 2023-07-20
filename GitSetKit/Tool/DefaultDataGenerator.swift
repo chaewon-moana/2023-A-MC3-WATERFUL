@@ -101,7 +101,7 @@ class DefaultDataGenerator {
     // MARK: Field: Constant
     private var constantField: Field {
         let field = Field(context: viewContext)
-        field.name = "default_field_edit_name".localized
+        field.name = ": "
         field.type = Field.FieldType.constant.rawValue
         field.order = 2
         field.typeBasedString = ": "
