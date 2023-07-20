@@ -31,9 +31,10 @@ extension Team {
             return []
         }
         
-        return fields.sorted { f1, f2 in
-            return f2.order > f1.order
-        }
+//        return fields.sorted { f1, f2 in
+//            return f2.order > f1.order
+//        }
+        return fields
     }
     
     public var wrappedName: String {

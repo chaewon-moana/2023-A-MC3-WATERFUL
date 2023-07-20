@@ -52,3 +52,8 @@
 "option_block_field_value" = "Value";
 "option_block_field_short" = "Short Desc";
 "option_block_field_detail" = "Detail Desc";
+
+// MARK: - TemplateView
+"block_context_delete" = "삭제";
+"block_context_move_left" = "왼쪽으로 이동";
+"block_context_move_right" = "오른쪽으로 이동";
