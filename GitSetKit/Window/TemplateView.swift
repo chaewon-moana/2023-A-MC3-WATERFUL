@@ -8,34 +8,56 @@
 import SwiftUI
 import WrappingHStack
 
-struct TemplateCell: View {
-    var field: Field
+fileprivate struct BlockCell: View {
+    @StateObject var field: Field
+    var selected: Bool = false
     
     var body: some View {
         Text(field.wrappedName)
+            .padding(4)
+            .foregroundColor(.white)
+            .background(
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(selected ? Color.accentColor : Color.gray)
+            )
     }
 }
 
-enum BlockType: String {
+fileprivate struct TextCell: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+    }
+}
+
+fileprivate enum BlockType: String {
     case text
     case date
     case option
     case constant
 }
 
+// MARK: - TemplateView
 struct TemplateView: View {
     var fields: [Field]
     
-    @State var blockType: BlockType = .text
-    @State var title: String = ""
-    @State var desc: String = ""
+    @State private var blockType: BlockType = .text
+    @State private var title: String = ""
+    
+    @State private var selected: Field
+    
+    init(fields: [Field]) {
+        self.fields = fields
+        self.selected = fields[0]
+    }
     
     var body: some View {
         VStack {
-            template
+            blocksView
                 .padding()
             Spacer()
-            option
+            blockOptionView
         }
         .background(
             RoundedRectangle(cornerRadius: 8)
@@ -43,30 +65,33 @@ struct TemplateView: View {
         )
     }
     
-    // MARK: - Template View
-    var template: some View {
-#if DEBUG
-        WrappingHStack(0..<30, id: \.self, alignment: .leading, spacing: .constant(8), lineSpacing: 8) { i in
-            Text("\(i)")
-        }
-        .foregroundColor(.white)
-#else
+    // MARK: - Blocks View
+    var blocksView: some View {
         ScrollView {
             LazyVStack {
-                WrappingHStack(0..<300, id: \.self, alignment: .leading, spacing: .constant(8), lineSpacing: 8) { i in
-                    Text("\(i)")
+                WrappingHStack(alignment: .leading, spacing: .constant(8), lineSpacing: 8) {
+                    TextCell(text: "git commit -m \"")
+                    
+                    ForEach(fields) { field in
+                        BlockCell(field: field, selected: selected.id == field.id)
+                            .padding(.horizontal, 4)
+                            .onTapGesture {
+                                selected = field
+                            }
+                    }
+                    
+                    TextCell(text: "\"")
                 }
                 .foregroundColor(.white)
             }
         }
-#endif
     }
+    //: - Blocks View
     
-//: - Template View
-    
-    // MARK: - Option View
-    var option: some View {
+    // MARK: - Block Option View
+    var blockOptionView: some View {
         HStack {
+            // MARK: Block Type
             VStack(alignment: .leading) {
                 Text("option_block_type")
                 Picker("", selection: $blockType) {
@@ -80,16 +105,11 @@ struct TemplateView: View {
                         .tag(BlockType.option)
                 }
             }
+            // MARK: Block Title
             VStack(alignment: .leading) {
                 Text("option_block_title")
                 TextField("", text: $title)
-                    .background(
-                        RoundedRectangle(cornerRadius: 4)
-                    )
-            }
-            VStack(alignment: .leading) {
-                Text("option_block_desc")
-                TextField("", text: $desc)
+                    .textFieldStyle(.plain)
                     .background(
                         RoundedRectangle(cornerRadius: 4)
                     )
@@ -101,8 +121,9 @@ struct TemplateView: View {
                 .fill(Color.gray)
         )
     }
-    //: - Option View
+    //: - Block Option View
 }
+//: - TemplateView
 
 struct ConventionView_Previews1: PreviewProvider {
     static func getTeams() -> [Team] {

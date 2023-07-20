@@ -12,12 +12,28 @@
 "delete" = "삭제";
 "edit" = "수정";
 
+// MARK: - Default Texts
+"default_team_name" = "새로운 팀";
+"default_team_emoticon" = "😀";
+"default_field_type_name" = "작업";
+"default_field_type_option_feat" = "기능추가✨";
+"default_field_type_option_fix" = "버그수정🐞";
+"default_field_type_option_refactor" = "리팩토링🔧";
+"default_field_type_option_docs" = "문서작업📄";
+"default_field_type_option_style" = "코드스타일⭐️";
+"default_field_type_option_test" = "테스트코드🧪";
+"default_field_type_option_chore" = "기타작업🧹";
+"default_field_edit_name" = "수정내용";
+"default_field_edit_placeholder" = "수정 내용을 입력해주세요. (ex: 알림 버튼 추가 등)";
+
 // MARK: - ContentView
 "add_team" = "팀 추가";
 "not_selected" = "팀을 생성하거나 선택해주세요";
 
 // MARK: - TeamView
 "section_team" = "나의 팀";
+"pin" = "고정";
+"unpin" = "고정 해제";
 
 // MARK: - ConventionView
 "convention_section_template" = "템플릿 설정";

@@ -18,6 +18,8 @@ struct ContentView: View {
     @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State private var selected: Team?
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // MARK: Side Bar
@@ -37,15 +39,25 @@ struct ContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 64, height: 64)
                     Text("not_selected")
+                    
+                    Button("add_team") {
+                        let generator = DefaultDataGenerator(managedObjectContext)
+                        let fields = generator.generateFields()
+                        let team = generator.generateTeam(fields)
+                        
+                        self.selected = team
+                        
+                        PersistenceController.shared.saveContext()
+                    }
                 }
-            }
-            
-            Button("Add Test") {
-                
             }
             //: - Detail
         }
-        .frame(minWidth: 720, maxHeight: 640)
+        .onLoad {
+            if let team = teams.first {
+                self.selected = team
+            }
+        }
     }
 }
 

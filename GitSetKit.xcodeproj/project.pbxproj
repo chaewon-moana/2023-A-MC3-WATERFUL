@@ -16,8 +16,12 @@
 		628C51802A67D71B005292E3 /* Field+Converted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C517F2A67D71B005292E3 /* Field+Converted.swift */; };
 		791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A324D2A63FABA004A61A1 /* TemplateView.swift */; };
 		791A32542A63FEA8004A61A1 /* BlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A32532A63FEA8004A61A1 /* BlockSettingView.swift */; };
+		79238C2E2A69040A006137BD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79238C2D2A69040A006137BD /* String+Extension.swift */; };
+		79238C312A69049D006137BD /* DefaultDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79238C302A69049D006137BD /* DefaultDataGenerator.swift */; };
 		79694F392A5AB090009F3C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79694F382A5AB090009F3C69 /* Assets.xcassets */; };
 		79694F4D2A5AB936009F3C69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79694F4C2A5AB936009F3C69 /* Localizable.strings */; };
+		799243A52A697A1800E3DD7C /* OnLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799243A42A697A1800E3DD7C /* OnLoadModifier.swift */; };
+		799243A72A697B0000E3DD7C /* View+OnLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799243A62A697B0000E3DD7C /* View+OnLoadModifier.swift */; };
 		79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F342A5AB08F009F3C69 /* GitSetKitApp.swift */; };
 		79D78B8B2A5FEDE800B8AA79 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */; };
 		79D78B8C2A5FEDE800B8AA79 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926082B2A5BDEF50008C589 /* FileHelper.swift */; };
@@ -45,6 +49,8 @@
 		628C517F2A67D71B005292E3 /* Field+Converted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Field+Converted.swift"; path = "Data/Field+Converted.swift"; sourceTree = "<group>"; };
 		791A324D2A63FABA004A61A1 /* TemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateView.swift; sourceTree = "<group>"; };
 		791A32532A63FEA8004A61A1 /* BlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockSettingView.swift; sourceTree = "<group>"; };
+		79238C2D2A69040A006137BD /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		79238C302A69049D006137BD /* DefaultDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataGenerator.swift; sourceTree = "<group>"; };
 		7926082B2A5BDEF50008C589 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		7926C1ED2A5E8420003B7D36 /* GitSetKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitSetKit.xcdatamodel; sourceTree = "<group>"; };
 		7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersistenceController.swift; path = Data/PersistenceController.swift; sourceTree = "<group>"; };
@@ -56,6 +62,8 @@
 		79694F4A2A5AB904009F3C69 /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
 		79694F4C2A5AB936009F3C69 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConventionView.swift; sourceTree = "<group>"; };
+		799243A42A697A1800E3DD7C /* OnLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLoadModifier.swift; sourceTree = "<group>"; };
+		799243A62A697B0000E3DD7C /* View+OnLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+OnLoadModifier.swift"; sourceTree = "<group>"; };
 		79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGroupBox.swift; sourceTree = "<group>"; };
 		79EE654A2A6515530099F722 /* FlowStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowStack.swift; sourceTree = "<group>"; };
 		79EE654C2A6572DF0099F722 /* ClearTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -92,9 +100,19 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		79238C2F2A69040E006137BD /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				79238C2D2A69040A006137BD /* String+Extension.swift */,
+				799243A62A697B0000E3DD7C /* View+OnLoadModifier.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		7926082A2A5BC9030008C589 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				79238C302A69049D006137BD /* DefaultDataGenerator.swift */,
 				7926082B2A5BDEF50008C589 /* FileHelper.swift */,
 			);
 			path = Tool;
@@ -139,6 +157,7 @@
 				7926C2082A5E8C6A003B7D36 /* Data */,
 				7926082A2A5BC9030008C589 /* Tool */,
 				79EE65472A650A470099F722 /* Component */,
+				79238C2F2A69040E006137BD /* Extension */,
 				79D78B7B2A5FE92600B8AA79 /* Window */,
 			);
 			path = GitSetKit;
@@ -159,6 +178,7 @@
 		79EE65472A650A470099F722 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				799243A42A697A1800E3DD7C /* OnLoadModifier.swift */,
 				79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */,
 				79EE654A2A6515530099F722 /* FlowStack.swift */,
 				79EE654C2A6572DF0099F722 /* ClearTextFieldStyle.swift */,
@@ -266,6 +286,7 @@
 				628C517C2A67D3B6005292E3 /* Option+CoreDataProperties.swift in Sources */,
 				628C51792A67D3B6005292E3 /* Team+CoreDataClass.swift in Sources */,
 				79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */,
+				79238C312A69049D006137BD /* DefaultDataGenerator.swift in Sources */,
 				628C517B2A67D3B6005292E3 /* Option+CoreDataClass.swift in Sources */,
 				79EE65492A650A5D0099F722 /* TransparentGroupBox.swift in Sources */,
 				791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */,
@@ -274,10 +295,13 @@
 				79D78B8C2A5FEDE800B8AA79 /* FileHelper.swift in Sources */,
 				628C517D2A67D3B6005292E3 /* Field+CoreDataClass.swift in Sources */,
 				628C517E2A67D3B6005292E3 /* Field+CoreDataProperties.swift in Sources */,
+				79238C2E2A69040A006137BD /* String+Extension.swift in Sources */,
 				79D78B8D2A5FEDE800B8AA79 /* ContentView.swift in Sources */,
 				628C51802A67D71B005292E3 /* Field+Converted.swift in Sources */,
 				B5AF6A5D2A6815800043303B /* TrayView.swift in Sources */,
 				628C517A2A67D3B6005292E3 /* Team+CoreDataProperties.swift in Sources */,
+				799243A72A697B0000E3DD7C /* View+OnLoadModifier.swift in Sources */,
+				799243A52A697A1800E3DD7C /* OnLoadModifier.swift in Sources */,
 				79D78B8E2A5FEDE800B8AA79 /* TeamView.swift in Sources */,
 				B5AF6A5E2A6815800043303B /* FieldView.swift in Sources */,
 				791A32542A63FEA8004A61A1 /* BlockSettingView.swift in Sources */,
