@@ -189,6 +189,16 @@ struct TemplateView: View {
     
     var blockOptionView: some View {
         HStack {
+            // MARK: Block Title
+            VStack(alignment: .leading) {
+                Text("option_block_title")
+                TextField("", text: $title)
+                    .textFieldStyle(.plain)
+                    .background(
+                        RoundedRectangle(cornerRadius: 4)
+                    )
+            }
+            .frame(maxWidth: 120)
             // MARK: Block Type
             VStack(alignment: .leading) {
                 Text("option_block_type")
@@ -203,15 +213,9 @@ struct TemplateView: View {
                         .tag(BlockType.option)
                 }
             }
-            // MARK: Block Title
-            VStack(alignment: .leading) {
-                Text("option_block_title")
-                TextField("", text: $title)
-                    .textFieldStyle(.plain)
-                    .background(
-                        RoundedRectangle(cornerRadius: 4)
-                    )
-            }
+            .frame(maxWidth: 120)
+            
+            Spacer()
         }
         .padding()
         .background(
