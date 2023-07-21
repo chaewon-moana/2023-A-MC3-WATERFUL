@@ -86,6 +86,7 @@ struct TeamCell: View {
 // MARK: - TeamView
 struct TeamView: View {
     
+    var pinned: [Team]
     var teams: [Team]
     
     @Binding var selected: Team?
@@ -94,6 +95,14 @@ struct TeamView: View {
     
     var body: some View {
         List(selection: $selected) {
+            Section("section_pinned") {
+                ForEach(pinned) { team in
+                    NavigationLink(value: team) {
+                        TeamCell(team: team)
+                    }
+                }
+            }
+            
             Section("section_team") {
                 ForEach(teams) { team in
                     NavigationLink(value: team) {
@@ -108,33 +117,3 @@ struct TeamView: View {
     }
 }
 //: - TeamView
-
-
-// MARK: - Preview
-struct ConventionView_Previews2: PreviewProvider {
-    static func getTeams() -> [Team] {
-        var teams: [Team] = Array()
-        
-        for i in 0..<5 {
-            let team = Team(context: PersistenceController.shared.container.viewContext)
-            team.name = "team \(i)"
-            team.emoticon = "🍪"
-            team.touch = Date()
-            team.pinned = false
-            teams.append(team)
-        }
-        
-        return teams
-    }
-    
-    static var previews: some View {
-        NavigationSplitView {
-            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
-        } detail: {
-            NavigationStack {
-                ConventionView(selected: .constant(getTeams()[0]))
-            }
-        }
-    }
-}
-//: - Preview

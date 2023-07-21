@@ -20,6 +20,10 @@
 		79238C312A69049D006137BD /* DefaultDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79238C302A69049D006137BD /* DefaultDataGenerator.swift */; };
 		79694F392A5AB090009F3C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79694F382A5AB090009F3C69 /* Assets.xcassets */; };
 		79694F4D2A5AB936009F3C69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79694F4C2A5AB936009F3C69 /* Localizable.strings */; };
+		7970C40E2A6A4FA300762041 /* OptionBlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7970C40D2A6A4FA300762041 /* OptionBlockSettingView.swift */; };
+		7970C4102A6A502300762041 /* ConstantBlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7970C40F2A6A502200762041 /* ConstantBlockSettingView.swift */; };
+		7970C4122A6A502E00762041 /* InputBlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7970C4112A6A502E00762041 /* InputBlockSettingView.swift */; };
+		7970C4142A6A503B00762041 /* DateBlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7970C4132A6A503B00762041 /* DateBlockSettingView.swift */; };
 		799243A52A697A1800E3DD7C /* OnLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799243A42A697A1800E3DD7C /* OnLoadModifier.swift */; };
 		799243A72A697B0000E3DD7C /* View+OnLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799243A62A697B0000E3DD7C /* View+OnLoadModifier.swift */; };
 		79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F342A5AB08F009F3C69 /* GitSetKitApp.swift */; };
@@ -29,6 +33,7 @@
 		79D78B8E2A5FEDE800B8AA79 /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4A2A5AB904009F3C69 /* TeamView.swift */; };
 		79D78B8F2A5FEDE800B8AA79 /* ConventionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */; };
 		79D78B902A5FEDE800B8AA79 /* GitSetKit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7926C1EC2A5E8420003B7D36 /* GitSetKit.xcdatamodeld */; };
+		79E862652A6A775900F929E1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E862642A6A775900F929E1 /* TestView.swift */; };
 		79EE65492A650A5D0099F722 /* TransparentGroupBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */; };
 		79EE654B2A6515530099F722 /* FlowStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE654A2A6515530099F722 /* FlowStack.swift */; };
 		79EE654D2A6572DF0099F722 /* ClearTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE654C2A6572DF0099F722 /* ClearTextFieldStyle.swift */; };
@@ -62,8 +67,13 @@
 		79694F4A2A5AB904009F3C69 /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
 		79694F4C2A5AB936009F3C69 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConventionView.swift; sourceTree = "<group>"; };
+		7970C40D2A6A4FA300762041 /* OptionBlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionBlockSettingView.swift; sourceTree = "<group>"; };
+		7970C40F2A6A502200762041 /* ConstantBlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantBlockSettingView.swift; sourceTree = "<group>"; };
+		7970C4112A6A502E00762041 /* InputBlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputBlockSettingView.swift; sourceTree = "<group>"; };
+		7970C4132A6A503B00762041 /* DateBlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBlockSettingView.swift; sourceTree = "<group>"; };
 		799243A42A697A1800E3DD7C /* OnLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLoadModifier.swift; sourceTree = "<group>"; };
 		799243A62A697B0000E3DD7C /* View+OnLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+OnLoadModifier.swift"; sourceTree = "<group>"; };
+		79E862642A6A775900F929E1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGroupBox.swift; sourceTree = "<group>"; };
 		79EE654A2A6515530099F722 /* FlowStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowStack.swift; sourceTree = "<group>"; };
 		79EE654C2A6572DF0099F722 /* ClearTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -163,14 +173,27 @@
 			path = GitSetKit;
 			sourceTree = "<group>";
 		};
+		7970C40C2A6A4F7E00762041 /* BlockSettings */ = {
+			isa = PBXGroup;
+			children = (
+				791A32532A63FEA8004A61A1 /* BlockSettingView.swift */,
+				7970C40D2A6A4FA300762041 /* OptionBlockSettingView.swift */,
+				7970C40F2A6A502200762041 /* ConstantBlockSettingView.swift */,
+				7970C4112A6A502E00762041 /* InputBlockSettingView.swift */,
+				7970C4132A6A503B00762041 /* DateBlockSettingView.swift */,
+			);
+			path = BlockSettings;
+			sourceTree = "<group>";
+		};
 		79D78B7B2A5FE92600B8AA79 /* Window */ = {
 			isa = PBXGroup;
 			children = (
+				7970C40C2A6A4F7E00762041 /* BlockSettings */,
 				79694F362A5AB08F009F3C69 /* ContentView.swift */,
 				79694F4A2A5AB904009F3C69 /* TeamView.swift */,
 				79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */,
 				791A324D2A63FABA004A61A1 /* TemplateView.swift */,
-				791A32532A63FEA8004A61A1 /* BlockSettingView.swift */,
+				79E862642A6A775900F929E1 /* TestView.swift */,
 			);
 			path = Window;
 			sourceTree = "<group>";
@@ -286,8 +309,11 @@
 				628C517C2A67D3B6005292E3 /* Option+CoreDataProperties.swift in Sources */,
 				628C51792A67D3B6005292E3 /* Team+CoreDataClass.swift in Sources */,
 				79D78B7C2A5FEDE800B8AA79 /* GitSetKitApp.swift in Sources */,
+				7970C4102A6A502300762041 /* ConstantBlockSettingView.swift in Sources */,
 				79238C312A69049D006137BD /* DefaultDataGenerator.swift in Sources */,
 				628C517B2A67D3B6005292E3 /* Option+CoreDataClass.swift in Sources */,
+				79E862652A6A775900F929E1 /* TestView.swift in Sources */,
+				7970C4122A6A502E00762041 /* InputBlockSettingView.swift in Sources */,
 				79EE65492A650A5D0099F722 /* TransparentGroupBox.swift in Sources */,
 				791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */,
 				79EE654B2A6515530099F722 /* FlowStack.swift in Sources */,
@@ -299,6 +325,7 @@
 				79D78B8D2A5FEDE800B8AA79 /* ContentView.swift in Sources */,
 				628C51802A67D71B005292E3 /* Field+Converted.swift in Sources */,
 				B5AF6A5D2A6815800043303B /* TrayView.swift in Sources */,
+				7970C40E2A6A4FA300762041 /* OptionBlockSettingView.swift in Sources */,
 				628C517A2A67D3B6005292E3 /* Team+CoreDataProperties.swift in Sources */,
 				799243A72A697B0000E3DD7C /* View+OnLoadModifier.swift in Sources */,
 				799243A52A697A1800E3DD7C /* OnLoadModifier.swift in Sources */,
@@ -306,6 +333,7 @@
 				B5AF6A5E2A6815800043303B /* FieldView.swift in Sources */,
 				791A32542A63FEA8004A61A1 /* BlockSettingView.swift in Sources */,
 				79D78B8F2A5FEDE800B8AA79 /* ConventionView.swift in Sources */,
+				7970C4142A6A503B00762041 /* DateBlockSettingView.swift in Sources */,
 				79EE654D2A6572DF0099F722 /* ClearTextFieldStyle.swift in Sources */,
 				79D78B902A5FEDE800B8AA79 /* GitSetKit.xcdatamodeld in Sources */,
 			);

@@ -8,7 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var teams: [Team] = []
+    @FetchRequest(
+        entity: Team.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Team.touch, ascending: true)],
+        predicate: NSPredicate(format: "pinned == true")
+    ) var pinnedTeam: FetchedResults<Team>
+    
+    @FetchRequest(
+        entity: Team.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Team.touch, ascending: true)]
+    ) var teams: FetchedResults<Team>
     
     @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State private var selected: Team?
@@ -18,13 +29,13 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // MARK: Side Bar
-            TeamView(teams: teams.map({ $0 }), selected: $selected)
+            TeamView(pinned: pinnedTeam.map({ $0 }), teams: teams.map({ $0 }), selected: $selected)
             
         } detail: {
             // MARK: Detail
             if selected != nil {
                 NavigationStack {
-                    ConventionView(selected: $selected)
+                    ConventionView(selectedTeam: $selected)
                 }
                 
             } else {
@@ -43,16 +54,12 @@ struct ContentView: View {
                         self.selected = team
                         
                         PersistenceController.shared.saveContext()
-                        
-                        self.teams = PersistenceController.shared.readTeam()
                     }
                 }
             }
             //: - Detail
         }
         .onLoad {
-            teams = PersistenceController.shared.readTeam()
-            
             if let team = teams.first {
                 self.selected = team
             }
