@@ -20,15 +20,12 @@ struct TeamCell: View {
     
     @FocusState private var field: Field?
     
-    @Environment(\.managedObjectContext) var managedObjectContext
-    
     var body: some View {
         if editing {
             TextField("", text: $newName)
                 .focused($field, equals: .edit)
                 .onSubmit {
-                    team.name = newName.isEmpty ? (team.name ?? "Unknown") : newName
-                    PersistenceController.shared.saveContext()
+                    PersistenceController.shared.updateTeam(team: team, name: newName.isEmpty ? (team.name ?? "Unknown") : newName)
                     
                     editing = false
                 }
@@ -47,16 +44,14 @@ struct TeamCell: View {
                 // MARK: Pin Button
                 if team.pinned {
                     Button(role: .none) {
-                        team.pinned = false
-                        PersistenceController.shared.saveContext()
+                        PersistenceController.shared.updateTeam(team: team, pinned: false)
                         
                     } label: {
                         Label("unpin", systemImage: "pin.fill")
                     }
                 } else {
                     Button(role: .none) {
-                        team.pinned = true
-                        PersistenceController.shared.saveContext()
+                        PersistenceController.shared.updateTeam(team: team, pinned: true)
                         
                     } label: {
                         Label("pin", systemImage: "pin")
@@ -76,7 +71,7 @@ struct TeamCell: View {
                 
                 // MARK: Delete Button
                 Button(role: .destructive) {
-                    managedObjectContext.delete(team)
+                    PersistenceController.shared.deleteTeam(team)
                     
                 } label: {
                     Label("delete", systemImage: "trash.fill")
