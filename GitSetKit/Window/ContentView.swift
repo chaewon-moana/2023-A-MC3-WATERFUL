@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    // 고정 팀
     @FetchRequest(
         entity: Team.entity(),
         sortDescriptors: [
@@ -15,14 +16,18 @@ struct ContentView: View {
         predicate: NSPredicate(format: "pinned == true")
     ) var pinnedTeam: FetchedResults<Team>
     
+    // 모든 팀
     @FetchRequest(
         entity: Team.entity(),
         sortDescriptors: [
             NSSortDescriptor(keyPath: \Team.touch, ascending: true)]
     ) var teams: FetchedResults<Team>
     
-    @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
+    // 선택된 팀
     @State private var selected: Team?
+    
+    // SideBar, Detail 보이기 설정
+    @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -31,14 +36,17 @@ struct ContentView: View {
             // MARK: Side Bar
             TeamView(pinned: pinnedTeam.map({ $0 }), teams: teams.map({ $0 }), selected: $selected)
             
+            //: Side Bar
         } detail: {
             // MARK: Detail
+            // 팀 선택된 경우
             if selected != nil {
                 NavigationStack {
                     ConventionView(selectedTeam: $selected)
                 }
                 
             } else {
+                // 팀 선택이 없는 경우 (= 팀이 없는 경우)
                 VStack(spacing: 16) {
                     Image(systemName: "tray")
                         .resizable()
@@ -60,6 +68,7 @@ struct ContentView: View {
             //: - Detail
         }
         .onLoad {
+            // 최초 로드 시 첫번째 팀 선택
             if let team = teams.first {
                 self.selected = team
             }

@@ -8,6 +8,7 @@
 import SwiftUI
 import WrappingHStack
 
+// 선택 가능한 Block Cell
 fileprivate struct BlockCell: View {
     @StateObject var field: Field
     var selected: Bool = false
@@ -18,11 +19,12 @@ fileprivate struct BlockCell: View {
             .foregroundColor(.white)
             .background(
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(selected ? Color.accentColor : Color.gray)
+                    .fill(selected ? Colors.Gray.secondary : Colors.Gray.tertiary)
             )
     }
 }
 
+// "git commit -m" 등 선택 불가능한 Cell
 fileprivate struct TextCell: View {
     var text: String
     
@@ -31,6 +33,7 @@ fileprivate struct TextCell: View {
     }
 }
 
+// Field(= Block) 종류
 fileprivate enum BlockType: String {
     case text
     case date
@@ -40,36 +43,46 @@ fileprivate enum BlockType: String {
 
 // MARK: - TemplateView
 struct TemplateView: View {
-    @State var team: Team
+    // 선택된 Team
+    @Binding var team: Team!
     
+    // WrappingHStack에서 사용되는 Data
+    // (일반 텍스트와 선택 가능한 Block Cell, Add Button 모두 포함)
     @State private var data: [Any] = []
     
+    // 선택된 Field
     @Binding var selected: Field?
     
+    // 데이터 변경 시 ScrollView 및 WrappingHstack을 다시 랜더링하기 위한 변수
     @State private var renderId: UUID = UUID()
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
         VStack {
+            // Field(= Block)들을 표시하는 View
             blocksView
                 .padding()
+            
             Spacer()
+            
+            // Field를 선택했을 때 해당 Field의 옵션을 변경하는 View
             blockOptionView
         }
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color.black)
+                .fill(Colors.Fill.codeBG)
         )
     }
     
     // MARK: - Blocks View
     var blocksView: some View {
         ScrollView {
+            // WrappingHStack이 VStack, HStack을 적절히 구분하여 줄바꿈해줄 수 있도록 하려면 ForEach문을 사용해서는 안됨
             WrappingHStack(data, id: \.self, alignment: .leading, spacing: .constant(8), lineSpacing: 4) { d in
                 
                 if let d = d as? String {
-                    // data가 String이고 '+'이면 추가 버튼
+                    // data가 String이고, 값이 '+'이면 추가 버튼
                     if d == "+" {
                         Button {
                             let field = Field(context: managedObjectContext)
@@ -98,10 +111,10 @@ struct TemplateView: View {
                                 .fill(Color.gray)
                         )
                     } else {
-                        Text(d)
-                            .foregroundColor(.white)
+                        TextCell(text: d)
                     }
                 } else if let d = d as? Field {
+                    // data가 Field이면 Block으로 표시
                     BlockCell(field: d, selected: selected?.id == d.id)
                         .onTapGesture {
                             selected = d
@@ -113,13 +126,15 @@ struct TemplateView: View {
             }
             
         }
+        .id(renderId)
         .onLoad {
             reloadData()
         }
     }
+    //: - Blocks View
     
+    // MARK: - Reload Data
     func reloadData() {
-        print(#function, "before: \(data.count)")
         data.removeAll()
         data.append("git commit -m \"")
         for field in team.wrappedFields {
@@ -127,9 +142,10 @@ struct TemplateView: View {
         }
         data.append("+")
         data.append("\"")
-        print(#function, "after: \(data.count)")
+        
+        renderId = UUID()
     }
-    //: - Blocks View
+    //: - Reload Data
     
     // MARK: Context Menu
     @ViewBuilder
@@ -139,9 +155,10 @@ struct TemplateView: View {
             Button(role: .none) {
                 let index = fields.index(of: field)
                 let indexSet = IndexSet(integer: index)
-                var newField = team.wrappedFields
-                newField.move(fromOffsets: indexSet, toOffset: index - 1)
-                team.fields = NSOrderedSet(array: newField)
+                let newField = team.fields?.mutableCopy() as! NSMutableOrderedSet
+                newField.moveObjects(at: indexSet, to: index - 1)
+                team.fields = newField
+                
                 PersistenceController.shared.saveContext()
                 
                 reloadData()
@@ -155,9 +172,10 @@ struct TemplateView: View {
             Button(role: .none) {
                 let index = fields.index(of: field)
                 let indexSet = IndexSet(integer: index)
-                var newField = team.wrappedFields
-                newField.move(fromOffsets: indexSet, toOffset: index + 1)
-                team.fields = NSOrderedSet(array: newField)
+                let newField = team.fields?.mutableCopy() as! NSMutableOrderedSet
+                newField.moveObjects(at: indexSet, to: index + 1)
+                team.fields = newField
+                
                 PersistenceController.shared.saveContext()
                 
                 reloadData()
@@ -169,12 +187,17 @@ struct TemplateView: View {
             
             // Delete Button
             Button(role: .none) {
+                // 실제 데이터 삭제
+                PersistenceController.shared.deleteField(field)
+                
+                // 현재 View의 Team에서 Field 삭제
                 let index = fields.index(of: field)
                 var newField = team.wrappedFields
                 newField.remove(at: index)
                 team.fields = NSOrderedSet(array: newField)
                 PersistenceController.shared.saveContext()
                 
+                // 데이터 다시 로드
                 reloadData()
                 
             } label: {
@@ -189,6 +212,18 @@ struct TemplateView: View {
     
     var blockOptionView: some View {
         HStack {
+            // MARK: Block Title
+            VStack(alignment: .leading) {
+                Text("option_block_title")
+                TextField("", text: $title)
+                    .textFieldStyle(.plain)
+                    .padding(2)
+                    .background(
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Colors.Gray.tertiary)
+                    )
+            }
+            .frame(maxWidth: 120)
             // MARK: Block Type
             VStack(alignment: .leading) {
                 Text("option_block_type")
@@ -203,20 +238,14 @@ struct TemplateView: View {
                         .tag(BlockType.option)
                 }
             }
-            // MARK: Block Title
-            VStack(alignment: .leading) {
-                Text("option_block_title")
-                TextField("", text: $title)
-                    .textFieldStyle(.plain)
-                    .background(
-                        RoundedRectangle(cornerRadius: 4)
-                    )
-            }
+            .frame(maxWidth: 120)
+            
+            Spacer()
         }
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color.gray)
+                .fill(Colors.Fill.codeBlockB)
         )
     }
     //: - Block Option View
