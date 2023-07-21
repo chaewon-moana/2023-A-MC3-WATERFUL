@@ -40,14 +40,15 @@ fileprivate enum BlockType: String {
 
 // MARK: - TemplateView
 struct TemplateView: View {
-    var team: Team
+    @State var team: Team
     
-    @State private var blockType: BlockType = .text
-    @State private var title: String = ""
+    @State private var data: [Any] = []
     
-    @State private var selected: Field?
+    @Binding var selected: Field?
     
     @State private var renderId: UUID = UUID()
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
         VStack {
@@ -65,95 +66,127 @@ struct TemplateView: View {
     // MARK: - Blocks View
     var blocksView: some View {
         ScrollView {
-            WrappingHStack(alignment: .leading, spacing: .constant(8), lineSpacing: 8) {
-                // PlaceHolder
-                TextCell(text: "git commit -m \"")
+            WrappingHStack(data, id: \.self, alignment: .leading, spacing: .constant(8), lineSpacing: 4) { d in
                 
-                // Actual Fields
-                ForEach(team.wrappedFields.indices, id: \.self) { i in
-                    // Block Cell
-                    BlockCell(field: team.wrappedFields[i], selected: selected?.id == team.wrappedFields[i].id)
-                        .padding(.horizontal, 4)
+                if let d = d as? String {
+                    // data가 String이고 '+'이면 추가 버튼
+                    if d == "+" {
+                        Button {
+                            let field = Field(context: managedObjectContext)
+                            field.name = "block_new_field_name".localized
+                            field.type = Field.FieldType.constant.rawValue
+                            field.order = 0
+                            field.typeBasedString = ""
+                            
+                            var fields = self.team.wrappedFields
+                            fields.append(field)
+                            
+                            team.fields = NSOrderedSet(array: fields)
+                            
+                            PersistenceController.shared.saveContext()
+                            
+                            reloadData()
+                            
+                        } label: {
+                            Text("+")
+                                .foregroundColor(.white)
+                        }
+                        .buttonStyle(.plain)
+                        .frame(width: 24, height: 24)
+                        .background(
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(Color.gray)
+                        )
+                    } else {
+                        Text(d)
+                            .foregroundColor(.white)
+                    }
+                } else if let d = d as? Field {
+                    BlockCell(field: d, selected: selected?.id == d.id)
                         .onTapGesture {
-                            selected = team.wrappedFields[i]
+                            selected = d
                         }
                         .contextMenu {
-                            contextMenuBuilder(i)
+                            contextMenuBuilder(d)
                         }
                 }
-                .onLoad {
-                    guard let first = team.wrappedFields.first else {
-                        return
-                    }
-                    
-                    selected = first
-                }
-                
-                
-                Button {
-                    let field = PersistenceController.shared.createField(name: "block_new_field_name".localized, type: Field.FieldType.constant.rawValue, order: 0, typeBasedString: "")
-                    PersistenceController.shared.addTeamField(team: team, field: field)
-                    
-                } label: {
-                    Text("+")
-                        .foregroundColor(.white)
-                }
-                .buttonStyle(.plain)
-                .frame(width: 24, height: 24)
-                .background(
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color.gray)
-                )
-
-                TextCell(text: "\"")
             }
-            .id(renderId)
-            .foregroundColor(.white)
+            
         }
+        .onLoad {
+            reloadData()
+        }
+    }
+    
+    func reloadData() {
+        print(#function, "before: \(data.count)")
+        data.removeAll()
+        data.append("git commit -m \"")
+        for field in team.wrappedFields {
+            data.append(field)
+        }
+        data.append("+")
+        data.append("\"")
+        print(#function, "after: \(data.count)")
     }
     //: - Blocks View
     
     // MARK: Context Menu
     @ViewBuilder
-    func contextMenuBuilder(_ i: Int) -> some View {
-        // Move Left Button
-        Button(role: .none) {
-            var newField = team.wrappedFields
-            newField.move(fromOffsets: IndexSet(integer: i), toOffset: i - 1)
-            PersistenceController.shared.updateTeam(team: team, fields: newField)
+    func contextMenuBuilder(_ field: Field) -> some View {
+        if let fields = team.fields {
+            // Move Left Button
+            Button(role: .none) {
+                let index = fields.index(of: field)
+                let indexSet = IndexSet(integer: index)
+                var newField = team.wrappedFields
+                newField.move(fromOffsets: indexSet, toOffset: index - 1)
+                team.fields = NSOrderedSet(array: newField)
+                PersistenceController.shared.saveContext()
+                
+                reloadData()
+                
+            } label: {
+                Label("block_context_move_left", systemImage: "arrow.left")
+            }
+            .disabled(fields.index(of: field) <= 0)
             
-            renderId = UUID()
+            // Move Right Button
+            Button(role: .none) {
+                let index = fields.index(of: field)
+                let indexSet = IndexSet(integer: index)
+                var newField = team.wrappedFields
+                newField.move(fromOffsets: indexSet, toOffset: index + 1)
+                team.fields = NSOrderedSet(array: newField)
+                PersistenceController.shared.saveContext()
+                
+                reloadData()
+                
+            } label: {
+                Label("block_context_move_right", systemImage: "arrow.right")
+            }
+            .disabled(fields.index(of: field) >= fields.count - 1)
             
-        } label: {
-            Label("block_context_move_left", systemImage: "arrow.left")
-        }
-        .disabled(i <= 0)
-        
-        // Move Right Button
-        Button(role: .none) {
-            var newField = team.wrappedFields
-            newField.move(fromOffsets: IndexSet(integer: i), toOffset: i + 1)
-            PersistenceController.shared.updateTeam(team: team, fields: newField)
-            
-            renderId = UUID()
-            
-        } label: {
-            Label("block_context_move_right", systemImage: "arrow.right")
-        }
-        .disabled(i >= team.wrappedFields.count - 1)
-        
-        // Delete Button
-        Button(role: .none) {
-            PersistenceController.shared.deleteField(team.wrappedFields[i])
-            
-            renderId = UUID()
-            
-        } label: {
-            Label("block_context_delete", systemImage: "trash.fill")
+            // Delete Button
+            Button(role: .none) {
+                let index = fields.index(of: field)
+                var newField = team.wrappedFields
+                newField.remove(at: index)
+                team.fields = NSOrderedSet(array: newField)
+                PersistenceController.shared.saveContext()
+                
+                reloadData()
+                
+            } label: {
+                Label("block_context_delete", systemImage: "trash.fill")
+            }
         }
     }
     
     // MARK: - Block Option View
+    @State private var blockType: BlockType = .text
+    @State private var title: String = ""
+    
     var blockOptionView: some View {
         HStack {
             // MARK: Block Type
@@ -189,30 +222,3 @@ struct TemplateView: View {
     //: - Block Option View
 }
 //: - TemplateView
-
-struct ConventionView_Previews1: PreviewProvider {
-    static func getTeams() -> [Team] {
-        var teams: [Team] = Array()
-        
-        for i in 0..<5 {
-            let team = Team(context: PersistenceController.shared.container.viewContext)
-            team.name = "team \(i)"
-            team.emoticon = "🍪"
-            team.touch = Date()
-            team.pinned = false
-            teams.append(team)
-        }
-        
-        return teams
-    }
-    
-    static var previews: some View {
-        NavigationSplitView {
-            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
-        } detail: {
-            NavigationStack {
-                ConventionView(selected: .constant(getTeams()[0]))
-            }
-        }
-    }
-}

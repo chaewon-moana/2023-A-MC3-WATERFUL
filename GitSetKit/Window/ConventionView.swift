@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ConventionView: View {
-    @Binding var selected: Team!
+    
+    @Binding var selectedTeam: Team!
+    @State var selectedField: Field?
     
     var body: some View {
         GeometryReader { proxy in
             VStack(spacing: 0) {
                 // MARK: - Template View
                 GroupBox {
-                    TemplateView(team: selected)
+                    TemplateView(team: selectedTeam, selected: $selectedField)
                 } label: {
                     Text("convention_section_template")
                         .font(.title3.bold())
@@ -27,7 +29,12 @@ struct ConventionView: View {
                 
                 // MARK: - Inspector View
                 GroupBox {
-                    BlockSettingView()
+                    BlockSettingView(selected: $selectedField)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.black)
+                        )
+                    
                 } label: {
                     Text("convention_section_block")
                         .font(.title3.bold())
@@ -40,43 +47,5 @@ struct ConventionView: View {
         }
         .navigationTitle(Text("app_name"))
         .frame(minWidth: 960, minHeight: 640)
-    }
-}
-
-struct ConventionView_Previews: PreviewProvider {
-    static var team: Team {
-        let team = Team(context: PersistenceController.shared.container.viewContext)
-        
-        team.emoticon = "🍪"
-        team.name = "촉촉단"
-        team.pinned = false
-        team.touch = Date()
-        
-        return team
-    }
-    
-    static func getTeams() -> [Team] {
-        var teams: [Team] = Array()
-        
-        for i in 0..<5 {
-            let team = Team(context: PersistenceController.shared.container.viewContext)
-            team.name = "team \(i)"
-            team.emoticon = "🍪"
-            team.touch = Date()
-            team.pinned = false
-            teams.append(team)
-        }
-        
-        return teams
-    }
-    
-    static var previews: some View {
-        NavigationSplitView {
-            TeamView(teams: getTeams(), selected: .constant(getTeams()[0]))
-        } detail: {
-            NavigationStack {
-                ConventionView(selected: .constant(team))
-            }
-        }
     }
 }

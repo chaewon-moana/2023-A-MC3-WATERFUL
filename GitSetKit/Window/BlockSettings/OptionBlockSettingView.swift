@@ -1,13 +1,13 @@
 //
-//  BlockSettingView.swift
+//  OptionBlockSettingView.swift
 //  GitSetKit
 //
-//  Created by 최명근 on 2023/07/16.
+//  Created by 최명근 on 2023/07/21.
 //
 
 import SwiftUI
 
-struct OptionBlockView: View {
+struct OptionBlockSettingView: View {
     var body: some View {
         ScrollView(.vertical) {
             // MARK: d
@@ -49,28 +49,5 @@ struct OptionBlockView: View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.gray)
         )
-    }
-}
-
-struct BlockSettingView: View {
-    var body: some View {
-        OptionBlockView()
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.black)
-            )
-    }
-}
-
-struct BlockSettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupBox {
-            BlockSettingView()
-        } label: {
-            Text("convention_section_block")
-                .font(.title3.bold())
-        }
-        .groupBoxStyle(TransparentGroupBox())
-        .padding()
     }
 }
