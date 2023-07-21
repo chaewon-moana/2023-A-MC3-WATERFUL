@@ -9,18 +9,24 @@ import SwiftUI
 
 
 struct TeamCell: View {
+    // 수정 모드에서 TextField 표시를 위한 필드
     enum Field {
         case edit
     }
     
-    @StateObject var team: Team
+    // 팀
+    @State var team: Team
     
+    // 팀 이름 수정 모드 토글
     @State private var editing: Bool = false
+    // 팀 이름 수정 임시 변수
     @State private var newName: String = ""
     
+    // TextField 포커스 변수
     @FocusState private var field: Field?
     
     var body: some View {
+        // 팀 이름 수정 모드
         if editing {
             TextField("", text: $newName)
                 .focused($field, equals: .edit)
@@ -86,15 +92,16 @@ struct TeamCell: View {
 // MARK: - TeamView
 struct TeamView: View {
     
+    // 고정된 팀
     var pinned: [Team]
+    // 모든 팀
     var teams: [Team]
     
     @Binding var selected: Team?
     
-    @FocusState private var editState: Team?
-    
     var body: some View {
         List(selection: $selected) {
+            // MARK: Pinned Team
             Section("section_pinned") {
                 ForEach(pinned) { team in
                     NavigationLink(value: team) {
@@ -102,7 +109,9 @@ struct TeamView: View {
                     }
                 }
             }
+            //: Pinned Team
             
+            // MARK: All Team
             Section("section_team") {
                 ForEach(teams) { team in
                     NavigationLink(value: team) {
@@ -110,6 +119,7 @@ struct TeamView: View {
                     }
                 }
             }
+            //: All Team
             
         }
         .listStyle(.sidebar)
