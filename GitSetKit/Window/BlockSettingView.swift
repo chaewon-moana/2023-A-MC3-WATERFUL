@@ -62,7 +62,7 @@ struct BlockSettingView: View {
     }
 }
 
-struct Conven3tionView_Preview1s: PreviewProvider {
+struct BlockSettingView_Previews: PreviewProvider {
     static var previews: some View {
         GroupBox {
             BlockSettingView()

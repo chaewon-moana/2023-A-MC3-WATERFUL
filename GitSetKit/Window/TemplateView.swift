@@ -41,7 +41,6 @@ fileprivate enum BlockType: String {
 // MARK: - TemplateView
 struct TemplateView: View {
     var team: Team
-    @State var fields: [Field]
     
     @State private var blockType: BlockType = .text
     @State private var title: String = ""
@@ -71,54 +70,19 @@ struct TemplateView: View {
                 TextCell(text: "git commit -m \"")
                 
                 // Actual Fields
-                ForEach(fields.indices, id: \.self) { i in
+                ForEach(team.wrappedFields.indices, id: \.self) { i in
                     // Block Cell
-                    BlockCell(field: fields[i], selected: selected?.id == fields[i].id)
+                    BlockCell(field: team.wrappedFields[i], selected: selected?.id == team.wrappedFields[i].id)
                         .padding(.horizontal, 4)
                         .onTapGesture {
-                            selected = fields[i]
+                            selected = team.wrappedFields[i]
                         }
                         .contextMenu {
-                            // Move Left Button
-                            Button(role: .none) {
-                                fields.move(fromOffsets: IndexSet(integer: i), toOffset: i - 1)
-                                team.fields = NSOrderedSet(array: self.fields)
-                                PersistenceController.shared.saveContext()
-                                
-                                renderId = UUID()
-                                
-                            } label: {
-                                Label("block_context_move_left", systemImage: "arrow.left")
-                            }
-                            .disabled(i <= 0)
-                            
-                            // Move Right Button
-                            Button(role: .none) {
-                                fields.move(fromOffsets: IndexSet(integer: i), toOffset: i + 1)
-                                team.fields = NSOrderedSet(array: self.fields)
-                                PersistenceController.shared.saveContext()
-                                
-                                renderId = UUID()
-                                
-                            } label: {
-                                Label("block_context_move_right", systemImage: "arrow.right")
-                            }
-                            .disabled(i >= fields.count - 1)
-                            
-                            // Delete Button
-                            Button(role: .none) {
-                                PersistenceController.shared.saveContext()
-                                
-                                renderId = UUID()
-                                
-                            } label: {
-                                Label("block_context_delete", systemImage: "trash.fill")
-                            }
-
+                            contextMenuBuilder(i)
                         }
                 }
                 .onLoad {
-                    guard let first = fields.first else {
+                    guard let first = team.wrappedFields.first else {
                         return
                     }
                     
@@ -127,6 +91,8 @@ struct TemplateView: View {
                 
                 
                 Button {
+                    let field = PersistenceController.shared.createField(name: "block_new_field_name".localized, type: Field.FieldType.constant.rawValue, order: 0, typeBasedString: "")
+                    PersistenceController.shared.addTeamField(team: team, field: field)
                     
                 } label: {
                     Text("+")
@@ -139,7 +105,6 @@ struct TemplateView: View {
                         .fill(Color.gray)
                 )
 
-                
                 TextCell(text: "\"")
             }
             .id(renderId)
@@ -147,6 +112,46 @@ struct TemplateView: View {
         }
     }
     //: - Blocks View
+    
+    // MARK: Context Menu
+    @ViewBuilder
+    func contextMenuBuilder(_ i: Int) -> some View {
+        // Move Left Button
+        Button(role: .none) {
+            var newField = team.wrappedFields
+            newField.move(fromOffsets: IndexSet(integer: i), toOffset: i - 1)
+            PersistenceController.shared.updateTeam(team: team, fields: newField)
+            
+            renderId = UUID()
+            
+        } label: {
+            Label("block_context_move_left", systemImage: "arrow.left")
+        }
+        .disabled(i <= 0)
+        
+        // Move Right Button
+        Button(role: .none) {
+            var newField = team.wrappedFields
+            newField.move(fromOffsets: IndexSet(integer: i), toOffset: i + 1)
+            PersistenceController.shared.updateTeam(team: team, fields: newField)
+            
+            renderId = UUID()
+            
+        } label: {
+            Label("block_context_move_right", systemImage: "arrow.right")
+        }
+        .disabled(i >= team.wrappedFields.count - 1)
+        
+        // Delete Button
+        Button(role: .none) {
+            PersistenceController.shared.deleteField(team.wrappedFields[i])
+            
+            renderId = UUID()
+            
+        } label: {
+            Label("block_context_delete", systemImage: "trash.fill")
+        }
+    }
     
     // MARK: - Block Option View
     var blockOptionView: some View {

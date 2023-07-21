@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @FetchRequest(
-        entity: Team.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Team.name, ascending: true)
-        ]
-    ) var teams: FetchedResults<Team>
+    @State var teams: [Team] = []
     
     @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State private var selected: Team?
@@ -48,12 +43,16 @@ struct ContentView: View {
                         self.selected = team
                         
                         PersistenceController.shared.saveContext()
+                        
+                        self.teams = PersistenceController.shared.readTeam()
                     }
                 }
             }
             //: - Detail
         }
         .onLoad {
+            teams = PersistenceController.shared.readTeam()
+            
             if let team = teams.first {
                 self.selected = team
             }

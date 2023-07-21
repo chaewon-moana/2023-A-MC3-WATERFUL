@@ -54,6 +54,8 @@
 "option_block_field_detail" = "Detail Desc";
 
 // MARK: - TemplateView
+"block_new_field_name" = "새 블록";
 "block_context_delete" = "삭제";
 "block_context_move_left" = "왼쪽으로 이동";
 "block_context_move_right" = "오른쪽으로 이동";
+"block_context_rename" = "이름 수정";
