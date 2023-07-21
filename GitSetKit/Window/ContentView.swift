@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @FetchRequest(
-        entity: Team.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Team.name, ascending: true)
-        ]
-    ) var teams: FetchedResults<Team>
+    @State var teams: [Team] = []
     
     @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State private var selected: Team?
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
@@ -37,15 +34,29 @@ struct ContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 64, height: 64)
                     Text("not_selected")
+                    
+                    Button("add_team") {
+                        let generator = DefaultDataGenerator(managedObjectContext)
+                        let fields = generator.generateFields()
+                        let team = generator.generateTeam(fields)
+                        
+                        self.selected = team
+                        
+                        PersistenceController.shared.saveContext()
+                        
+                        self.teams = PersistenceController.shared.readTeam()
+                    }
                 }
-            }
-            
-            Button("Add Test") {
-                
             }
             //: - Detail
         }
-        .frame(minWidth: 720, maxHeight: 640)
+        .onLoad {
+            teams = PersistenceController.shared.readTeam()
+            
+            if let team = teams.first {
+                self.selected = team
+            }
+        }
     }
 }
 

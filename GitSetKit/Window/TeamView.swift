@@ -13,7 +13,7 @@ struct TeamCell: View {
         case edit
     }
     
-    var team: Team
+    @StateObject var team: Team
     
     @State private var editing: Bool = false
     @State private var newName: String = ""
@@ -25,26 +25,40 @@ struct TeamCell: View {
             TextField("", text: $newName)
                 .focused($field, equals: .edit)
                 .onSubmit {
-//                    teamVM.clearStates()
-//                    team.name = newName.isEmpty ? (team.name ?? "no name") : newName
-//                    teamVM.name = team.name ?? "no name"
-//                    teamVM.desc = team.desc ?? ""
-//                    teamVM.template = team.template ?? ""
-//                    teamVM.updateTeam(team: team)
-//                    teamVM.clearStates()
+                    PersistenceController.shared.updateTeam(team: team, name: newName.isEmpty ? (team.name ?? "Unknown") : newName)
                     
                     editing = false
                 }
         } else {
             HStack {
-                Text(team.name ?? "no content")
+                Text(team.name ?? "Unknown")
                     .font(.body)
                 
                 Spacer()
                 
-                Image(systemName: "pin.fill")
+                if team.pinned {
+                    Image(systemName: "pin.fill")
+                }
             }
             .contextMenu {
+                // MARK: Pin Button
+                if team.pinned {
+                    Button(role: .none) {
+                        PersistenceController.shared.updateTeam(team: team, pinned: false)
+                        
+                    } label: {
+                        Label("unpin", systemImage: "pin.fill")
+                    }
+                } else {
+                    Button(role: .none) {
+                        PersistenceController.shared.updateTeam(team: team, pinned: true)
+                        
+                    } label: {
+                        Label("pin", systemImage: "pin")
+                    }
+                }
+                //: Edit Button
+                
                 // MARK: Edit Button
                 Button(role: .none) {
                     editing = true
@@ -57,7 +71,7 @@ struct TeamCell: View {
                 
                 // MARK: Delete Button
                 Button(role: .destructive) {
-//                    teamVM.deleteTeam(team: team)
+                    PersistenceController.shared.deleteTeam(team)
                     
                 } label: {
                     Label("delete", systemImage: "trash.fill")
