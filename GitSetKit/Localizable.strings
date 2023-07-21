@@ -31,6 +31,7 @@
 "not_selected" = "팀을 생성하거나 선택해주세요";
 
 // MARK: - TeamView
+"section_pinned" = "고정";
 "section_team" = "나의 팀";
 "pin" = "고정";
 "unpin" = "고정 해제";
