@@ -22,6 +22,7 @@ class DefaultDataGenerator {
         team.name = "default_team_name".localized
         team.emoticon = "default_team_emoticon".localized
         team.pinned = false
+        team.touch = Date()
         team.fields = NSOrderedSet(array: fields)
         
         return team
