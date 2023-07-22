@@ -9,8 +9,31 @@ import SwiftUI
 
 struct InputBlockSettingView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            Text("input_block_field_text")
+                .padding(.leading, 16)
+                .padding(.top, 16)
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Colors.Gray.tertiary)
+                .overlay {
+                    TextEditor(text: $value)
+                        .foregroundColor(Colors.Text.secondary)
+                        .textFieldStyle(.plain)
+                        .multilineTextAlignment(.leading)
+                        .scrollContentBackground(.hidden)
+                        .padding()
+                }
+                .padding(.leading, 16)
+                .padding(.bottom)
+                .padding(.trailing)
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Colors.Gray.quaternary)
+        )
     }
+    
+    @State private var value: String = "input_block_field_placeholder".localized
 }
 
 struct InputBlockSettingView_Previews: PreviewProvider {
