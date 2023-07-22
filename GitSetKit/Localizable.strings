@@ -52,7 +52,7 @@
 // MARK: OptionBlockView
 "option_block_field_value" = "Value";
 "option_block_field_short" = "Short Desc";
-"option_block_field_detail" = "Detail Desc";
+"option_block_field_detail" = "Detail Description";
 
 // MARK: - TemplateView
 "block_new_field_name" = "새 블록";
