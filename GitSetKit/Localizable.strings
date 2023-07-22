@@ -60,6 +60,8 @@
 # 3. '~했음' 대신 수행한 작업을 명시 (ex. '~작업', '~작성' 등)
 # ex) feat: 로그인 기능 추가
 ";
+// MARK: DateBlockSettingView
+"date_block_field_text" = "날짜 유형을 선택해주세요";
 
 // MARK: - TemplateView
 "block_new_field_name" = "새 블록";
