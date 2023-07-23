@@ -128,20 +128,24 @@ struct TeamView: View {
     // 고정된 팀
     var pinned: [Team]
     // 모든 팀
-    var teams: [Team]
+    @State var teams: [Team]
     
     @Binding var selected: Team?
     
     // 팀 데이터 수정 시 List를 다시 로드하기 위한 UUID
     @State private var renderId: UUID = UUID()
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     var body: some View {
         List(selection: $selected) {
             // MARK: Pinned Team
-            Section("section_pinned") {
-                ForEach(pinned) { team in
-                    NavigationLink(value: team) {
-                        TeamCell(team: team, renderId: $renderId)
+            if !pinned.isEmpty {
+                Section("section_pinned") {
+                    ForEach(pinned) { team in
+                        NavigationLink(value: team) {
+                            TeamCell(team: team, renderId: $renderId)
+                        }
                     }
                 }
             }
@@ -155,11 +159,23 @@ struct TeamView: View {
                     }
                 }
             }
+            .onAppear {
+                teams.sort { t1, t2 in
+                    t1.pinned || t1.touch ?? Date() > t2.touch ?? Date()
+                }
+            }
             //: All Team
             
         }
         .listStyle(.sidebar)
         .id(renderId)
+        .onChange(of: selected) { newValue in
+            if let selected = selected {
+                PersistenceController.shared.updateTeam(team: selected, touch: Date())
+                
+                renderId = UUID()
+            }
+        }
         
     }
 }
