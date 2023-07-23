@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConventionView: View {
     
-    @Binding var selectedTeam: Team!
+    @Binding var selectedTeam: Team?
     @State var selectedField: Field?
     
     var body: some View {
@@ -21,7 +21,7 @@ struct ConventionView: View {
                     TemplateView(team: $selectedTeam, selected: $selectedField)
                 } label: {
                     Text("convention_section_template")
-                        .font(.title3.bold())
+                        .font(.title2)
                 }
                 .groupBoxStyle(TransparentGroupBox())
                 .padding()
@@ -39,7 +39,7 @@ struct ConventionView: View {
                     
                 } label: {
                     Text("convention_section_block")
-                        .font(.title3.bold())
+                        .font(.title2)
                 }
                 .groupBoxStyle(TransparentGroupBox())
                 .padding()
@@ -48,6 +48,5 @@ struct ConventionView: View {
             }
         }
         .navigationTitle(Text("app_name"))
-        .frame(minWidth: 960, minHeight: 640)
     }
 }
