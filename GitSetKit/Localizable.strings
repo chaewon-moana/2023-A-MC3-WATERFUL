@@ -51,6 +51,7 @@
 "option_block_type_date" = "날짜";
 "option_block_type_option" = "선택";
 "option_block_title" = "Block Title";
+"option_block_title_empty" = "이름 없는 필드";
 "option_block_desc" = "Block Description";
 
 // MARK: - BlockSettingView

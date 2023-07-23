@@ -30,20 +30,25 @@ struct ConventionView: View {
                 
                 // MARK: - Inspector View
                 // 선택된 Field(= Block)을 수정하는 View
-                GroupBox {
-                    BlockSettingView(selected: $selectedField)
-                        .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.black)
-                        )
-                    
-                } label: {
-                    Text("convention_section_block")
-                        .font(.title2)
+                // 선택된 Field가 없거나 블럭 타입이 Constant인 경우 빈 칸으로 표시
+                if let type = selectedField?.type, type != Field.FieldType.constant.rawValue {
+                    GroupBox {
+                        BlockSettingView(selected: $selectedField)
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color.black)
+                            )
+                        
+                    } label: {
+                        Text("convention_section_block")
+                            .font(.title2)
+                    }
+                    .groupBoxStyle(TransparentGroupBox())
+                    .padding()
+                    .frame(height: proxy.size.height / 2)
+                } else {
+                    Spacer()
                 }
-                .groupBoxStyle(TransparentGroupBox())
-                .padding()
-                .frame(height: proxy.size.height / 2)
                 // : - Inspector View
             }
         }
