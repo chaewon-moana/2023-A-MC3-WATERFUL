@@ -37,14 +37,6 @@ fileprivate struct TextCell: View {
     }
 }
 
-// Field(= Block) 종류
-fileprivate enum BlockType: String {
-    case text
-    case date
-    case option
-    case constant
-}
-
 // MARK: - TemplateView
 struct TemplateView: View {
     // 선택된 Team
@@ -221,7 +213,7 @@ struct TemplateView: View {
     }
     
     // MARK: - Block Option View
-    @State private var blockType: BlockType = .text
+    @State private var blockType: Field.FieldType = .input
     @State private var title: String = ""
     
     var blockOptionView: some View {
@@ -237,6 +229,11 @@ struct TemplateView: View {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Colors.Gray.tertiary)
                     )
+                    .onSubmit {
+                        if let selected = selected {
+                            PersistenceController.shared.updateField(field: selected, name: title)
+                        }
+                    }
             }
             .frame(maxWidth: 120)
             // MARK: Block Type
@@ -246,14 +243,20 @@ struct TemplateView: View {
                     .padding(.leading, 6)
                 Picker("", selection: $blockType) {
                     Text("option_block_type_constant")
-                        .tag(BlockType.constant)
+                        .tag(Field.FieldType.constant)
                     Text("option_block_type_text")
-                        .tag(BlockType.text)
+                        .tag(Field.FieldType.input)
                     Text("option_block_type_date")
-                        .tag(BlockType.date)
+                        .tag(Field.FieldType.date)
                     Text("option_block_type_option")
-                        .tag(BlockType.option)
+                        .tag(Field.FieldType.option)
                 }
+                .onChange(of: blockType, perform: { newValue in
+                    if let selected = selected {
+                        PersistenceController.shared.updateField(field: selected, type: blockType.rawValue, typeBasedString: "")
+                    }
+                    selected = nil
+                })
             }
             .frame(maxWidth: 120)
             
@@ -264,6 +267,12 @@ struct TemplateView: View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Colors.Fill.codeBlockB)
         )
+        .onChange(of: selected) { newValue in
+            if let selected = selected {
+                blockType = Field.FieldType(rawValue: selected.type) ?? .input
+                title = selected.name ?? "option_block_title_empty".localized
+            }
+        }
     }
     //: - Block Option View
 }
