@@ -25,6 +25,8 @@ struct TeamCell: View {
     // TextField 포커스 변수
     @FocusState private var field: Field?
     
+    @Binding var renderId: UUID
+    
     var body: some View {
         // 팀 이름 수정 모드
         if editing {
@@ -34,6 +36,8 @@ struct TeamCell: View {
                     PersistenceController.shared.updateTeam(team: team, name: newName.isEmpty ? (team.name ?? "Unknown") : newName)
                     
                     editing = false
+                    
+                    renderId = UUID()
                 }
         } else {
             HStack {
@@ -52,12 +56,16 @@ struct TeamCell: View {
                     Button(role: .none) {
                         PersistenceController.shared.updateTeam(team: team, pinned: false)
                         
+                        renderId = UUID()
+                        
                     } label: {
                         Label("unpin", systemImage: "pin.fill")
                     }
                 } else {
                     Button(role: .none) {
                         PersistenceController.shared.updateTeam(team: team, pinned: true)
+                        
+                        renderId = UUID()
                         
                     } label: {
                         Label("pin", systemImage: "pin")
@@ -79,6 +87,8 @@ struct TeamCell: View {
                 Button(role: .destructive) {
                     PersistenceController.shared.deleteTeam(team)
                     
+                    renderId = UUID()
+                    
                 } label: {
                     Label("delete", systemImage: "trash.fill")
                 }
@@ -99,13 +109,16 @@ struct TeamView: View {
     
     @Binding var selected: Team?
     
+    // 팀 데이터 수정 시 List를 다시 로드하기 위한 UUID
+    @State private var renderId: UUID = UUID()
+    
     var body: some View {
         List(selection: $selected) {
             // MARK: Pinned Team
             Section("section_pinned") {
                 ForEach(pinned) { team in
                     NavigationLink(value: team) {
-                        TeamCell(team: team)
+                        TeamCell(team: team, renderId: $renderId)
                     }
                 }
             }
@@ -115,7 +128,7 @@ struct TeamView: View {
             Section("section_team") {
                 ForEach(teams) { team in
                     NavigationLink(value: team) {
-                        TeamCell(team: team)
+                        TeamCell(team: team, renderId: $renderId)
                     }
                 }
             }
@@ -123,6 +136,7 @@ struct TeamView: View {
             
         }
         .listStyle(.sidebar)
+        .id(renderId)
         
     }
 }
