@@ -15,6 +15,7 @@
 		628C517E2A67D3B6005292E3 /* Field+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C51782A67D3B6005292E3 /* Field+CoreDataProperties.swift */; };
 		628C51802A67D71B005292E3 /* Field+Converted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C517F2A67D71B005292E3 /* Field+Converted.swift */; };
 		790C323A2A6CC63900DBD6CC /* FileCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790C32392A6CC63900DBD6CC /* FileCommand.swift */; };
+		790C323D2A6CDF2000DBD6CC /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 790C323C2A6CDF2000DBD6CC /* HotKey */; };
 		791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A324D2A63FABA004A61A1 /* TemplateView.swift */; };
 		791A32542A63FEA8004A61A1 /* BlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A32532A63FEA8004A61A1 /* BlockSettingView.swift */; };
 		79238C2E2A69040A006137BD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79238C2D2A69040A006137BD /* String+Extension.swift */; };
@@ -93,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790C323D2A6CDF2000DBD6CC /* HotKey in Frameworks */,
 				79F9A9F32A6203A100C6D920 /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +253,7 @@
 			name = GitSetKit;
 			packageProductDependencies = (
 				79F9A9F22A6203A100C6D920 /* WrappingHStack */,
+				790C323C2A6CDF2000DBD6CC /* HotKey */,
 			);
 			productName = GitSetKit;
 			productReference = 79694F312A5AB08F009F3C69 /* GitSetKit.app */;
@@ -283,6 +286,7 @@
 			mainGroup = 79694F282A5AB08F009F3C69;
 			packageReferences = (
 				79F9A9F12A6203A100C6D920 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				790C323B2A6CDF2000DBD6CC /* XCRemoteSwiftPackageReference "HotKey" */,
 			);
 			productRefGroup = 79694F322A5AB08F009F3C69 /* Products */;
 			projectDirPath = "";
@@ -545,6 +549,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		790C323B2A6CDF2000DBD6CC /* XCRemoteSwiftPackageReference "HotKey" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soffes/HotKey";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		79F9A9F12A6203A100C6D920 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dkk/WrappingHStack";
@@ -556,6 +568,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		790C323C2A6CDF2000DBD6CC /* HotKey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 790C323B2A6CDF2000DBD6CC /* XCRemoteSwiftPackageReference "HotKey" */;
+			productName = HotKey;
+		};
 		79F9A9F22A6203A100C6D920 /* WrappingHStack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 79F9A9F12A6203A100C6D920 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
