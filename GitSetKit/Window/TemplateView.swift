@@ -15,11 +15,13 @@ fileprivate struct BlockCell: View {
     
     var body: some View {
         Text(field.wrappedName)
-            .padding(4)
-            .foregroundColor(.white)
+            .font(.custom("SourceCodePro-Light", size: 17)) // FIXME: 폰트 적용 안되는 문제
+            .foregroundColor(selected ? Color.black : Color.white)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 4)
             .background(
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(selected ? Colors.Gray.secondary : Colors.Gray.tertiary)
+                    .fill(selected ? Colors.Gray.quaternary : Colors.Gray.secondary)
             )
     }
 }
@@ -30,6 +32,8 @@ fileprivate struct TextCell: View {
     
     var body: some View {
         Text(text)
+            .font(.custom("SourceCodePro-Light", size: 17)) // FIXME: 폰트 적용 안되는 문제
+            .foregroundColor(.white)
     }
 }
 
@@ -142,9 +146,12 @@ struct TemplateView: View {
     
     // MARK: - Reload Data
     func reloadData() {
+        guard let fields = team?.wrappedFields else {
+            return
+        }
         data.removeAll()
         data.append("git commit -m \"")
-        for field in team!.wrappedFields {
+        for field in fields {
             data.append(field)
         }
         data.append("+")
@@ -222,6 +229,7 @@ struct TemplateView: View {
             // MARK: Block Title
             VStack(alignment: .leading) {
                 Text("option_block_title")
+                    .foregroundColor(.white.opacity(0.6))
                 TextField("", text: $title)
                     .textFieldStyle(.plain)
                     .padding(2)
@@ -234,6 +242,8 @@ struct TemplateView: View {
             // MARK: Block Type
             VStack(alignment: .leading) {
                 Text("option_block_type")
+                    .foregroundColor(.white.opacity(0.6))
+                    .padding(.leading, 6)
                 Picker("", selection: $blockType) {
                     Text("option_block_type_constant")
                         .tag(BlockType.constant)
