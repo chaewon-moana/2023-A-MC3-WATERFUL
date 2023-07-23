@@ -26,6 +26,11 @@
 "default_field_edit_name" = "수정내용";
 "default_field_edit_placeholder" = "수정 내용을 입력해주세요. (ex: 알림 버튼 추가 등)";
 
+// MARK: - Commands
+"command_file_new_team" = "새 팀";
+"command_file_import" = "기존 팀 추가";
+"command_file_export" = "팀 추출";
+
 // MARK: - ContentView
 "add_team" = "팀 추가";
 "not_selected" = "팀을 생성하거나 선택해주세요";

@@ -40,7 +40,7 @@ struct ContentView: View {
         } detail: {
             // MARK: Detail
             // 팀 선택된 경우
-            if selected != nil {
+            if let selected = selected {
                 NavigationStack {
                     ConventionView(selectedTeam: $selected)
                 }

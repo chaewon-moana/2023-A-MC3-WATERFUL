@@ -13,12 +13,30 @@ struct GitSetKitApp: App {
     let persistenceController = PersistenceController.shared
     
     var body: some Scene {
-        WindowGroup {
+        // MARK: - WindowView
+        WindowGroup(id: WindowId.window.rawValue) {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .commands {
-            
+            CommandGroup(replacing: .newItem) {
+                FileCommand()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }
         }
+        //: - WindowView
+        
+        // MARK: - TrayView
+        MenuBarExtra {
+            TrayView()
+        } label: {
+            Image(systemName: "arrow.branch")
+        }
+        .menuBarExtraStyle(.window)
+        //: - TrayView
+    }
+    
+    enum WindowId: String {
+        case window
     }
 }

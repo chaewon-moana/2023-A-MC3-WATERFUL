@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConventionView: View {
     
-    @Binding var selectedTeam: Team!
+    @Binding var selectedTeam: Team?
     @State var selectedField: Field?
     
     var body: some View {

@@ -44,7 +44,7 @@ fileprivate enum BlockType: String {
 // MARK: - TemplateView
 struct TemplateView: View {
     // 선택된 Team
-    @Binding var team: Team!
+    @Binding var team: Team?
     
     // WrappingHStack에서 사용되는 Data
     // (일반 텍스트와 선택 가능한 Block Cell, Add Button 모두 포함)
@@ -59,20 +59,27 @@ struct TemplateView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
-        VStack {
-            // Field(= Block)들을 표시하는 View
-            blocksView
-                .padding()
-            
+        if team != nil {
+            VStack {
+                // Field(= Block)들을 표시하는 View
+                blocksView
+                    .padding()
+                
+                Spacer()
+                
+                // Field를 선택했을 때 해당 Field의 옵션을 변경하는 View
+                blockOptionView
+            }
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Colors.Fill.codeBG)
+            )
+            .onChange(of: team) { _ in
+                reloadData()
+            }
+        } else {
             Spacer()
-            
-            // Field를 선택했을 때 해당 Field의 옵션을 변경하는 View
-            blockOptionView
         }
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Colors.Fill.codeBG)
-        )
     }
     
     // MARK: - Blocks View
@@ -91,10 +98,10 @@ struct TemplateView: View {
                             field.order = 0
                             field.typeBasedString = ""
                             
-                            var fields = self.team.wrappedFields
+                            var fields = self.team!.wrappedFields
                             fields.append(field)
                             
-                            team.fields = NSOrderedSet(array: fields)
+                            team!.fields = NSOrderedSet(array: fields)
                             
                             PersistenceController.shared.saveContext()
                             
@@ -137,7 +144,7 @@ struct TemplateView: View {
     func reloadData() {
         data.removeAll()
         data.append("git commit -m \"")
-        for field in team.wrappedFields {
+        for field in team!.wrappedFields {
             data.append(field)
         }
         data.append("+")
@@ -150,14 +157,14 @@ struct TemplateView: View {
     // MARK: Context Menu
     @ViewBuilder
     func contextMenuBuilder(_ field: Field) -> some View {
-        if let fields = team.fields {
+        if let fields = team!.fields {
             // Move Left Button
             Button(role: .none) {
                 let index = fields.index(of: field)
                 let indexSet = IndexSet(integer: index)
-                let newField = team.fields?.mutableCopy() as! NSMutableOrderedSet
+                let newField = team!.fields?.mutableCopy() as! NSMutableOrderedSet
                 newField.moveObjects(at: indexSet, to: index - 1)
-                team.fields = newField
+                team!.fields = newField
                 
                 PersistenceController.shared.saveContext()
                 
@@ -172,9 +179,9 @@ struct TemplateView: View {
             Button(role: .none) {
                 let index = fields.index(of: field)
                 let indexSet = IndexSet(integer: index)
-                let newField = team.fields?.mutableCopy() as! NSMutableOrderedSet
+                let newField = team!.fields?.mutableCopy() as! NSMutableOrderedSet
                 newField.moveObjects(at: indexSet, to: index + 1)
-                team.fields = newField
+                team!.fields = newField
                 
                 PersistenceController.shared.saveContext()
                 
@@ -192,9 +199,9 @@ struct TemplateView: View {
                 
                 // 현재 View의 Team에서 Field 삭제
                 let index = fields.index(of: field)
-                var newField = team.wrappedFields
+                var newField = team!.wrappedFields
                 newField.remove(at: index)
-                team.fields = NSOrderedSet(array: newField)
+                team!.fields = NSOrderedSet(array: newField)
                 PersistenceController.shared.saveContext()
                 
                 // 데이터 다시 로드
