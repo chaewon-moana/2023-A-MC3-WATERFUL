@@ -7,17 +7,20 @@
 
 import Foundation
 import SwiftUI
+import WrappingHStack
 
 struct FieldView: View {
     
     //dummy data
     //block type에 따라서 다르게 나오도록 작성하기
-    //block type - 고정텍스트, 텍스트, 선택, 날짜
+    //block type - 텍스트, 선택, 날짜
     //block title -> 작업에 나오도록
+
     
     var body: some View {
         
         VStack{
+            //: = Field.name 받아와서 넣어야함
             Text("작업")
                 .frame(width: 344, alignment: .leading)
                 .foregroundColor(.black)
@@ -28,19 +31,40 @@ struct FieldView: View {
             //FieldView로 빼기
             ZStack{
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color(red:241/255 ,green:241/255 ,blue: 241/255))
-                    .frame(width: 320,height: 101)
-                    .opacity(0.9)
+                    .frame(width: 320, height: 101)
+                    .background(.blue)
                 
-              
-                
+               
+                OptionFieldView()
+                    .frame(width: 304 ,height: 85, alignment: .topLeading)
+//
+//                if let selected = selectedField {
+//                    switch selectedField!.wrappedType {
+//                    case .constant:
+//                        OptionFieldView() //ConstantBlockSettingView 어디갔,,,
+//
+//                    case .option:
+//                        OptionFieldView()
+//
+//                    case .input:
+//                        InputFieldView()
+//
+//                    case .date:
+//                        DateFieldView()
+//
+//                    }
+//
+//
+//                }
                 
             }
         }
-        
-        
     }
 }
+
+
+
+
 
 struct FieldView_Previews: PreviewProvider {
     static var previews: some View {
