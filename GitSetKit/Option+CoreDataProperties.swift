@@ -19,7 +19,6 @@ extension Option {
     @NSManaged public var value: String?
     @NSManaged public var shortDesc: String?
     @NSManaged public var detailDesc: String?
-    @NSManaged public var order: Int16
 
 }
 
