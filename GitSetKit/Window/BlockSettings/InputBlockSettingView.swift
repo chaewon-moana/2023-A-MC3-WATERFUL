@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct InputBlockSettingView: View {
+    @Binding var field: Field?
+    @State var value: String = "input_block_field_placeholder".localized
+    @State var typeBasedString: String?
+    @State var bindedField: Field?
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("input_block_field_text")
@@ -31,13 +36,13 @@ struct InputBlockSettingView: View {
             RoundedRectangle(cornerRadius: 4)
                 .fill(Colors.Gray.quaternary)
         )
-    }
-    
-    @State private var value: String = "input_block_field_placeholder".localized
-}
-
-struct InputBlockSettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        InputBlockSettingView()
+        .onAppear {
+            bindedField = field
+            guard let string = bindedField?.wrappedTypeBasedString else { return }
+            value = string
+        }
+        .onDisappear {
+            PersistenceController.shared.updateField(field: bindedField!, typeBasedString: value)
+        }
     }
 }
