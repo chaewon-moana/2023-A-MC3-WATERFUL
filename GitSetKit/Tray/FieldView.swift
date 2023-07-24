@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import WrappingHStack
+import CoreData
 
 struct FieldView: View {
     
@@ -16,6 +17,9 @@ struct FieldView: View {
     //block type - 텍스트, 선택, 날짜
     //block title -> 작업에 나오도록
 
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @State private var selected: Team?
+    
     
     var body: some View {
         
@@ -35,7 +39,7 @@ struct FieldView: View {
                     .background(.blue)
                 
                
-                OptionFieldView()
+                DateFieldView()
                     .frame(width: 304 ,height: 85, alignment: .topLeading)
 //
 //                if let selected = selectedField {
@@ -59,6 +63,17 @@ struct FieldView: View {
                 
             }
         }
+//        .onAppear{
+//            let generator = DefaultDataGenerator(managedObjectContext)
+//            let fields = generator.generateFields()
+//            let team = generator.generateTeam(fields)
+//            
+//            self.selected = team
+//            
+//            
+//            
+//            PersistenceController.shared.saveContext()
+//        }
     }
 }
 

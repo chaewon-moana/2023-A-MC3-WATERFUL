@@ -26,11 +26,13 @@ struct GitSetKitApp: App {
         }
         //: - WindowView
         
+        
         // MARK: - TrayView
         MenuBarExtra {
             TrayView()
         } label: {
             Image(systemName: "arrow.branch")
+            //GitSetKitLogo로 변경
         }
         .menuBarExtraStyle(.window)
         //: - TrayView
