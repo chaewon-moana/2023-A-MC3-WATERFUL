@@ -91,7 +91,7 @@ struct TemplateView: View {
                             let field = Field(context: managedObjectContext)
                             field.name = "block_new_field_name".localized
                             field.type = Field.FieldType.constant.rawValue
-                            field.order = 0
+//                            field.order = 0
                             field.typeBasedString = ""
                             
                             var fields = self.team!.wrappedFields
