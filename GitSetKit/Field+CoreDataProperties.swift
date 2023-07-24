@@ -18,7 +18,6 @@ extension Field {
 
     @NSManaged public var name: String?
     @NSManaged public var type: Int16
-    @NSManaged public var order: Int16
     @NSManaged public var typeBasedString: String?
     @NSManaged public var options: NSOrderedSet?
 
@@ -32,9 +31,10 @@ extension Field {
             return []
         }
         
-        return options.sorted { o1, o2 in
-            return o2.order > o1.order
-        }
+//        return options.sorted { o1, o2 in
+//            return o2 > o1.order
+//        }
+        return options
     }
     
     public var wrappedName: String {

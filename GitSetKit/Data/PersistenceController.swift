@@ -113,12 +113,11 @@ extension PersistenceController {
 
 // MARK: Field CRUD
 extension PersistenceController {
-    func createField(name: String, type: Int16, order: Int16, typeBasedString: String? = nil, options: [Option]? = nil) -> Field {
+    func createField(name: String, type: Int16, typeBasedString: String? = nil, options: [Option]? = nil) -> Field {
         let newField = Field(context: container.viewContext)
         
         newField.name = name
         newField.type = type
-        newField.order = order
         if typeBasedString != nil {
             newField.typeBasedString = typeBasedString!
         }
@@ -143,7 +142,7 @@ extension PersistenceController {
         return results
     }
     
-    func updateField(field: Field, name: String? = nil, type: Int16? = nil, order: Int16? = nil, typeBasedString: String? = nil, options: [Option]? = nil) {
+    func updateField(field: Field, name: String? = nil, type: Int16? = nil, typeBasedString: String? = nil, options: [Option]? = nil) {
         var hasChanges: Bool = false
         
         if name != nil {
@@ -152,10 +151,6 @@ extension PersistenceController {
         }
         if type != nil {
             field.type = type!
-            hasChanges = true
-        }
-        if order != nil {
-            field.order = order!
             hasChanges = true
         }
         if typeBasedString != nil {
@@ -180,7 +175,7 @@ extension PersistenceController {
 
 // MARK: Option CRUD
 extension PersistenceController {
-    func createOption(value: String, shortDesc: String? = nil, detailDesc: String? = nil, order: Int16) -> Option {
+    func createOption(value: String, shortDesc: String? = nil, detailDesc: String? = nil) -> Option {
         let newOption = Option(context: container.viewContext)
         
         newOption.value = value
@@ -190,7 +185,6 @@ extension PersistenceController {
         if detailDesc != nil {
             newOption.detailDesc = detailDesc
         }
-        newOption.order = order
         
         return newOption
     }
@@ -210,7 +204,7 @@ extension PersistenceController {
     }
     
     func updateOption(option: Option, value: String? = nil, shortDesc: String? = nil
-                      , detailDesc: String? = nil, order: Int16? = nil) {
+                      , detailDesc: String? = nil) {
         var hasChanges: Bool = false
         
         if value != nil {
@@ -223,10 +217,6 @@ extension PersistenceController {
         }
         if detailDesc != nil {
             option.detailDesc = detailDesc!
-            hasChanges = true
-        }
-        if order != nil {
-            option.order = order!
             hasChanges = true
         }
         

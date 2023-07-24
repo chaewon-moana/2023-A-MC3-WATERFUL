@@ -44,7 +44,7 @@ class DefaultDataGenerator {
         let field = Field(context: viewContext)
         field.name = "default_field_type_name".localized
         field.type = Field.FieldType.option.rawValue
-        field.order = 0
+//        field.order = 0
         field.options = NSOrderedSet(array: typeOptions)
         
         return field
@@ -104,7 +104,7 @@ class DefaultDataGenerator {
         let field = Field(context: viewContext)
         field.name = ": "
         field.type = Field.FieldType.constant.rawValue
-        field.order = 2
+//        field.order = 2
         field.typeBasedString = ": "
         
         return field
@@ -115,7 +115,7 @@ class DefaultDataGenerator {
         let field = Field(context: viewContext)
         field.name = "default_field_edit_name".localized
         field.type = Field.FieldType.input.rawValue
-        field.order = 2
+//        field.order = 2
         field.typeBasedString = "default_field_edit_placeholder".localized
         
         return field
