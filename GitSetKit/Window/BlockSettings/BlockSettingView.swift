@@ -15,7 +15,7 @@ struct BlockSettingView: View {
         if let selected = selected {
             switch selected.wrappedType {
             case .constant:
-                ConstantBlockSettingView()
+                OptionBlockSettingView() //ConstantBlockSettingView 어디갔,,,
                 
             case .option:
                 OptionBlockSettingView()

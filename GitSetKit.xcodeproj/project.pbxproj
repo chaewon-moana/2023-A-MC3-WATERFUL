@@ -39,6 +39,10 @@
 		79EE654B2A6515530099F722 /* FlowStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE654A2A6515530099F722 /* FlowStack.swift */; };
 		79EE654D2A6572DF0099F722 /* ClearTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE654C2A6572DF0099F722 /* ClearTextFieldStyle.swift */; };
 		79F9A9F32A6203A100C6D920 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 79F9A9F22A6203A100C6D920 /* WrappingHStack */; };
+		B50AADC92A6E2D5300ED0E0B /* TeamSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50AADC82A6E2D5300ED0E0B /* TeamSelectedView.swift */; };
+		B543D7392A6E44A50002C1CC /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543D7382A6E44A50002C1CC /* InputFieldView.swift */; };
+		B543D73B2A6E44CA0002C1CC /* OptionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543D73A2A6E44CA0002C1CC /* OptionFieldView.swift */; };
+		B543D73D2A6E45180002C1CC /* DateFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543D73C2A6E45180002C1CC /* DateFieldView.swift */; };
 		B5AF6A572A6815340043303B /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5AF6A552A6815340043303B /* SF-Pro.ttf */; };
 		B5AF6A582A6815340043303B /* SourceCodePro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5AF6A562A6815340043303B /* SourceCodePro-Light.ttf */; };
 		B5AF6A5D2A6815800043303B /* TrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AF6A5B2A6815800043303B /* TrayView.swift */; };
@@ -78,6 +82,10 @@
 		79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGroupBox.swift; sourceTree = "<group>"; };
 		79EE654A2A6515530099F722 /* FlowStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowStack.swift; sourceTree = "<group>"; };
 		79EE654C2A6572DF0099F722 /* ClearTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTextFieldStyle.swift; sourceTree = "<group>"; };
+		B50AADC82A6E2D5300ED0E0B /* TeamSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectedView.swift; sourceTree = "<group>"; };
+		B543D7382A6E44A50002C1CC /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
+		B543D73A2A6E44CA0002C1CC /* OptionFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionFieldView.swift; sourceTree = "<group>"; };
+		B543D73C2A6E45180002C1CC /* DateFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFieldView.swift; sourceTree = "<group>"; };
 		B5AF6A552A6815340043303B /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		B5AF6A562A6815340043303B /* SourceCodePro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Light.ttf"; sourceTree = "<group>"; };
 		B5AF6A592A6815450043303B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -211,6 +219,16 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		B543D73E2A6E452F0002C1CC /* Field */ = {
+			isa = PBXGroup;
+			children = (
+				B543D7382A6E44A50002C1CC /* InputFieldView.swift */,
+				B543D73C2A6E45180002C1CC /* DateFieldView.swift */,
+				B543D73A2A6E44CA0002C1CC /* OptionFieldView.swift */,
+			);
+			path = Field;
+			sourceTree = "<group>";
+		};
 		B5AF6A542A6815340043303B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,8 +241,10 @@
 		B5AF6A5A2A6815800043303B /* Tray */ = {
 			isa = PBXGroup;
 			children = (
-				B5AF6A5B2A6815800043303B /* TrayView.swift */,
 				B5AF6A5C2A6815800043303B /* FieldView.swift */,
+				B543D73E2A6E452F0002C1CC /* Field */,
+				B5AF6A5B2A6815800043303B /* TrayView.swift */,
+				B50AADC82A6E2D5300ED0E0B /* TeamSelectedView.swift */,
 			);
 			path = Tray;
 			sourceTree = "<group>";
@@ -326,6 +346,7 @@
 				628C517D2A67D3B6005292E3 /* Field+CoreDataClass.swift in Sources */,
 				628C517E2A67D3B6005292E3 /* Field+CoreDataProperties.swift in Sources */,
 				79238C2E2A69040A006137BD /* String+Extension.swift in Sources */,
+				B543D73B2A6E44CA0002C1CC /* OptionFieldView.swift in Sources */,
 				79D78B8D2A5FEDE800B8AA79 /* ContentView.swift in Sources */,
 				628C51802A67D71B005292E3 /* Field+Converted.swift in Sources */,
 				B5AF6A5D2A6815800043303B /* TrayView.swift in Sources */,
@@ -336,9 +357,12 @@
 				79D78B8E2A5FEDE800B8AA79 /* TeamView.swift in Sources */,
 				B5AF6A5E2A6815800043303B /* FieldView.swift in Sources */,
 				791A32542A63FEA8004A61A1 /* BlockSettingView.swift in Sources */,
+				B543D73D2A6E45180002C1CC /* DateFieldView.swift in Sources */,
 				79D78B8F2A5FEDE800B8AA79 /* ConventionView.swift in Sources */,
 				7970C4142A6A503B00762041 /* DateBlockSettingView.swift in Sources */,
 				79EE654D2A6572DF0099F722 /* ClearTextFieldStyle.swift in Sources */,
+				B50AADC92A6E2D5300ED0E0B /* TeamSelectedView.swift in Sources */,
+				B543D7392A6E44A50002C1CC /* InputFieldView.swift in Sources */,
 				79D78B902A5FEDE800B8AA79 /* GitSetKit.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,7 +493,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = VA3J8597P8;
+				DEVELOPMENT_TEAM = X32GZ3NKQ8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -498,7 +522,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = VA3J8597P8;
+				DEVELOPMENT_TEAM = X32GZ3NKQ8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
