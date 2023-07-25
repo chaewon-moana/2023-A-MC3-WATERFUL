@@ -37,7 +37,7 @@
 
 // MARK: - TeamView
 "section_pinned" = "고정";
-"section_team" = "나의 팀";
+"section_team" = "Team";
 "pin" = "고정";
 "unpin" = "고정 해제";
 

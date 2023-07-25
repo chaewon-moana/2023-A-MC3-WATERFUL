@@ -52,6 +52,6 @@ struct ConventionView: View {
                 // : - Inspector View
             }
         }
-        .navigationTitle(Text("app_name"))
+        .navigationTitle(Text(selectedTeam?.wrappedName ?? "app_name".localized))
     }
 }
