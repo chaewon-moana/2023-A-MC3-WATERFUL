@@ -8,20 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    // 고정 팀
-    @FetchRequest(
-        entity: Team.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Team.touch, ascending: true)],
-        predicate: NSPredicate(format: "pinned == true")
-    ) var pinnedTeam: FetchedResults<Team>
-    
-    // 모든 팀
-    @FetchRequest(
-        entity: Team.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Team.touch, ascending: true)]
-    ) var teams: FetchedResults<Team>
     
     // 선택된 팀
     @State private var selected: Team?
@@ -34,7 +20,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // MARK: Side Bar
-            TeamView(pinned: pinnedTeam.map({ $0 }), teams: teams.map({ $0 }), selected: $selected)
+            TeamView(selected: $selected)
             
             //: Side Bar
         } detail: {
@@ -66,12 +52,6 @@ struct ContentView: View {
                 }
             }
             //: - Detail
-        }
-        .onLoad {
-            // 최초 로드 시 첫번째 팀 선택
-            if let team = teams.first {
-                self.selected = team
-            }
         }
     }
 }
