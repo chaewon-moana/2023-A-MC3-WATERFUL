@@ -17,6 +17,8 @@ struct TeamCell: View {
     // 팀
     @State var team: Team
     
+    @Binding var selected: Team?
+    
     // 팀 이름 수정 모드 토글
     @State private var editing: Bool = false
     // 팀 이름 수정 임시 변수
@@ -112,6 +114,8 @@ struct TeamCell: View {
                     
                     renderId = UUID()
                     
+                    selected = nil
+                    
                 } label: {
                     Label("delete", systemImage: "trash.fill")
                 }
@@ -124,11 +128,20 @@ struct TeamCell: View {
 
 // MARK: - TeamView
 struct TeamView: View {
+    // 고정 팀
+    @FetchRequest(
+        entity: Team.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Team.touch, ascending: false)],
+        predicate: NSPredicate(format: "pinned == true")
+    ) var pinned: FetchedResults<Team>
     
-    // 고정된 팀
-    var pinned: [Team]
     // 모든 팀
-    @State var teams: [Team]
+    @FetchRequest(
+        entity: Team.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Team.touch, ascending: false)]
+    ) var teams: FetchedResults<Team>
     
     @Binding var selected: Team?
     
@@ -144,7 +157,7 @@ struct TeamView: View {
                 Section("section_pinned") {
                     ForEach(pinned) { team in
                         NavigationLink(value: team) {
-                            TeamCell(team: team, renderId: $renderId)
+                            TeamCell(team: team, selected: $selected, renderId: $renderId)
                         }
                     }
                 }
@@ -155,17 +168,36 @@ struct TeamView: View {
             Section("section_team") {
                 ForEach(teams) { team in
                     NavigationLink(value: team) {
-                        TeamCell(team: team, renderId: $renderId)
+                        TeamCell(team: team, selected: $selected, renderId: $renderId)
                     }
-                }
-            }
-            .onAppear {
-                teams.sort { t1, t2 in
-                    t1.pinned || t1.touch ?? Date() > t2.touch ?? Date()
                 }
             }
             //: All Team
             
+            // MARK: - Add Team
+            Button {
+                let generator = DefaultDataGenerator(managedObjectContext)
+                let fields = generator.generateFields()
+                let team = generator.generateTeam(fields)
+                
+                PersistenceController.shared.saveContext()
+                
+                selected = team
+                
+            } label: {
+                HStack {
+                    Spacer()
+                    Image(systemName: "plus")
+                    Spacer()
+                }
+            }
+            .buttonStyle(.plain)
+            .padding(8)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Colors.Gray.secondary)
+            )
+            //-: Add Team
         }
         .listStyle(.sidebar)
         .id(renderId)
@@ -173,7 +205,12 @@ struct TeamView: View {
             if let selected = selected {
                 PersistenceController.shared.updateTeam(team: selected, touch: Date())
                 
-                renderId = UUID()
+            }
+        }
+        .onLoad {
+            // 최초 로드 시 첫번째 팀 선택
+            if let team = teams.first {
+                self.selected = team
             }
         }
         

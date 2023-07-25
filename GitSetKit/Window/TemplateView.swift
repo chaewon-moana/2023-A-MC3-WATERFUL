@@ -64,7 +64,9 @@ struct TemplateView: View {
                 Spacer()
                 
                 // Field를 선택했을 때 해당 Field의 옵션을 변경하는 View
-                blockOptionView
+                if selected != nil {
+                    blockOptionView
+                }
             }
             .background(
                 RoundedRectangle(cornerRadius: 8)
@@ -215,6 +217,7 @@ struct TemplateView: View {
     // MARK: - Block Option View
     @State private var blockType: Field.FieldType = .input
     @State private var title: String = ""
+    @State private var fieldChanged: Bool = false
     
     var blockOptionView: some View {
         HStack {
@@ -253,11 +256,15 @@ struct TemplateView: View {
                         .tag(Field.FieldType.constant)
                 }
                 .shadow(radius: 1)
+                .onChange(of: selected, perform: { newValue in
+                    self.fieldChanged = true
+                })
                 .onChange(of: blockType, perform: { newValue in
-                    if let selected = selected {
+                    if let selected = selected, !fieldChanged {
                         PersistenceController.shared.updateField(field: selected, type: blockType.rawValue, typeBasedString: "")
+                        self.selected = nil
                     }
-                    selected = nil
+                    self.fieldChanged = false
                 })
             }
             .frame(maxWidth: 120)
