@@ -12,20 +12,22 @@ import CoreData
 
 struct FieldView: View {
     
-
-//    @Binding var team: Team?
-//    @State var selectedField: Field?
+    @Binding var selectedTeam: Team!
+    @Binding var outputMessage: [Any]
+    @State var selectedField: [Field] = []
+    @State var currentField: Int = 2
+    
+    //@Binding var inputText: String
     
     var body: some View {
         
         VStack{
             //: = Field.name 받아와서 넣어야함
-            Text("작업")
+            Text("\(selectedField.count)")
                 .frame(width: 344, alignment: .leading)
                 .foregroundColor(.black)
                 .font(.system(size:20))
                 .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 0))
-            
             
             //FieldView로 빼기
             ZStack{
@@ -33,26 +35,28 @@ struct FieldView: View {
                     .frame(width: 320, height: 101)
                     .background(.blue)
                 
-               
-                //Field type에 따라서 View 다르게 불러와야하는데,,,
-                DateFieldView()
-                    .frame(width: 304 ,height: 85, alignment: .topLeading)
-
-
                 
+                switch currentField {
+                case 1:
+                    InputFieldView(outputMessage: $outputMessage)
+                case 2:
+                    OptionFieldView(outputMessage: $outputMessage, Fields: $selectedField)
+                case 3:
+                    InputFieldView(outputMessage: $outputMessage)
+                case 4:
+                    DateFieldView()
+                default :
+                    InputFieldView(outputMessage: $outputMessage)
+                }
+              
             }
         }
-     
+        .onAppear{
+            selectedField = PersistenceController.shared.readField(selectedTeam)
+        }
+        
     }
 }
 
 
 
-
-
-//struct FieldView_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        FieldView()
-//    }
-//}

@@ -23,19 +23,21 @@ struct TrayView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    
     let shared = PersistenceController.shared
      
-    @State private var teamNames: [Team] = []
     
-    //@State private var teamNames = ["team1", "team2", "team3", "team4"]
-    @State private var workBlocks = ["git commit -m \"","작업", "날짜", ":", "수정내용", "수정내용"]
+    @State private var teamNames: [Team] = []
+    @State private var selectedField: [Field] = []
+    @State private var selectedTeam: Team? = nil
     
     @State private var selectedTeamIndex = 0
     @State private var gitCommitOn = true
     @State private var commitMessage: String = "git commit -m \""
-    @State private var selectedBlock = ""
+    @State private var selectedBlock = Field()
     
     @State private var outputMessage: [Any] = []
+    @State private var inputText: String = ""
     
     
     
@@ -47,10 +49,9 @@ struct TrayView: View {
                 .frame(width:344,height:390)
                 .opacity(0.3)
             
-            
             VStack{
                 
-                TeamSelectedView(teamNames: $teamNames)
+                TeamSelectedView(teamNames: $teamNames, selectedTeam: $selectedTeam)
                 
                 VStack{
                     Text("미리보기")
@@ -67,27 +68,28 @@ struct TrayView: View {
                         VStack{
                             ScrollView {
                               //if-else //field 값 workBlocks에 담아오고 입력된 값 out에 저장, 기본 textplaceholder 로 바꾸면 될듯
-                                    WrappingHStack(workBlocks, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { block in
+                                    WrappingHStack(selectedField, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { block in
                                         
-                                        if block == commitMessage {
-                                            if gitCommitOn {
-                                                Text(commitMessage)
-                                                    .font(.custom("SourceCodePro-Light", size: 15))
-                                                    .foregroundColor(.white)
-                                            }
-                                        } else {
+                                        //Fieldtype받아서 각자 View로 이동,,,
+                                        
+//                                        if block == commitMessage {
+//                                            if gitCommitOn {
+//                                                Text(commitMessage)
+//                                                    .font(.custom("SourceCodePro-Light", size: 15))
+//                                                    .foregroundColor(.white)
+//                                            }
+//                                        } else {
                                             Button(action: {
                                                 selectedBlock = block
-                                                //fieldSelected(field: selectedBlock)
                                                 print(selectedBlock)
                                             }, label: {
-                                                Text("   \(block)   ")
+                                                Text("   \(selectedBlock.wrappedName)   ")
                                             })
                                             .buttonStyle(.plain)
                                             .frame(height: 18)
                                             .background(Color.green)
                                             .cornerRadius(4)
-                                        }
+                                        //}
                                         
                                     } //wrappingHStack
                                     .padding()
@@ -97,14 +99,12 @@ struct TrayView: View {
                             }//scrollView
                             .frame(width: 320, height: 100, alignment: .topLeading)
                             
-                            
                             HStack{
                                 Toggle(isOn: $gitCommitOn){
                                     Text(" Git 명령어 포함")
                                 }
                                 .toggleStyle(.checkbox)
                                 .offset(x: -80,y:15)
-                                
                                 
                                 
                                 Button(action: {
@@ -130,49 +130,63 @@ struct TrayView: View {
                             
                         }
                         .frame(width: 320, height: 120)
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+         
                     }
                     .frame(width: 320, height: 120)
                     
                 }
                 
-                
-                FieldView()
+                FieldView(selectedTeam: $selectedTeam, outputMessage: $outputMessage)
                     .frame(width: 320, height: 100)
                     .padding()
-                
-                
-                HStack{
-                    
-                    Spacer()
-                    
-                    Button("이전"){
-                        print("이전 화면으로 넘어가기")
-                    }
-                    
-                    Button("다음"){
-                        print("다음 화면으로 넘어가기")
+   
+                    HStack{
+                        
+                        Spacer()
+                        
+                        Button("이전"){
+                            print("이전 화면으로 넘어가기")
+                        }
+                        
+                        Button("다음"){
+                            print("다음 화면으로 넘어가기")
+
+                        }
                         
                     }
-                    
+                    .frame(width: 320)
+                    .tint(.blue)
                 }
-                .frame(width: 320)
-                .tint(.blue)
-                
-            }
+            
+        
             
         }
-//        .onAppear{
-//            shared.createTeam(emoticon: "🧚‍♂️", name: "team1", pinned: false, touch: Date())
-//            teamNames = shared.readTeam()
-//            print("\(teamNames) check")
-//        }
+        .onAppear{
+            
+//            shared.createTeam(emoticon: "👍", name: "team5", pinned: false, touch: Date())
+//            shared.createTeam(emoticon: "👍", name: "team7", pinned: false, touch: Date())
+//
+//            let opt1 = shared.createOption(value: "feat", shortDesc: "기능추가", detailDesc: "코드 기능추가")
+//            let opt2 = shared.createOption(value: "fix", shortDesc: "수정", detailDesc: "코드수정")
+//            let opt3 = shared.createOption(value: "Docs", shortDesc: "문서수정", detailDesc: "문서수정수정")
+//            let field1 = shared.createField(name: "작업", type: 2, options: [opt1, opt2, opt3])
+//            let field2 = shared.createField(name: "날짜", type: 4)
+//            let field3 = shared.createField(name: ":", type: 1)
+//            let field4 = shared.createField(name: "수정사항", type: 3)
+//
+            teamNames = shared.readTeam()
+//
+//
+//
+//
+          //shared.updateTeam(team: teamNames[0], emoticon: "🌻", name: "team12", pinned: false, touch: Date(), fields: [field1, field2, field3, field4])
+           
+            print("\(teamNames.count) check")
+            teamNames = shared.readTeam()
+            selectedField = shared.readField(teamNames[0])
+            //print(selectedField)
+        
+        }
         
         
     }
@@ -185,12 +199,6 @@ struct TrayView: View {
         NSPasteboard.general.setString(text, forType: .string)
     }
     
-}
-
-struct TrayView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrayView()
-    }
 }
 
 

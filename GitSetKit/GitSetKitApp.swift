@@ -30,7 +30,7 @@ struct GitSetKitApp: App {
         // MARK: - TrayView
         MenuBarExtra {
             TrayView()
-                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         } label: {
             Image(systemName: "arrow.branch")
             //GitSetKitLogo로 변경

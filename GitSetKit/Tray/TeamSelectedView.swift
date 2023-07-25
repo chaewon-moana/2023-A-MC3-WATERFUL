@@ -11,12 +11,11 @@ import CoreData
 
 struct TeamSelectedView: View {
     
-    @State private var teamName = ["team1", "team2", "team3", "team4"]
-    @State private var selectedTeamIndex = 0
+    @State var selectedTeamIndex: String = ""
     @State private var isWindow = false
     
     @Binding var teamNames: [Team]
-    @State var selectedTeam: Team?
+    @Binding var selectedTeam: Team!
    
     let shared = PersistenceController.shared
     
@@ -24,7 +23,7 @@ struct TeamSelectedView: View {
         HStack{
             //로고 변경해야함
             
-            Image(systemName: "pencil.circle.fill")
+            Image(systemName: "GitSetKitLogo")
                 .frame(width:24, height:24)
                 .onTapGesture {
                     isWindow = true
@@ -37,26 +36,24 @@ struct TeamSelectedView: View {
             Spacer()
             
             Menu{
-                ForEach(0..<teamName.count) { index in
+                ForEach(0..<teamNames.count) { index in
                     Button(action: {
-                        print("팀선택됨") //선택된 팀으로 이동 + 선택다시 되도록
-                        selectedTeamIndex = index
+                        selectedTeamIndex = teamNames[index].name ?? "team"
+                        selectedTeam = teamNames[index]
+                        print("\(selectedTeamIndex)-") //선택된 팀으로 이동 + 선택다시 되도록
                     }){
-                        Text(teamName[index])
+                        Text(teamNames[index].name ?? " ")
                     }
                 }
             } label: {
-                Text(teamName[selectedTeamIndex]) //coredata에서 선택된 거 받아오기
+                Text("\(selectedTeamIndex) ") //coredata에서 선택된 거 받아오기
                     .foregroundColor(.black)
             }
-
             .frame(width:100)
             .padding(EdgeInsets(top: 0, leading: 90, bottom: 0, trailing: 0))
-            
-            
+  
         }
- 
-        
+
         .frame(width: 330)
         .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
         

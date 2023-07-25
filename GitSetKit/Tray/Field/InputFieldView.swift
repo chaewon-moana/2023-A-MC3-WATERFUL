@@ -13,7 +13,9 @@ struct InputFieldView: View {
     
     @State private var value: String = "ex) 알림 버튼 추가"
     @State private var inputText: String = ""
+    @Binding var outputMessage: [Any]
     
+    //
     var body: some View {
         TextEditor(text: $inputText)
             .background(Color("quaternary"))
@@ -30,7 +32,10 @@ struct InputFieldView: View {
                 .frame(width: 310, height: 100 ,alignment: .topLeading)
                 
         }
+        
+        
     }
+    
 }
 
 
