@@ -242,14 +242,14 @@ struct TemplateView: View {
                     .foregroundColor(.white.opacity(0.6))
                     .padding(.leading, 6)
                 Picker("", selection: $blockType) {
-                    Text("option_block_type_constant")
+                    Text("􀌀 "+"option_block_type_constant".localized)
                         .tag(Field.FieldType.constant)
-                    Text("option_block_type_text")
-                        .tag(Field.FieldType.input)
-                    Text("option_block_type_date")
-                        .tag(Field.FieldType.date)
-                    Text("option_block_type_option")
+                    Text("􀇷 "+"option_block_type_option".localized)
                         .tag(Field.FieldType.option)
+                    Text("􀉉 "+"option_block_type_date".localized)
+                        .tag(Field.FieldType.date)
+                    Text("􀅯 "+"option_block_type_text".localized)
+                        .tag(Field.FieldType.input)
                 }
                 .onChange(of: blockType, perform: { newValue in
                     if let selected = selected {
