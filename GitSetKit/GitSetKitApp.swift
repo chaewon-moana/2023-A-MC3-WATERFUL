@@ -30,7 +30,9 @@ struct GitSetKitApp: App {
         MenuBarExtra {
             TrayView()
         } label: {
-            Image(systemName: "arrow.branch")
+            Image("tray_icon")
+                .renderingMode(.template)
+                .resizable()
         }
         .menuBarExtraStyle(.window)
         //: - TrayView
