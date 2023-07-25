@@ -16,6 +16,7 @@ struct InputBlockSettingView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("input_block_field_text")
+                .foregroundColor(Colors.Text.tertiary)
                 .padding(.leading, 16)
                 .padding(.top, 16)
             RoundedRectangle(cornerRadius: 4)
