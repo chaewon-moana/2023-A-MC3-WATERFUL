@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct DateBlockSettingView: View {
+    @Binding var field: Field?
+    @State private var value = 0
+    var dateFormat = ["YYYY-MM-DD", "YY-MM-DD", "MM-DD"]
+    
     var body: some View {
         RoundedRectangle(cornerRadius: 4)
             .fill(Colors.Gray.quaternary)
@@ -24,6 +28,12 @@ struct DateBlockSettingView: View {
                                 .foregroundColor(Colors.Gray.primary)
                                 .padding(.top)
                         }
+                        .onChange(of: value) { newValue in
+                            guard (field?.typeBasedString) != nil else { return }
+                            
+                            let newDate = dateFormatter(value: value)
+                            PersistenceController.shared.updateField(field: field!, name: newDate, typeBasedString: newDate)
+                        }
                     } label: { }
                         .pickerStyle(.radioGroup)
                         .padding(.leading, 8)
@@ -32,12 +42,22 @@ struct DateBlockSettingView: View {
             )
     }
     
-    @State private var value = 0
-    private var dateFormat = ["YYYY-MM-DD", "YY-MM-DD", "MM-DD"]
-}
-
-struct DateBlockSettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        DateBlockSettingView()
+    func dateFormatter(value: Int) -> String {
+        let date = DateFormatter()
+        date.locale = Locale(identifier: Locale.current.identifier)
+        date.timeZone = TimeZone(identifier: TimeZone.current.identifier)
+        
+        switch value {
+        case 0:
+            date.dateFormat = "YYYY-MM-dd"
+        case 1:
+            date.dateFormat = "YY-MM-dd"
+        case 2:
+            date.dateFormat = "MM-dd"
+        default:
+            date.dateFormat = "YYYY-MM-dd"
+        }
+        
+        return date.string(from: Date())
     }
 }

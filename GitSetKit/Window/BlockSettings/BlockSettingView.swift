@@ -8,25 +8,24 @@
 import SwiftUI
 
 struct BlockSettingView: View {
-    
     @Binding var selected: Field?
     
     var body: some View {
         if let selected = selected {
             switch selected.wrappedType {
-            case .constant:
-                OptionBlockSettingView() //ConstantBlockSettingView 어디갔,,,
-                
             case .option:
-                OptionBlockSettingView()
+                OptionBlockSettingView(field: $selected)
                 
             case .input:
-                InputBlockSettingView()
+                InputBlockSettingView(field: $selected)
                 
             case .date:
-                DateBlockSettingView()
+                DateBlockSettingView(field: $selected)
+                
+            default:
+                Spacer()
+                
             }
-            
         } else {
             Spacer()
         }
