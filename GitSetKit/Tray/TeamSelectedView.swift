@@ -15,20 +15,10 @@ struct TeamSelectedView: View {
     @State private var selectedTeamIndex = 0
     @State private var isWindow = false
     
-    @State var teamNames: [Team] = []
-    
-    @State var selected: Team?
-    
+    @Binding var teamNames: [Team]
+    @State var selectedTeam: Team?
+   
     let shared = PersistenceController.shared
- 
-   @Environment(\.managedObjectContext) var managedObjectContext
-    
-//
-//    @FetchRequest(
-//        entity: Team.entity(),
-//        sortDescriptors: [
-//            NSSortDescriptor(keyPath: \Team.touch, ascending: true)]
-//    ) var teams: FetchedResults<Team>
     
     var body: some View {
         HStack{
@@ -59,6 +49,7 @@ struct TeamSelectedView: View {
                 Text(teamName[selectedTeamIndex]) //coredata에서 선택된 거 받아오기
                     .foregroundColor(.black)
             }
+
             .frame(width:100)
             .padding(EdgeInsets(top: 0, leading: 90, bottom: 0, trailing: 0))
             
@@ -75,15 +66,6 @@ struct TeamSelectedView: View {
     
 }
 
-//        .sheet(isPresented: $isWindow) {
-//            ContentView()
-//        }
-//sheet가 아닌 Window로 열어야할 듯, NSWindow 찾기
 
 
-struct Previews_TeamSelectedView: PreviewProvider {
-    static var previews: some View {
 
-        TeamSelectedView()
-    }
-}

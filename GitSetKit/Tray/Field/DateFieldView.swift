@@ -26,7 +26,7 @@ struct DateFieldView: View {
         
         //date값 형식에 맞게 수정하는 코드
         
-        //[DateBlockSettingView.swift] - [dateFormat], Date() 형식이 어떻게 이뤄는지 알아야함요
+        //[DateBlockSettingView.swift] - [dateFormat], Date() 형식이 어떻게 이뤄지는지 알아서 format변환
         
         
     }

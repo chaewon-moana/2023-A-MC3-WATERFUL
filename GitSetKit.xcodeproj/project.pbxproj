@@ -241,9 +241,9 @@
 		B5AF6A5A2A6815800043303B /* Tray */ = {
 			isa = PBXGroup;
 			children = (
+				B5AF6A5B2A6815800043303B /* TrayView.swift */,
 				B5AF6A5C2A6815800043303B /* FieldView.swift */,
 				B543D73E2A6E452F0002C1CC /* Field */,
-				B5AF6A5B2A6815800043303B /* TrayView.swift */,
 				B50AADC82A6E2D5300ED0E0B /* TeamSelectedView.swift */,
 			);
 			path = Tray;

@@ -9,9 +9,11 @@ import Foundation
 import SwiftUI
 import CoreData
 import WrappingHStack
-//import AppKit
+import AppKit
+
 
 struct TrayView: View {
+    
     @FetchRequest(
         entity: Team.entity(),
         sortDescriptors: [
@@ -19,40 +21,43 @@ struct TrayView: View {
         ]
     ) var teams: FetchedResults<Team>
     
-    //dummy data
-    @State private var teamNames = ["team1", "team2", "team3", "team4"]
-    @State private var workBlocks = ["작업", "날짜", ":", "수정내용", "수정내용"]
-    @State private var selectedView = ""
+    @Environment(\.managedObjectContext) var managedObjectContext
     
-    let SourcePro = "SourceCodePro-Light"
+    let shared = PersistenceController.shared
+     
+    @State private var teamNames: [Team] = []
+    
+    //@State private var teamNames = ["team1", "team2", "team3", "team4"]
+    @State private var workBlocks = ["git commit -m \"","작업", "날짜", ":", "수정내용", "수정내용"]
     
     @State private var selectedTeamIndex = 0
     @State private var gitCommitOn = true
-    @State var isShownMessage = false
-    @State private var date = Date()
-    @State private var commitMessage: String = "Git commit copied check"
+    @State private var commitMessage: String = "git commit -m \""
     @State private var selectedBlock = ""
     
+    @State private var outputMessage: [Any] = []
     
     
     
     var body: some View {
         ZStack{
+            //glassmorphism 적용
             RoundedRectangle(cornerRadius: 20)
                 .ignoresSafeArea()
                 .frame(width:344,height:390)
                 .opacity(0.3)
             
+            
             VStack{
                 
-                TeamSelectedView()
+                TeamSelectedView(teamNames: $teamNames)
                 
                 VStack{
                     Text("미리보기")
                         .frame(width: 344, alignment: .leading)
                         .foregroundColor(.black)
                         .font(.system(size:16))
-                        .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 0))
+                        .padding(.leading, 24)
                     
                     ZStack{
                         RoundedRectangle(cornerRadius: 10)
@@ -61,37 +66,33 @@ struct TrayView: View {
                         
                         VStack{
                             ScrollView {
-                                LazyVStack {
-                                    //Field 작업
-                                    //data에서 작업 받아와야함
-                               
-                                        if gitCommitOn {
-
-                                            Text("git commit -m : ")
-                                                .font(.custom("SourceCodePro-Light", size: 15))
-
-                                            //.padding()
-                                        }
-                                   
-                                        WrappingHStack(workBlocks, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { block in
+                              //if-else //field 값 workBlocks에 담아오고 입력된 값 out에 저장, 기본 textplaceholder 로 바꾸면 될듯
+                                    WrappingHStack(workBlocks, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { block in
+                                        
+                                        if block == commitMessage {
+                                            if gitCommitOn {
+                                                Text(commitMessage)
+                                                    .font(.custom("SourceCodePro-Light", size: 15))
+                                                    .foregroundColor(.white)
+                                            }
+                                        } else {
                                             Button(action: {
                                                 selectedBlock = block
                                                 //fieldSelected(field: selectedBlock)
                                                 print(selectedBlock)
                                             }, label: {
-                                                Text(block)
+                                                Text("   \(block)   ")
                                             })
                                             .buttonStyle(.plain)
-                                            .frame(width: 64, height: 18)
+                                            .frame(height: 18)
                                             .background(Color.green)
                                             .cornerRadius(4)
-                                            
-                                            
-                                        } //wrappingHStack
-                                        .foregroundColor(.black)
-                                    }
-                                    .frame(width: 320, height: 101)
-              
+                                        }
+                                        
+                                    } //wrappingHStack
+                                    .padding()
+                                    .foregroundColor(.black)
+                                    
                                 
                             }//scrollView
                             .frame(width: 320, height: 100, alignment: .topLeading)
@@ -130,6 +131,12 @@ struct TrayView: View {
                         }
                         .frame(width: 320, height: 120)
                         
+                        
+                        
+                        
+                        
+                        
+                        
                     }
                     .frame(width: 320, height: 120)
                     
@@ -139,6 +146,7 @@ struct TrayView: View {
                 FieldView()
                     .frame(width: 320, height: 100)
                     .padding()
+                
                 
                 HStack{
                     
@@ -150,6 +158,7 @@ struct TrayView: View {
                     
                     Button("다음"){
                         print("다음 화면으로 넘어가기")
+                        
                     }
                     
                 }
@@ -159,6 +168,12 @@ struct TrayView: View {
             }
             
         }
+//        .onAppear{
+//            shared.createTeam(emoticon: "🧚‍♂️", name: "team1", pinned: false, touch: Date())
+//            teamNames = shared.readTeam()
+//            print("\(teamNames) check")
+//        }
+        
         
     }
     
@@ -170,24 +185,6 @@ struct TrayView: View {
         NSPasteboard.general.setString(text, forType: .string)
     }
     
-    
-    func fieldSelected(field: String) -> String {
-        
-        switch field {
-        case "작업" :
-            selectedView = "OptionFieldView"
-        case "날짜" :
-            selectedView = "DateFieldView"
-        default:
-            selectedView = "InputFieldView"
-        }
-        
-        return selectedView
-    }
-    
-    
-    
-    
 }
 
 struct TrayView_Previews: PreviewProvider {
@@ -195,3 +192,6 @@ struct TrayView_Previews: PreviewProvider {
         TrayView()
     }
 }
+
+
+

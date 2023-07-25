@@ -155,8 +155,9 @@ struct OptionBlockSettingView: View {
     }
 }
 
-struct OptionBlockSettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        OptionBlockSettingView()
-    }
-}
+//struct OptionBlockSettingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        OptionBlockSettingView()
+//        
+//    }
+//}

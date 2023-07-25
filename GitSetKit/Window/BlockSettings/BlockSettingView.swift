@@ -5,6 +5,7 @@
 //  Created by 최명근 on 2023/07/16.
 //
 
+
 import SwiftUI
 
 struct BlockSettingView: View {
@@ -15,14 +16,11 @@ struct BlockSettingView: View {
         if let selected = selected {
             switch selected.wrappedType {
             case .constant:
-                OptionBlockSettingView() //ConstantBlockSettingView 어디갔,,,
-                
+                OptionBlockSettingView(field: $selected) //ConstantBlockSettingView 어디갔,,,
             case .option:
-                OptionBlockSettingView()
-                
+                OptionBlockSettingView(field: $selected)
             case .input:
-                InputBlockSettingView()
-                
+                InputBlockSettingView(field: $selected)
             case .date:
                 DateBlockSettingView()
             }

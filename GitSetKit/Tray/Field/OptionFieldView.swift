@@ -12,9 +12,9 @@ import WrappingHStack
 
 struct OptionFieldView: View {
     
+        //OptionField -> Option 받아오기
         let workBlock = ["feat", "fix", "refactor", "docs", "style", "test", "chore"]
     
-
         @State var selectedOptionValue: String = ""
     
         var body: some View {

@@ -12,14 +12,9 @@ import CoreData
 
 struct FieldView: View {
     
-    //dummy data
-    //block type에 따라서 다르게 나오도록 작성하기
-    //block type - 텍스트, 선택, 날짜
-    //block title -> 작업에 나오도록
 
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @State private var selected: Team?
-    
+//    @Binding var team: Team?
+//    @State var selectedField: Field?
     
     var body: some View {
         
@@ -39,41 +34,15 @@ struct FieldView: View {
                     .background(.blue)
                 
                
+                //Field type에 따라서 View 다르게 불러와야하는데,,,
                 DateFieldView()
                     .frame(width: 304 ,height: 85, alignment: .topLeading)
-//
-//                if let selected = selectedField {
-//                    switch selectedField!.wrappedType {
-//                    case .constant:
-//                        OptionFieldView() //ConstantBlockSettingView 어디갔,,,
-//
-//                    case .option:
-//                        OptionFieldView()
-//
-//                    case .input:
-//                        InputFieldView()
-//
-//                    case .date:
-//                        DateFieldView()
-//
-//                    }
-//
-//
-//                }
+
+
                 
             }
         }
-//        .onAppear{
-//            let generator = DefaultDataGenerator(managedObjectContext)
-//            let fields = generator.generateFields()
-//            let team = generator.generateTeam(fields)
-//            
-//            self.selected = team
-//            
-//            
-//            
-//            PersistenceController.shared.saveContext()
-//        }
+     
     }
 }
 
@@ -81,8 +50,9 @@ struct FieldView: View {
 
 
 
-struct FieldView_Previews: PreviewProvider {
-    static var previews: some View {
-        FieldView()
-    }
-}
+//struct FieldView_Previews: PreviewProvider {
+//    static var previews: some View {
+//
+//        FieldView()
+//    }
+//}
