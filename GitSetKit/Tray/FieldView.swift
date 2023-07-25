@@ -11,19 +11,20 @@ import WrappingHStack
 import CoreData
 
 struct FieldView: View {
-    
-    @Binding var selectedTeam: Team!
+    @Binding var teamNames: [Team]
+    @State var selectedTeam: Team!
     @Binding var outputMessage: [Any]
     @State var selectedField: [Field] = []
-    @State var currentField: Int = 2
+    @State var currentField: Int = 3
     
+    @Binding var selectTeam: Team
     //@Binding var inputText: String
     
     var body: some View {
         
         VStack{
             //: = Field.name 받아와서 넣어야함
-            Text("\(selectedField.count)")
+            Text("작업")
                 .frame(width: 344, alignment: .leading)
                 .foregroundColor(.black)
                 .font(.system(size:20))
@@ -40,7 +41,7 @@ struct FieldView: View {
                 case 1:
                     InputFieldView(outputMessage: $outputMessage)
                 case 2:
-                    OptionFieldView(outputMessage: $outputMessage, Fields: $selectedField)
+                    OptionFieldView(outputMessage: $outputMessage)
                 case 3:
                     InputFieldView(outputMessage: $outputMessage)
                 case 4:
@@ -51,10 +52,6 @@ struct FieldView: View {
               
             }
         }
-        .onAppear{
-            selectedField = PersistenceController.shared.readField(selectedTeam)
-        }
-        
     }
 }
 

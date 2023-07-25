@@ -23,21 +23,21 @@ struct TrayView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    
     let shared = PersistenceController.shared
      
     
-    @State private var teamNames: [Team] = []
-    @State private var selectedField: [Field] = []
-    @State private var selectedTeam: Team? = nil
+    @State var teamNames: [Team] = []
+    @State var selectedField: [Field] = []
+    
+    @State var selectTeam: Team
     
     @State private var selectedTeamIndex = 0
     @State private var gitCommitOn = true
     @State private var commitMessage: String = "git commit -m \""
     @State private var selectedBlock = Field()
     
-    @State private var outputMessage: [Any] = []
-    @State private var inputText: String = ""
+    @State var outputMessage: [Any] = []
+    @State var inputText: String = ""
     
     
     
@@ -51,7 +51,7 @@ struct TrayView: View {
             
             VStack{
                 
-                TeamSelectedView(teamNames: $teamNames, selectedTeam: $selectedTeam)
+                TeamSelectedView(teamNames: $teamNames)
                 
                 VStack{
                     Text("미리보기")
@@ -136,7 +136,7 @@ struct TrayView: View {
                     
                 }
                 
-                FieldView(selectedTeam: $selectedTeam, outputMessage: $outputMessage)
+                FieldView(teamNames: $teamNames, outputMessage: $outputMessage, selectTeam: $selectTeam)
                     .frame(width: 320, height: 100)
                     .padding()
    
@@ -173,20 +173,16 @@ struct TrayView: View {
 //            let field2 = shared.createField(name: "날짜", type: 4)
 //            let field3 = shared.createField(name: ":", type: 1)
 //            let field4 = shared.createField(name: "수정사항", type: 3)
-//
+////
             teamNames = shared.readTeam()
-//
-//
-//
-//
-          //shared.updateTeam(team: teamNames[0], emoticon: "🌻", name: "team12", pinned: false, touch: Date(), fields: [field1, field2, field3, field4])
+      //shared.updateTeam(team: teamNames[0], emoticon: "🌻", name: "team12", pinned: false, touch: Date(), fields: [field1, field2, field3, field4])
            
             print("\(teamNames.count) check")
-            teamNames = shared.readTeam()
-            selectedField = shared.readField(teamNames[0])
-            //print(selectedField)
+
+            //selectedField = shared.readField(teamNames[0])
         
         }
+        
         
         
     }

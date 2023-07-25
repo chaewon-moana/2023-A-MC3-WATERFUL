@@ -14,11 +14,10 @@ struct OptionFieldView: View {
     
     //OptionField -> Option 받아오기
     let workBlock = ["feat", "fix", "refactor", "docs", "style", "test", "chore"]
-    
-    
+
     @State var selectedOptionValue: String = ""
     @Binding var outputMessage: [Any]
-    @Binding var Fields: [Field]
+    //@Binding var Fields: [Field]
     
     var body: some View {
         ScrollView {

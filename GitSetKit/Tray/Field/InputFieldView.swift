@@ -15,7 +15,6 @@ struct InputFieldView: View {
     @State private var inputText: String = ""
     @Binding var outputMessage: [Any]
     
-    //
     var body: some View {
         TextEditor(text: $inputText)
             .background(Color("quaternary"))
