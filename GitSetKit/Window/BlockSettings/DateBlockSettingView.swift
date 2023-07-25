@@ -9,8 +9,9 @@ import SwiftUI
 
 struct DateBlockSettingView: View {
     @Binding var field: Field?
+    @State var bindedField: Field?
     @State private var value = 0
-    var dateFormat = ["YYYY-MM-DD", "YY-MM-DD", "MM-DD"]
+    var dateFormat = ["YYYY-MM-dd", "YY-MM-dd", "MM-dd"]
     
     var body: some View {
         RoundedRectangle(cornerRadius: 4)
@@ -28,36 +29,62 @@ struct DateBlockSettingView: View {
                                 .foregroundColor(Colors.Gray.primary)
                                 .padding(.top)
                         }
-                        .onChange(of: value) { newValue in
-                            guard (field?.typeBasedString) != nil else { return }
-                            
-                            let newDate = dateFormatter(value: value)
-                            PersistenceController.shared.updateField(field: field!, name: newDate, typeBasedString: newDate)
-                        }
                     } label: { }
                         .pickerStyle(.radioGroup)
                         .padding(.leading, 8)
                 }
                 , alignment: .topLeading
             )
+            .onAppear {
+                guard let string = field?.typeBasedString else { return }
+                bindedField = field
+                value = dateConverter(typeBasedString: string)
+            }
+            .onDisappear {
+                PersistenceController.shared.updateField(field: bindedField!, typeBasedString: dateFormatter(value: value))
+            }
     }
     
     func dateFormatter(value: Int) -> String {
-        let date = DateFormatter()
-        date.locale = Locale(identifier: Locale.current.identifier)
-        date.timeZone = TimeZone(identifier: TimeZone.current.identifier)
-        
         switch value {
         case 0:
-            date.dateFormat = "YYYY-MM-dd"
+            return "YYYY-MM-dd"
         case 1:
-            date.dateFormat = "YY-MM-dd"
+            return "YY-MM-dd"
         case 2:
-            date.dateFormat = "MM-dd"
+            return "MM-dd"
         default:
-            date.dateFormat = "YYYY-MM-dd"
+            return "MM-dd"
         }
         
-        return date.string(from: Date())
+//        let date = DateFormatter()
+//        date.locale = Locale(identifier: Locale.current.identifier)
+//        date.timeZone = TimeZone(identifier: TimeZone.current.identifier)
+//
+//        switch value {
+//        case 0:
+//            date.dateFormat = "YYYY-MM-dd"
+//        case 1:
+//            date.dateFormat = "YY-MM-dd"
+//        case 2:
+//            date.dateFormat = "MM-dd"
+//        default:
+//            date.dateFormat = "YYYY-MM-dd"
+//        }
+//
+//        return date.string(from: Date())
+    }
+    
+    func dateConverter(typeBasedString: String) -> Int {
+        switch typeBasedString {
+        case "YYYY-MM-dd":
+            return 0
+        case "YY-MM-dd":
+            return 1
+        case "MM-dd":
+            return 2
+        default:
+            return 0
+        }
     }
 }
