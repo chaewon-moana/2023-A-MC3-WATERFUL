@@ -37,7 +37,7 @@
 
 // MARK: - TeamView
 "section_pinned" = "고정";
-"section_team" = "나의 팀";
+"section_team" = "Team";
 "pin" = "고정";
 "unpin" = "고정 해제";
 
@@ -45,12 +45,12 @@
 "convention_section_template" = "템플릿 설정";
 "convention_section_block" = "블럭 설정";
 // MARK: OptionView
-"option_block_type" = "Block Type";
-"option_block_type_constant" = "고정 텍스트";
-"option_block_type_text" = "텍스트";
-"option_block_type_date" = "날짜";
-"option_block_type_option" = "선택";
-"option_block_title" = "Block Title";
+"option_block_type" = "블럭 유형";
+"option_block_type_constant" = "고정 텍스트형";
+"option_block_type_text" = "텍스트형";
+"option_block_type_date" = "날짜형";
+"option_block_type_option" = "선택형";
+"option_block_title" = "블럭 제목";
 "option_block_title_empty" = "이름 없는 필드";
 "option_block_desc" = "Block Description";
 
@@ -60,7 +60,7 @@
 "option_block_field_short" = "Short Desc";
 "option_block_field_detail" = "Detail Description";
 // MARK: InputBlockSettingView
-"input_block_field_text" = "이곳에 입력되는 내용들은 Placeholder로 표시됩니다.";
+"input_block_field_text" = "이곳에 입력되는 내용들은 Placeholder로 표시돼요";
 "input_block_field_placeholder" = "# 1. 제목은 변경사항이 무엇인지 명확히 작성
 # 2. 끝에 마침표 미작성
 # 3. '~했음' 대신 수행한 작업을 명시 (ex. '~작업', '~작성' 등)

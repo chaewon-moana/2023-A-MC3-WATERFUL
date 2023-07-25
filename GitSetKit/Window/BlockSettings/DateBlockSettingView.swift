@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct DateBlockSettingView: View {
+    @Binding var field: Field?
+    @State var bindedField: Field?
+    @State private var value = 0
+    var dateFormat = ["YYYY-MM-dd", "YY-MM-dd", "MM-dd"]
+    
     var body: some View {
         RoundedRectangle(cornerRadius: 4)
             .fill(Colors.Gray.quaternary)
@@ -30,14 +35,56 @@ struct DateBlockSettingView: View {
                 }
                 , alignment: .topLeading
             )
+            .onAppear {
+                guard let string = field?.typeBasedString else { return }
+                bindedField = field
+                value = dateConverter(typeBasedString: string)
+            }
+            .onDisappear {
+                PersistenceController.shared.updateField(field: bindedField!, typeBasedString: dateFormatter(value: value))
+            }
     }
     
-    @State private var value = 0
-    private var dateFormat = ["YYYY-MM-DD", "YY-MM-DD", "MM-DD"]
-}
-
-struct DateBlockSettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        DateBlockSettingView()
+    func dateFormatter(value: Int) -> String {
+        switch value {
+        case 0:
+            return "YYYY-MM-dd"
+        case 1:
+            return "YY-MM-dd"
+        case 2:
+            return "MM-dd"
+        default:
+            return "MM-dd"
+        }
+        
+//        let date = DateFormatter()
+//        date.locale = Locale(identifier: Locale.current.identifier)
+//        date.timeZone = TimeZone(identifier: TimeZone.current.identifier)
+//
+//        switch value {
+//        case 0:
+//            date.dateFormat = "YYYY-MM-dd"
+//        case 1:
+//            date.dateFormat = "YY-MM-dd"
+//        case 2:
+//            date.dateFormat = "MM-dd"
+//        default:
+//            date.dateFormat = "YYYY-MM-dd"
+//        }
+//
+//        return date.string(from: Date())
+    }
+    
+    func dateConverter(typeBasedString: String) -> Int {
+        switch typeBasedString {
+        case "YYYY-MM-dd":
+            return 0
+        case "YY-MM-dd":
+            return 1
+        case "MM-dd":
+            return 2
+        default:
+            return 0
+        }
     }
 }

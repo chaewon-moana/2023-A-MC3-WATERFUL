@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct BlockSettingView: View {
-    
     @Binding var selected: Field?
     
     var body: some View {
@@ -19,12 +18,17 @@ struct BlockSettingView: View {
                 OptionBlockSettingView(field: $selected) //ConstantBlockSettingView 어디갔,,,
             case .option:
                 OptionBlockSettingView(field: $selected)
+                
             case .input:
                 InputBlockSettingView(field: $selected)
+                
             case .date:
-                DateBlockSettingView()
+                DateBlockSettingView(field: $selected)
+                
+            default:
+                Spacer()
+                
             }
-            
         } else {
             Spacer()
         }
