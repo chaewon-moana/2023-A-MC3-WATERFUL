@@ -26,10 +26,11 @@ struct TrayView: View {
     let shared = PersistenceController.shared
      
     
-    @State var teamNames: [Team] = []
-    @State var selectedField: [Field] = []
-    
-    @State var selectTeam: Team
+    @State private var teamNames: [Team] = []
+    //@State var selectTeam: Team?
+    @State private var selected: Team?
+    @State private var selectedField: [Field] = []
+
     
     @State private var selectedTeamIndex = 0
     @State private var gitCommitOn = true
@@ -51,7 +52,7 @@ struct TrayView: View {
             
             VStack{
                 
-                TeamSelectedView(teamNames: $teamNames)
+                TeamSelectedView(teamNames: $teamNames, selectedTeam: $selected)
                 
                 VStack{
                     Text("미리보기")
@@ -136,26 +137,26 @@ struct TrayView: View {
                     
                 }
                 
-                FieldView(teamNames: $teamNames, outputMessage: $outputMessage, selectTeam: $selectTeam)
-                    .frame(width: 320, height: 100)
-                    .padding()
+                FieldView(teamNames: $teamNames, selected: $selected, outputMessage: $outputMessage, selectedField: $selectedField, selectTeam: $selected)
+                    //.frame(width: 320, height: 100)
+                    //.padding()
    
-                    HStack{
-                        
-                        Spacer()
-                        
-                        Button("이전"){
-                            print("이전 화면으로 넘어가기")
-                        }
-                        
-                        Button("다음"){
-                            print("다음 화면으로 넘어가기")
-
-                        }
-                        
-                    }
-                    .frame(width: 320)
-                    .tint(.blue)
+//                    HStack{
+//                        
+//                        Spacer()
+//                        
+//                        Button("이전"){
+//                            print("이전 화면으로 넘어가기")
+//                        }
+//                        
+//                        Button("다음"){
+//                            print("다음 화면으로 넘어가기")
+//
+//                        }
+//                        
+//                    }
+//                    .frame(width: 320)
+//                    .tint(.blue)
                 }
             
         
@@ -176,12 +177,10 @@ struct TrayView: View {
 ////
             teamNames = shared.readTeam()
       //shared.updateTeam(team: teamNames[0], emoticon: "🌻", name: "team12", pinned: false, touch: Date(), fields: [field1, field2, field3, field4])
-           
             print("\(teamNames.count) check")
 
-            //selectedField = shared.readField(teamNames[0])
-        
         }
+      
         
         
         

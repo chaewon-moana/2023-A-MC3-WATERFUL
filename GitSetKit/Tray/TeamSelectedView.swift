@@ -16,8 +16,10 @@ struct TeamSelectedView: View {
     @State var selectTeam: Team = Team()
     
     @Binding var teamNames: [Team]
-   // @Binding var selectedTeam: Team!
-   
+    @Binding var selectedTeam: Team?
+   // @Binding var selectedField: [Field]
+    // @Binding var selectedTeam: Team!
+    
     let shared = PersistenceController.shared
     
     var body: some View {
@@ -34,31 +36,35 @@ struct TeamSelectedView: View {
             
             Spacer()
             
-            Menu{
-                ForEach(0..<teamNames.count) { index in
-                    Button(action: {
-                        selectedTeamIndex = teamNames[index].name ?? "team"
-                        selectTeam = teamNames[index]
-                        print("\(selectedTeamIndex)-") //선택된 팀으로 이동 + 선택다시 되도록
-                    }){
-                        Text(teamNames[index].name ?? " ")
+            Menu(selectedTeam?.wrappedName ?? "팀 선택") {
+                ForEach(teamNames) { team in
+                    Button {
+                        selectedTeam = team
+//                        print(selectedTeam)
+                    } label: {
+                        Text(team.wrappedName)
                     }
+                    
                 }
-            } label: {
-                Text("\(selectedTeamIndex) ") //coredata에서 선택된 거 받아오기
-                    .foregroundColor(.black)
             }
-            .frame(width:100)
-            .padding(EdgeInsets(top: 0, leading: 90, bottom: 0, trailing: 0))
-  
-        }//Hstack -> windowView 열리게 
+            //                .onChange(of: $team) { team in
+            //                    if let team = team {
+            //                        selectedField = shared.readField(team)
+            //                        print("fieldcheck")
+            //                        print(selectedField)
+            //                    }
+            //                }
+            
+//        }
+        .frame(width:100)
+        .padding(EdgeInsets(top: 0, leading: 90, bottom: 0, trailing: 0))
+        
+    }//Hstack
         .frame(width: 330)
         .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
-        
-    }
     
     
-    
+}
 }
 
 
