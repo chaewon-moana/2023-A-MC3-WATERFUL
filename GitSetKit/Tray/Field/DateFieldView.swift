@@ -20,9 +20,10 @@ struct DateFieldView: View {
             selection: $date,
             displayedComponents: [.date]
         )
+        .frame(width: 300, height: 88, alignment: .leading)
         .foregroundColor(.black)
         .datePickerStyle(.field)
-        .frame(width: 300)
+        
         
         //date값 형식에 맞게 수정하는 코드
         

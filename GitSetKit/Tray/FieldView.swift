@@ -12,67 +12,58 @@ import CoreData
 
 struct FieldView: View {
     @Binding var selectTeam: Team?
+    @Binding var selectedFields: [Field]
+    @Binding var selectedField: Field?
     @Binding var outputMessage: [Any]
-    @Binding var selectedField: [Field]
-    @State var currentField: Int = 3
+    @Binding var selectedFieldIndex: Int
+    @Binding var selectedOptions: [Option]
     
-    //@Binding var inputText: String
     
     var body: some View {
-        
         NavigationView{
             VStack{
-                //: = Field.name 받아와서 넣어야함
-                Text("작업")
-                    .frame(width: 344, alignment: .leading)
-                    .foregroundColor(.black)
-                    .font(.system(size:20))
-                    .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 0))
-                
-                //FieldView로 빼기
                 ZStack{
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 320, height: 101)
-                        .background(.blue)
+                    RoundedRectangle(cornerRadius: 4)
+                        .frame(width: 320, height: 104)
+                        .background(Color(red: 246/255, green: 246/255, blue: 246/255))
+                        .opacity(0.48)
                     
-                    
-                    switch currentField {
-                    case 1:
-                        InputFieldView(outputMessage: $outputMessage)
-                    case 2:
-                        OptionFieldView(outputMessage: $outputMessage)
-                    case 3:
-                        InputFieldView(outputMessage: $outputMessage)
-                    case 4:
-                        DateFieldView()
-                    default :
-                        InputFieldView(outputMessage: $outputMessage)
-                    }
+                    selectedFieldView(selectedFields: selectedFields, selectedFieldIndex: selectedFieldIndex)
+                        .frame(width: 300, height: 88)
                     
                 }//ZStack
-                
-                HStack{
-                    
-                    Spacer()
-                    
-                    Button("이전"){
-                        print("이전 화면으로 넘어가기")
-                    }
-                    
-                    Button("다음"){
-                        print("다음 화면으로 넘어가기")
-
-                    }
-                    
-                }
-                .frame(width: 320)
-                .tint(.blue)
+                .frame(width: 316, height: 104)
             } //VStack
-            
-            
-        }//NavigationView
+        }
+        
     }
+    
+    
+    func selectedFieldView(selectedFields: [Field], selectedFieldIndex: Int) -> some View {
+        if selectedFieldIndex >= 0 && selectedFieldIndex < selectedFields.count {
+            let currentField = selectedFields[selectedFieldIndex].wrappedType.rawValue
+            
+            switch currentField {
+            case 1: //constant
+                return AnyView(Text(""))
+            case 2:
+                return AnyView(OptionFieldView(outputMessage: $outputMessage, selectedOptions: $selectedOptions))
+            case 3:
+                return AnyView(InputFieldView(outputMessage: $outputMessage))
+            case 4:
+                return AnyView(DateFieldView())
+            default:
+                return AnyView(InputFieldView(outputMessage: $outputMessage))
+            }
+        } else {
+            return AnyView(Text("Field 찾을 수 없음"))
+        }
+    }//func - selectedFieldView
+
+
 }
+
+
 
 
 

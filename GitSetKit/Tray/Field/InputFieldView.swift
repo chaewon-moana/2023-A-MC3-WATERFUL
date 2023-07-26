@@ -19,16 +19,17 @@ struct InputFieldView: View {
         TextEditor(text: $inputText)
             .background(Color("quaternary"))
             .foregroundColor(.black)
-            .frame(width:310, height: 101)
+            .frame(width:300, height: 88)
             .textFieldStyle(.plain)
             .multilineTextAlignment(.leading)
             .scrollContentBackground(.hidden)
+            //.padding(.top, 4)
         
         
         if inputText.isEmpty {
             Text("   ex) 알림 버튼 추가")
-                .foregroundColor(.gray)
-                .frame(width: 310, height: 100 ,alignment: .topLeading)
+                .foregroundColor(Colors.Text.secondary)
+                .frame(width: 300, height: 88, alignment: .topLeading)
                 
         }
         
