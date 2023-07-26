@@ -28,10 +28,9 @@ struct TrayView: View {
     
     @State private var teamNames: [Team] = []
     //@State var selectTeam: Team?
-    @State private var selected: Team?
+    @State private var selectedTeam: Team?
     @State private var selectedField: [Field] = []
 
-    
     @State private var selectedTeamIndex = 0
     @State private var gitCommitOn = true
     @State private var commitMessage: String = "git commit -m \""
@@ -39,8 +38,6 @@ struct TrayView: View {
     
     @State var outputMessage: [Any] = []
     @State var inputText: String = ""
-    
-    
     
     var body: some View {
         ZStack{
@@ -52,7 +49,10 @@ struct TrayView: View {
             
             VStack{
                 
-                TeamSelectedView(teamNames: $teamNames, selectedTeam: $selected)
+                TeamSelectedView(teamNames: $teamNames, selectedTeam: $selectedTeam)
+                    .onChange(of: selectedTeam) { newValue in
+                        selectedField = newValue!.wrappedFields
+                    }
                 
                 VStack{
                     Text("미리보기")
@@ -69,34 +69,36 @@ struct TrayView: View {
                         VStack{
                             ScrollView {
                               //if-else //field 값 workBlocks에 담아오고 입력된 값 out에 저장, 기본 textplaceholder 로 바꾸면 될듯
-                                    WrappingHStack(selectedField, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { block in
-                                        
-                                        //Fieldtype받아서 각자 View로 이동,,,
-                                        
-//                                        if block == commitMessage {
-//                                            if gitCommitOn {
-//                                                Text(commitMessage)
-//                                                    .font(.custom("SourceCodePro-Light", size: 15))
-//                                                    .foregroundColor(.white)
-//                                            }
-//                                        } else {
-                                            Button(action: {
-                                                selectedBlock = block
-                                                print(selectedBlock)
-                                            }, label: {
-                                                Text("   \(selectedBlock.wrappedName)   ")
-                                            })
-                                            .buttonStyle(.plain)
-                                            .frame(height: 18)
-                                            .background(Color.green)
-                                            .cornerRadius(4)
-                                        //}
-                                        
-                                    } //wrappingHStack
-                                    .padding()
-                                    .foregroundColor(.black)
-                                    
-                                
+//                                    WrappingHStack(selectedField, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { block in
+//
+//                                        //Fieldtype받아서 각자 View로 이동,,,
+//
+////                                        if block == commitMessage {
+////                                            if gitCommitOn {
+////                                                Text(commitMessage)
+////                                                    .font(.custom("SourceCodePro-Light", size: 15))
+////                                                    .foregroundColor(.white)
+////                                            }
+////                                        } else {
+//                                            Button(action: {
+//                                                selectedBlock = block
+//                                                print(selectedBlock)
+//                                            }, label: {
+//                                                Text("   \(selectedBlock.wrappedName)   ")
+//                                            })
+//                                            .buttonStyle(.plain)
+//                                            .frame(height: 18)
+//                                            .background(Color.green)
+//                                            .cornerRadius(4)
+//                                        //}
+//
+//                                    } //wrappingHStack
+//                                    .padding()
+//                                    .foregroundColor(.black)
+                                  
+                                WrappingHStack(selectedField, id: \.self, alignment: .leading, spacing: .constant(8), lineSpacing: 4) { field in
+                                    Text("\(field.wrappedName)")
+                                }
                             }//scrollView
                             .frame(width: 320, height: 100, alignment: .topLeading)
                             
@@ -137,7 +139,7 @@ struct TrayView: View {
                     
                 }
                 
-                FieldView(selectTeam: $selected, outputMessage: $outputMessage, selectedField: $selectedField)
+                FieldView(selectTeam: $selectedTeam, outputMessage: $outputMessage, selectedField: $selectedField)
                     //.frame(width: 320, height: 100)
                     //.padding()
    

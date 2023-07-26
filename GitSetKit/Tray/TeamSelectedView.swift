@@ -10,15 +10,11 @@ import SwiftUI
 import CoreData
 
 struct TeamSelectedView: View {
-    
     @State var selectedTeamIndex: String = ""
     @State private var isWindow = false
-    @State var selectTeam: Team = Team()
     
     @Binding var teamNames: [Team]
     @Binding var selectedTeam: Team?
-   // @Binding var selectedField: [Field]
-    // @Binding var selectedTeam: Team!
     
     let shared = PersistenceController.shared
     
@@ -36,35 +32,23 @@ struct TeamSelectedView: View {
             
             Spacer()
             
-            Menu(selectedTeam?.wrappedName ?? "팀 선택") {
-                ForEach(teamNames) { team in
+            Menu {
+                ForEach(teamNames, id: \.self) { team in
                     Button {
                         selectedTeam = team
-//                        print(selectedTeam)
                     } label: {
                         Text(team.wrappedName)
                     }
-                    
                 }
+            } label: {
+                Text(selectedTeam?.wrappedName ?? "팀 선택")
             }
-            //                .onChange(of: $team) { team in
-            //                    if let team = team {
-            //                        selectedField = shared.readField(team)
-            //                        print("fieldcheck")
-            //                        print(selectedField)
-            //                    }
-            //                }
-            
-//        }
-        .frame(width:100)
-        .padding(EdgeInsets(top: 0, leading: 90, bottom: 0, trailing: 0))
-        
-    }//Hstack
+            .frame(width:100)
+            .padding(EdgeInsets(top: 0, leading: 90, bottom: 0, trailing: 0))
+        }//Hstack
         .frame(width: 330)
         .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
-    
-    
-}
+    }
 }
 
 
