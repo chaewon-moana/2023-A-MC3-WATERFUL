@@ -25,7 +25,7 @@ struct TeamSelectedView: View {
                 .onTapGesture {
                     isWindowOpen.toggle()
                 }
-            
+
             Text("GitSetKit")
                 .foregroundColor(.black)
             

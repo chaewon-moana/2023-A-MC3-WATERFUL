@@ -11,9 +11,7 @@ import CoreData
 import WrappingHStack
 
 struct OptionFieldView: View {
-    
-    let workBlock = ["feat", "fix", "refactor"]
-    
+        
     @State var selectedOptionValue: String!
     @Binding var outputMessage: [Any]
     @Binding var selectedOptions: [Option]
@@ -37,6 +35,9 @@ struct OptionFieldView: View {
             .foregroundColor(.black)
         }//ScrollView
         .frame(width: 300, height: 88)
+        .onAppear {
+            selectedOptions = PersistenceController.shared.readOption()
+        }
         
         
         
