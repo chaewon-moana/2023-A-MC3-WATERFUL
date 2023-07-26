@@ -137,7 +137,7 @@ struct TrayView: View {
                     
                 }
                 
-                FieldView(teamNames: $teamNames, selected: $selected, outputMessage: $outputMessage, selectedField: $selectedField, selectTeam: $selected)
+                FieldView(selectTeam: $selected, outputMessage: $outputMessage, selectedField: $selectedField)
                     //.frame(width: 320, height: 100)
                     //.padding()
    
