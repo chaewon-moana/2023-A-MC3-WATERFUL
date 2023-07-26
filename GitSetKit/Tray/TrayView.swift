@@ -83,7 +83,7 @@ struct TrayView: View {
                                         Button(action: {
                                             //입력하면 글자 바뀌도록,,,
                                         }, label: {
-                                            Text("    \(block.wrappedName)    ")//기본값은 block.wrappedName -> 입력시 입력값으로 변경
+                                            Text("    \(block.wrappedName)    ")
                                                 .foregroundColor(Color.white)
                                         })
                                         .buttonStyle(.plain)
@@ -118,7 +118,6 @@ struct TrayView: View {
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 19, height: 18)
                                     }
-                                    
                                 }
                                 .buttonStyle(.plain)
                                 .offset(x: 70, y: 10)
@@ -153,25 +152,38 @@ struct TrayView: View {
                     Text("\(Image(systemName: "keyboard")) [shift+방향키]로 다음으로 넘어갈 수 있어요!")
                         .foregroundColor(Colors.Text.secondary)
                         .font(.system(size: 11))
+                    
                     Spacer()
                     
-                    Button("이전"){
-                        print("이전 화면으로 넘어가기")
-                        selectedFieldIndex -= 1
-                    }
-                    .background(selectedFieldIndex != 0 ? Color(red: 0, green: 122/255, blue: 1) : Color.white)
+                    Button(action: {
+                       selectedFieldIndex -= 1
+                    }, label: {
+                        Text("이전")//기본값은 block.wrappedName -> 입력시 입력값으로 변경
+                            .foregroundColor((selectedFieldIndex != 0 ? Color.white : Color.black))
+                    })
+                    .frame(width: 40, height: 24)
+                    .buttonStyle(.plain)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(selectedFieldIndex != 0 ? Color(red: 0, green: 122/255, blue: 1) : Color.white)
+                    )
                     .disabled(selectedFieldIndex == 0)
+
                     
-                    
-                    Button("다음"){
-                        print("다음 화면으로 넘어가기")
-                        print(selectedFields[selectedFieldIndex])
-                        //selectedFieldView(selectedFields: selectedFields, selectedFieldIndex: Int16(selectedFieldIndex))
-                        selectedFieldIndex += 1
-                    }
-                    
-                    .background(selectedFieldIndex < selectedFields.count ? Color(red: 0, green: 122/255, blue: 1) : Color.white)
+                    Button(action: {
+                       selectedFieldIndex += 1
+                    }, label: {
+                        Text("다음")//기본값은 block.wrappedName -> 입력시 입력값으로 변경
+                            .foregroundColor((selectedFieldIndex < selectedFields.count ? Color.white : Color.black))
+                    })
+                    .frame(width: 40, height: 24)
+                    .buttonStyle(.plain)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(selectedFieldIndex < selectedFields.count ? Color(red: 0, green: 122/255, blue: 1) : Color.white)
+                    )
                     .disabled(selectedFieldIndex == selectedFields.count)
+                    
                     
                 }//HStack - Previous, Next Button View
                 .frame(width: 316, height: 16)
@@ -180,19 +192,18 @@ struct TrayView: View {
         .onAppear{
             //coredata Test용 DATA
             //shared.createTeam(emoticon: "👍", name: "team5", pinned: false, touch: Date())
-//            let opt1 = shared.createOption(value: "feat", shortDesc: "기능추가", detailDesc: "코드 기능추가")
-//            let opt2 = shared.createOption(value: "fix", shortDesc: "수정", detailDesc: "코드수정")
-//            let opt3 = shared.createOption(value: "Docs", shortDesc: "문서수정", detailDesc: "문서수정수정")
-//            let field1 = shared.createField(name: "작업", type: 2, options: [opt1, opt2, opt3])
-//            let field2 = shared.createField(name: "날짜", type: 4)
-//            let field3 = shared.createField(name: ":", type: 1)
-//            let field4 = shared.createField(name: "수정사항", type: 3)
-//
-//
-//            shared.updateTeam(team: teamNames[0], emoticon: "🌻", name: "teamteam", pinned: false, touch: Date(), fields: [field1, field2, field3, field4])
+            //            let opt1 = shared.createOption(value: "feat", shortDesc: "기능추가", detailDesc: "코드 기능추가")
+            //            let opt2 = shared.createOption(value: "fix", shortDesc: "수정", detailDesc: "코드수정")
+            //            let opt3 = shared.createOption(value: "Docs", shortDesc: "문서수정", detailDesc: "문서수정수정")
+            //            let field1 = shared.createField(name: "작업", type: 2, options: [opt1, opt2, opt3])
+            //            let field2 = shared.createField(name: "날짜", type: 4)
+            //            let field3 = shared.createField(name: ":", type: 1)
+            //            let field4 = shared.createField(name: "수정사항", type: 3)
+            //
+            //
+            //            shared.updateTeam(team: teamNames[0], emoticon: "🌻", name: "teamteam", pinned: false, touch: Date(), fields: [field1, field2, field3, field4])
             //shared.createTeam(emoticon: "👍", name: "team7", pinned: false, touch: Date())
             teamNames = shared.readTeam()
-            
             
         }
     }
@@ -201,11 +212,6 @@ struct TrayView: View {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(text, forType: .string)
     }
-    
-    
-    
-    
-    
     
 }
 
