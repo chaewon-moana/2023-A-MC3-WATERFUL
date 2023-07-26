@@ -26,9 +26,11 @@ struct GitSetKitApp: App {
         }
         //: - WindowView
         
+        
         // MARK: - TrayView
         MenuBarExtra {
             TrayView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         } label: {
             Image("tray_icon")
                 .renderingMode(.template)
