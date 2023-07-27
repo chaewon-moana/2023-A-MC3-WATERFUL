@@ -15,7 +15,6 @@ struct DateFieldView: View {
     @Binding var outputMessage: [String]
     @Binding var selectedFieldIndex: Int
     
-    
     var body: some View {
         
         DatePicker(

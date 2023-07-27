@@ -30,20 +30,17 @@ struct WorkFieldView: View {
                             .foregroundColor(.white)
                     }
                     
-                    if index == (selectedFields.count) {
-                        Text("\"")
-                            .frame(width: 10)
-                            .font(.custom("SourceCodePro-Light", size: 13))
-                            .foregroundColor(.white)
-                    }
+                    
                     if block.type == 1 {
                         Text(block.wrappedName)
                             .foregroundColor(Color.white)
                     } else {
                         Button(action: {
-                            //
+                            selectedFieldIndex = index
+                            
                         }, label: {
-                            Text(" \(outputMessage[index]) ")
+                            Text("   \(outputMessage[index])   ")
+                                .padding(.horizontal, 8)
                                 .foregroundColor(Color.white)
                         })
                         .buttonStyle(.plain)
@@ -53,7 +50,14 @@ struct WorkFieldView: View {
                         .padding(.leading, 4)
                         .padding(.trailing, 4)
                     }//else
-                }
+                    
+                    if index == (selectedFields.count-1) {
+                        Text("\"")
+                            .frame(width: 10)
+                            .font(.custom("SourceCodePro-Light", size: 13))
+                            .foregroundColor(.white)
+                    }
+                }//WrappingHStack
                 .frame(alignment: .topLeading)
                 .padding(12)
             }//scrollView
