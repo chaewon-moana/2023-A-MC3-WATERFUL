@@ -11,12 +11,11 @@ import WrappingHStack
 import CoreData
 
 struct FieldView: View {
-    @Binding var selectTeam: Team?
+    //@Binding var selectTeam: Team?
     @Binding var selectedFields: [Field]
     @Binding var selectedField: Field?
-    @Binding var outputMessage: [Any]
+    @Binding var outputMessage: [String]
     @Binding var selectedFieldIndex: Int
-    @Binding var selectedOptions: [Option]
     
     
     var body: some View {
@@ -30,7 +29,11 @@ struct FieldView: View {
                     
                     selectedFieldView(selectedFields: selectedFields, selectedFieldIndex: selectedFieldIndex)
                         .frame(width: 300, height: 88)
-                    
+                        .onChange(of:selectedFieldIndex){ newValue in
+                            if selectedFields[selectedFieldIndex].wrappedType.rawValue == 1 {
+                                selectedFieldIndex += 1
+                            }
+                        }
                 }//ZStack
                 .frame(width: 316, height: 104)
             } //VStack
@@ -38,22 +41,21 @@ struct FieldView: View {
         
     }
     
-    
     func selectedFieldView(selectedFields: [Field], selectedFieldIndex: Int) -> some View {
         if selectedFieldIndex >= 0 && selectedFieldIndex < selectedFields.count {
             let currentField = selectedFields[selectedFieldIndex].wrappedType.rawValue
             
             switch currentField {
-            case 1: //constant
-                return AnyView(Text(""))
+//            case 1: //constant
+//                return AnyView(Text(""))
             case 2:
-                return AnyView(OptionFieldView(outputMessage: $outputMessage, selectedOptions: $selectedOptions))
+                return AnyView(OptionFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex))
             case 3:
-                return AnyView(InputFieldView(outputMessage: $outputMessage))
+                return AnyView(InputFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex))
             case 4:
-                return AnyView(DateFieldView())
+                return AnyView(DateFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex))
             default:
-                return AnyView(InputFieldView(outputMessage: $outputMessage))
+                return AnyView(InputFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex))
             }
         } else {
             return AnyView(Text("Field 찾을 수 없음"))

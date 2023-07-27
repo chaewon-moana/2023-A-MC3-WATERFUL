@@ -15,6 +15,8 @@ struct TeamSelectedView: View {
     
     @Binding var teamNames: [Team]
     @Binding var selectedTeam: Team?
+    @Binding var outputMessage: [String]
+
     
     @State private var isWindowOpen = false
     
@@ -35,6 +37,7 @@ struct TeamSelectedView: View {
                 ForEach(teamNames, id: \.self) { team in
                     Button {
                         selectedTeam = team
+                        print("\(outputMessage) chch")
                     } label: {
                         Text(team.wrappedName)
                             .foregroundColor(Color.black)

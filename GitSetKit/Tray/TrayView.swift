@@ -8,17 +8,9 @@
 import Foundation
 import SwiftUI
 import CoreData
-import WrappingHStack
-//import AppKit
 
 struct TrayView: View {
     
-    @FetchRequest(
-        entity: Team.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Team.name, ascending: true)
-        ]
-    ) var teams: FetchedResults<Team>
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -27,16 +19,12 @@ struct TrayView: View {
     @State private var teamNames: [Team] = []
     @State private var selectedTeam: Team?
     @State private var selectedFields: [Field] = []
-    @State private var selectedOptions: [Option] = []
     @State private var selectedField: Field?
-    
     @State private var selectedFieldIndex = 0
-    @State private var gitCommitOn = true
-    @State private var commitMessage: String = "git commit -m \""
-    @State private var tmpMessage: String = ""
+    @State private var selectedFieldsCount = 0
     
-    @State var outputMessage: [Any] = []
-    @State var inputText: String = ""
+    
+    @State var outputMessage: [String] = []
     
     var body: some View {
         
@@ -48,10 +36,12 @@ struct TrayView: View {
             
             VStack{
                 
-                TeamSelectedView(teamNames: $teamNames, selectedTeam: $selectedTeam)
+                TeamSelectedView(teamNames: $teamNames, selectedTeam: $selectedTeam, outputMessage: $outputMessage)
                     .onChange(of: selectedTeam){ newValue in
                         selectedFields = newValue!.wrappedFields
                         selectedFieldIndex = 0
+                        selectedFieldsCount = selectedFields.count
+                        outputMessage = addOutput(selectedFields: selectedFields)
                     }
                 
                 VStack{
@@ -65,68 +55,9 @@ struct TrayView: View {
                             .foregroundColor(Colors.Fill.codeBG)
                             .frame(width: 316, height: 120)
                         
-                        VStack{
-                            ScrollView {
-                                WrappingHStack(selectedFields, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { block in
-                                    
-                                    if gitCommitOn && block.wrappedName == selectedFields.first?.wrappedName{
-                                        Text(commitMessage)
-                                            .frame(width: 120)
-                                            .font(.custom("SourceCodePro-Light", size: 13))
-                                            .foregroundColor(.white)
-                                    }
-                                    if block.type == 1 {
-                                        Text(block.wrappedName)
-                                            .foregroundColor(Color.white)
-                                    } else {
-                                        Button(action: {
-                                            tmpMessage = block.wrappedName
-                                            print("\(tmpMessage)")
-                                        }, label: {
-                                            Text("    \(block.wrappedName)    ")
-                                                .foregroundColor(Color.white)
-                                        })
-                                        .buttonStyle(.plain)
-                                        .frame(height: 18)
-                                        .background(Colors.Fill.codeBlockB)
-                                        .cornerRadius(4)
-                                    }
-                                }
-                                .frame(alignment: .topLeading)
-                                .padding(12)
-                            }//scrollView
-                            .frame(width: 316, height: 100, alignment: .center)
-                            
-                            HStack{
-                                Toggle(isOn: $gitCommitOn){
-                                    Text(" Git 명령어 포함")
-                                }
-                                .toggleStyle(.checkbox)
-                                .offset(x: -80,y:15)
-                                
-                                Button(action: {
-                                    copyToPaste(text: commitMessage)
-                                    print("복사됨")
-                                }) {
-                                    ZStack{
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .frame(width: 32, height: 32)
-                                            .foregroundColor(.gray)
-                                        Image(systemName: "doc.on.doc")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 19, height: 18)
-                                    }
-                                }
-                                .disabled(selectedFieldIndex != selectedFields.count)
-                                .buttonStyle(.plain)
-                                .offset(x: 70, y: 10)
-                            }//HStack - copyAndPaste Button View
-                            .frame(width: 316, height: 20)
-                            .offset(x:0, y: -30)
-                            
-                        }//WorkFieldView
-                    }
+                        WorkFieldView(selectedFields: $selectedFields, outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex)
+                        
+                    }//ZStack
                     .frame(width: 316, height: 120)
                     
                 }//WorkView
@@ -138,61 +69,24 @@ struct TrayView: View {
                         .foregroundColor(.black)
                         .font(.system(size:16))
                     
-                    FieldView(selectTeam: $selectedTeam, selectedFields: $selectedFields, selectedField: $selectedField, outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex, selectedOptions: $selectedOptions)
+                    FieldView(selectedFields: $selectedFields, selectedField: $selectedField, outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex)
                         .onChange(of: selectedTeam){ newValue in
                             selectedFields = newValue!.wrappedFields
                         }
+                    
                         .frame(width: 316, height: 104)
                         .opacity(1)
                         .ignoresSafeArea()
                 }
                 .frame(width: 316, height: 130)
                 
-                HStack{
-                    Text("\(Image(systemName: "keyboard")) [shift+방향키]로 다음으로 넘어갈 수 있어요!")
-                        .foregroundColor(Colors.Text.secondary)
-                        .font(.system(size: 11))
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                       selectedFieldIndex -= 1
-                    }, label: {
-                        Text("이전")//기본값은 block.wrappedName -> 입력시 입력값으로 변경
-                            .foregroundColor((selectedFieldIndex != 0 ? Color.white : Color.black))
-                    })
-                    .frame(width: 40, height: 24)
-                    .buttonStyle(.plain)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(selectedFieldIndex != 0 ? Color(red: 0, green: 122/255, blue: 1) : Color.white)
-                    )
-                    .disabled(selectedFieldIndex == 0)
-
-                    
-                    Button(action: {
-                       selectedFieldIndex += 1
-                    }, label: {
-                        Text("다음")//기본값은 block.wrappedName -> 입력시 입력값으로 변경
-                            .foregroundColor((selectedFieldIndex < selectedFields.count ? Color.white : Color.black))
-                    })
-                    .frame(width: 40, height: 24)
-                    .buttonStyle(.plain)
-                    .disabled(selectedFieldIndex == selectedFields.count)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(selectedFieldIndex < selectedFields.count ? Color(red: 0, green: 122/255, blue: 1) : Color.white)
-                    )
-                    
-                    
-                    
-                }//HStack - Previous, Next Button View
-                .frame(width: 316, height: 16)
+                ButtonView(selectedFieldIndex: $selectedFieldIndex, outputMessage: $outputMessage, selectedFieldsCount: $selectedFieldsCount)
+                    .frame(width: 316, height: 16)
             }
         }
         .onAppear{
-            //coredata Test용 DATA
-            //shared.createTeam(emoticon: "👍", name: "team5", pinned: false, touch: Date())
+            //            coredata Test용 DATA
+            //            shared.createTeam(emoticon: "👍", name: "team5", pinned: false, touch: Date())
             //            let opt1 = shared.createOption(value: "feat", shortDesc: "기능추가", detailDesc: "코드 기능추가")
             //            let opt2 = shared.createOption(value: "fix", shortDesc: "수정", detailDesc: "코드수정")
             //            let opt3 = shared.createOption(value: "Docs", shortDesc: "문서수정", detailDesc: "문서수정수정")
@@ -203,16 +97,22 @@ struct TrayView: View {
             //
             //
             //            shared.updateTeam(team: teamNames[0], emoticon: "🌻", name: "teamteam", pinned: false, touch: Date(), fields: [field1, field2, field3, field4])
-            //shared.createTeam(emoticon: "👍", name: "team7", pinned: false, touch: Date())
+            //            shared.createTeam(emoticon: "👍", name: "team7", pinned: false, touch: Date())
             teamNames = shared.readTeam()
-            
         }
     }
-    //git commit message copied function
-    func copyToPaste(text: String) {
-        NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(text, forType: .string)
+    //outputMessage에 값을 넣는 함수
+    func addOutput(selectedFields: [Field]) -> [String] {
+        var outputMessage: [String] = []
+        
+        for field in selectedFields {
+            let tmp = "\(field.wrappedName)"
+            outputMessage.append(tmp)
+        }
+        return outputMessage
     }
+    
+    
     
 }
 
