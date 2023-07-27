@@ -22,10 +22,11 @@ struct OptionFieldView: View {
             WrappingHStack(selectedOptions, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { opt in
                 Button(action: {
                     let selectedOptionValue = opt.value ?? "d"
-                    print(selectedOptions)
+                    print(opt.value)
                 }, label: {
                     Text(opt.value ?? "d")
                 })
+                .padding(selectedOptions.count > 8 ? 2 : 3 )
                 .buttonStyle(.plain)
                 .frame(width: 72, height: 40)
                 .background(Color.white)
