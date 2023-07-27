@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import CoreData
+//import CoreData
 import WrappingHStack
 
 struct OptionFieldView: View {
@@ -20,7 +20,6 @@ struct OptionFieldView: View {
     
     var body: some View {
         ScrollView {
-            
             WrappingHStack(selectedOptions, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { opt in
                 Button(action: {
                     let selectedOptionValue = opt.value ?? "optionField 오류"

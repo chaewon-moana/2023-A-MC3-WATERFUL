@@ -29,7 +29,7 @@ struct TrayView: View {
     var body: some View {
         
         ZStack{
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: 4)
                 .frame(width:340,height:390)
                 .opacity(0.5)
                 .ignoresSafeArea()

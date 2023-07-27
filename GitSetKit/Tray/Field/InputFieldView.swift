@@ -27,7 +27,6 @@ struct InputFieldView: View {
             .onChange(of: inputText){ newValue in
                 outputMessage[selectedFieldIndex] = newValue
             }
-            //.padding(.top, 4)
         
         
         if inputText.isEmpty {
