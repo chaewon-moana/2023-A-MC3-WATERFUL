@@ -12,6 +12,9 @@ import CoreData
 struct DateFieldView: View {
     
     @State var date = Date()
+    @Binding var outputMessage: [String]
+    @Binding var selectedFieldIndex: Int
+    
     
     var body: some View {
         
@@ -23,11 +26,15 @@ struct DateFieldView: View {
         .frame(width: 300, height: 88, alignment: .leading)
         .foregroundColor(.black)
         .datePickerStyle(.field)
+        .onChange(of: date) { newValue in
+            //DateBlockSetting 형식에 맞게 출력할 수 있도록 챱챱
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            let formattedDate = dateFormatter.string(from: newValue)
+            outputMessage[selectedFieldIndex] = formattedDate
+            
+        }
         
-        
-        //date값 형식에 맞게 수정하는 코드
-        
-        //[DateBlockSettingView.swift] - [dateFormat], Date() 형식이 어떻게 이뤄지는지 알아서 format변환
         
         
     }

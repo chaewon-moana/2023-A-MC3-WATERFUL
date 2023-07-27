@@ -13,18 +13,20 @@ import WrappingHStack
 struct OptionFieldView: View {
         
     @State var selectedOptionValue: String!
-    @Binding var outputMessage: [Any]
-    @Binding var selectedOptions: [Option]
+    @Binding var outputMessage: [String]
+    @Binding var selectedFieldIndex: Int
+    
+    @State var selectedOptions: [Option] = []
     
     var body: some View {
         ScrollView {
             
             WrappingHStack(selectedOptions, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { opt in
                 Button(action: {
-                    let selectedOptionValue = opt.value ?? "d"
-                    print(opt.value)
+                    let selectedOptionValue = opt.value ?? "optionField 오류"
+                    outputMessage[selectedFieldIndex] = selectedOptionValue
                 }, label: {
-                    Text(opt.value ?? "d")
+                    Text(opt.value ?? "optionField 오류")
                 })
                 .padding(selectedOptions.count > 8 ? 2 : 3 )
                 .buttonStyle(.plain)

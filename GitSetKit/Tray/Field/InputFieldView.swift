@@ -13,7 +13,8 @@ struct InputFieldView: View {
     
     @State private var value: String = "ex) 알림 버튼 추가"
     @State private var inputText: String = ""
-    @Binding var outputMessage: [Any]
+    @Binding var outputMessage: [String]
+    @Binding var selectedFieldIndex: Int
     
     var body: some View {
         TextEditor(text: $inputText)
@@ -23,6 +24,9 @@ struct InputFieldView: View {
             .textFieldStyle(.plain)
             .multilineTextAlignment(.leading)
             .scrollContentBackground(.hidden)
+            .onChange(of: inputText){ newValue in
+                outputMessage[selectedFieldIndex] = newValue
+            }
             //.padding(.top, 4)
         
         
@@ -35,6 +39,7 @@ struct InputFieldView: View {
         
         
     }
+        
     
 }
 
