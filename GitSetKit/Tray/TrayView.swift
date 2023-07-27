@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreData
 import WrappingHStack
-import AppKit
+//import AppKit
 
 struct TrayView: View {
     
@@ -25,7 +25,6 @@ struct TrayView: View {
     let shared = PersistenceController.shared
     
     @State private var teamNames: [Team] = []
-    //@State var selectTeam: Team?
     @State private var selectedTeam: Team?
     @State private var selectedFields: [Field] = []
     @State private var selectedOptions: [Option] = []
@@ -34,6 +33,7 @@ struct TrayView: View {
     @State private var selectedFieldIndex = 0
     @State private var gitCommitOn = true
     @State private var commitMessage: String = "git commit -m \""
+    @State private var tmpMessage: String = ""
     
     @State var outputMessage: [Any] = []
     @State var inputText: String = ""
@@ -74,14 +74,14 @@ struct TrayView: View {
                                             .frame(width: 120)
                                             .font(.custom("SourceCodePro-Light", size: 13))
                                             .foregroundColor(.white)
-                                        
                                     }
                                     if block.type == 1 {
                                         Text(block.wrappedName)
                                             .foregroundColor(Color.white)
                                     } else {
                                         Button(action: {
-                                            //입력하면 글자 바뀌도록,,,
+                                            tmpMessage = block.wrappedName
+                                            print("\(tmpMessage)")
                                         }, label: {
                                             Text("    \(block.wrappedName)    ")
                                                 .foregroundColor(Color.white)
@@ -106,7 +106,6 @@ struct TrayView: View {
                                 
                                 Button(action: {
                                     copyToPaste(text: commitMessage)
-                                    //마지막 Fields로 왔을 때, 활성화
                                     print("복사됨")
                                 }) {
                                     ZStack{
@@ -119,6 +118,7 @@ struct TrayView: View {
                                             .frame(width: 19, height: 18)
                                     }
                                 }
+                                .disabled(selectedFieldIndex != selectedFields.count)
                                 .buttonStyle(.plain)
                                 .offset(x: 70, y: 10)
                             }//HStack - copyAndPaste Button View
@@ -178,11 +178,12 @@ struct TrayView: View {
                     })
                     .frame(width: 40, height: 24)
                     .buttonStyle(.plain)
+                    .disabled(selectedFieldIndex == selectedFields.count)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
                             .fill(selectedFieldIndex < selectedFields.count ? Color(red: 0, green: 122/255, blue: 1) : Color.white)
                     )
-                    .disabled(selectedFieldIndex == selectedFields.count)
+                    
                     
                     
                 }//HStack - Previous, Next Button View
