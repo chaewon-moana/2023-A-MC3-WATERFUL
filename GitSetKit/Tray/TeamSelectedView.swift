@@ -37,7 +37,6 @@ struct TeamSelectedView: View {
                 ForEach(teamNames, id: \.self) { team in
                     Button {
                         selectedTeam = team
-                        print("\(outputMessage) chch")
                     } label: {
                         Text(team.wrappedName)
                             .foregroundColor(Color.black)

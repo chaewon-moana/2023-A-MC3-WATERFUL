@@ -23,8 +23,9 @@ struct TrayView: View {
     @State private var selectedFieldIndex = 0
     @State private var selectedFieldsCount = 0
     
-    
+    @State private var fieldName: String = "작업"
     @State var outputMessage: [String] = []
+    //@State private var today = Date()
     
     var body: some View {
         
@@ -64,17 +65,21 @@ struct TrayView: View {
                 .frame(width: 316, height: 146)
                 
                 VStack{
-                    Text("작업")
+                    Text(fieldName)
                         .frame(width: 316, height: 18, alignment: .leading)
                         .foregroundColor(.black)
                         .font(.system(size:16))
-                    
-                    FieldView(selectedFields: $selectedFields, selectedField: $selectedField, outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex)
-                        .onChange(of: selectedTeam){ newValue in
-                            selectedFields = newValue!.wrappedFields
+                        .onChange(of: selectedFieldIndex){ newValue in
+                            fieldName = selectedFields[selectedFieldIndex].wrappedName
                         }
                     
+                    FieldView(selectedFields: $selectedFields, selectedField: $selectedField, outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex, fieldName: $fieldName)
+                        .onChange(of: selectedTeam){ newValue in
+                            selectedFields = newValue!.wrappedFields
+                            fieldName = selectedFields[selectedFieldIndex].wrappedName
+                        }
                         .frame(width: 316, height: 104)
+                        .cornerRadius(4)
                         .opacity(1)
                         .ignoresSafeArea()
                 }
@@ -101,12 +106,24 @@ struct TrayView: View {
             teamNames = shared.readTeam()
         }
     }
+    
     //outputMessage에 값을 넣는 함수
     func addOutput(selectedFields: [Field]) -> [String] {
         var outputMessage: [String] = []
+        var tmp: String
+        
+        var today = Date()
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        let dateString = dateFormatter.string(from: today)
         
         for field in selectedFields {
-            let tmp = "\(field.wrappedName)"
+            if field.type == 4 {
+                tmp = dateString
+            } else {
+                tmp = "\(field.wrappedName)"
+            }
+            
             outputMessage.append(tmp)
         }
         return outputMessage

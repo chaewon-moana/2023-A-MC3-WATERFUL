@@ -15,6 +15,7 @@ struct InputFieldView: View {
     @State private var inputText: String = ""
     @Binding var outputMessage: [String]
     @Binding var selectedFieldIndex: Int
+    //@Binding var selectedFields: [Field]
     
     var body: some View {
         TextEditor(text: $inputText)
@@ -28,13 +29,12 @@ struct InputFieldView: View {
                 outputMessage[selectedFieldIndex] = newValue
             }
         
-        
         if inputText.isEmpty {
             Text("   ex) 알림 버튼 추가")
                 .foregroundColor(Colors.Text.secondary)
                 .frame(width: 300, height: 88, alignment: .topLeading)
                 
-        }
+        } 
         
         
     }

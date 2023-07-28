@@ -16,7 +16,7 @@ struct FieldView: View {
     @Binding var selectedField: Field?
     @Binding var outputMessage: [String]
     @Binding var selectedFieldIndex: Int
-    
+    @Binding var fieldName: String
     
     var body: some View {
         NavigationView{
@@ -37,7 +37,7 @@ struct FieldView: View {
                 }//ZStack
                 .frame(width: 316, height: 104)
             } //VStack
-        }
+        }//navigationView
         
     }
     
