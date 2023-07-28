@@ -51,7 +51,7 @@ struct WorkFieldView: View {
                         .padding(.trailing, 4)
                     }//else
                     
-                    if index == (selectedFields.count-1) {
+                    if index == (selectedFields.count-1) && gitCommitOn{
                         Text("\"")
                             .frame(width: 10)
                             .font(.custom("SourceCodePro-Light", size: 13))
