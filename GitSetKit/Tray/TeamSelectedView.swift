@@ -15,18 +15,19 @@ struct TeamSelectedView: View {
     
     @Binding var teamNames: [Team]
     @Binding var selectedTeam: Team?
+    @Binding var outputMessage: [String]
+
     
-    let shared = PersistenceController.shared
+    @State private var isWindowOpen = false
     
     var body: some View {
         HStack{
-            //로고 변경해야함
-            Image(systemName: "GitSetKitLogo")
+            Image("tray_icon")
                 .frame(width:24, height:24)
                 .onTapGesture {
-                    isWindow = true
+                    isWindowOpen.toggle()
                 }
-            
+
             Text("GitSetKit")
                 .foregroundColor(.black)
             
@@ -36,18 +37,26 @@ struct TeamSelectedView: View {
                 ForEach(teamNames, id: \.self) { team in
                     Button {
                         selectedTeam = team
+                        print("\(outputMessage) chch")
                     } label: {
                         Text(team.wrappedName)
+                            .foregroundColor(Color.black)
                     }
                 }
             } label: {
                 Text(selectedTeam?.wrappedName ?? "팀 선택")
             }
-            .frame(width:100)
-            .padding(EdgeInsets(top: 0, leading: 90, bottom: 0, trailing: 0))
+            
+            .frame(width:100, alignment: .trailing)
+           
+            
         }//Hstack
-        .frame(width: 330)
-        .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
+        .frame(width: 316, height: 24)
+        .padding(EdgeInsets(top: 9, leading: 9, bottom: 15, trailing: 9))
+        .sheet(isPresented: $isWindowOpen){
+            ContentView()
+                .frame(width: 850, height: 518)
+        }
     }
 }
 

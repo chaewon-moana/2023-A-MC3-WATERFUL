@@ -13,27 +13,32 @@ struct InputFieldView: View {
     
     @State private var value: String = "ex) 알림 버튼 추가"
     @State private var inputText: String = ""
-    @Binding var outputMessage: [Any]
+    @Binding var outputMessage: [String]
+    @Binding var selectedFieldIndex: Int
     
     var body: some View {
         TextEditor(text: $inputText)
             .background(Color("quaternary"))
             .foregroundColor(.black)
-            .frame(width:310, height: 101)
+            .frame(width:300, height: 88)
             .textFieldStyle(.plain)
             .multilineTextAlignment(.leading)
             .scrollContentBackground(.hidden)
+            .onChange(of: inputText){ newValue in
+                outputMessage[selectedFieldIndex] = newValue
+            }
         
         
         if inputText.isEmpty {
             Text("   ex) 알림 버튼 추가")
-                .foregroundColor(.gray)
-                .frame(width: 310, height: 100 ,alignment: .topLeading)
+                .foregroundColor(Colors.Text.secondary)
+                .frame(width: 300, height: 88, alignment: .topLeading)
                 
         }
         
         
     }
+        
     
 }
 

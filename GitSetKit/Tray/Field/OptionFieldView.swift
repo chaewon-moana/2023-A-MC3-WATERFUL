@@ -7,40 +7,41 @@
 
 import Foundation
 import SwiftUI
-import CoreData
+//import CoreData
 import WrappingHStack
 
 struct OptionFieldView: View {
+        
+    @State var selectedOptionValue: String!
+    @Binding var outputMessage: [String]
+    @Binding var selectedFieldIndex: Int
     
-    //OptionField -> Option 받아오기
-    let workBlock = ["feat", "fix", "refactor", "docs", "style", "test", "chore"]
-
-    @State var selectedOptionValue: String = ""
-    @Binding var outputMessage: [Any]
-    //@Binding var Fields: [Field]
+    @State var selectedOptions: [Option] = []
     
     var body: some View {
         ScrollView {
-            LazyVStack {
-                WrappingHStack(workBlock, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { block in
-                    Button(action: {
-                        selectedOptionValue = block
-                        print(selectedOptionValue)
-                    }, label: {
-                        Text(block)
-                    })
-                    .buttonStyle(.plain)
-                    .frame(width: 72, height: 40)
-                    .background(Color.yellow)
-                    .cornerRadius(8)
-                    
-                }
-                .foregroundColor(.black)
-            }
-            .frame(width: 304, height: 96)
-            //.padding(.top, 24) -> workBlock 8개 이상되면 추가 필요함
-            
+            WrappingHStack(selectedOptions, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { opt in
+                Button(action: {
+                    let selectedOptionValue = opt.value ?? "optionField 오류"
+                    outputMessage[selectedFieldIndex] = selectedOptionValue
+                }, label: {
+                    Text(opt.value ?? "optionField 오류")
+                })
+                .padding(selectedOptions.count > 8 ? 2 : 3 )
+                .buttonStyle(.plain)
+                .frame(width: 72, height: 40)
+                .background(Color.white)
+                .cornerRadius(8)
+                
+            }//WrappingHstack
+            .foregroundColor(.black)
+        }//ScrollView
+        .frame(width: 300, height: 88)
+        .onAppear {
+            selectedOptions = PersistenceController.shared.readOption()
         }
+        
+        
         
     }
 }
