@@ -82,7 +82,6 @@ struct BlockOptionView: View {
             BlockTypeSelectView(blockTypes: blockTypes, selected: $blockType)
                 .onAppear(perform: {
                     if let selectedField = selectedField {
-                        fieldChanged = true
                         blockType = selectedField.wrappedType
                     }
                 })

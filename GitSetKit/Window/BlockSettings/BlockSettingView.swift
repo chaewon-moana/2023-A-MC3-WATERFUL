@@ -16,6 +16,7 @@ struct BlockSettingView: View {
             switch selected.wrappedType {
             case .constant:
                 OptionBlockSettingView(field: $selected) //ConstantBlockSettingView 어디갔,,,
+                
             case .option:
                 OptionBlockSettingView(field: $selected)
                 
@@ -24,10 +25,6 @@ struct BlockSettingView: View {
                 
             case .date:
                 DateBlockSettingView(field: $selected)
-                
-            default:
-                Spacer()
-                
             }
         } else {
             Spacer()
