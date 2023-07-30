@@ -29,4 +29,11 @@ class Colors {
         static let quaternary = Color("QuaternaryGray")
     }
     
+    class Background {
+        static let primary = Color("ColorPrimaryBackground")
+        static let secondary = Color("ColorSecondaryBackground")
+        static let tertiary = Color("ColorTertiaryBackground")
+        static let primarySelected = Color("ColorPrimarySelectedBackground")
+    }
+    
 }

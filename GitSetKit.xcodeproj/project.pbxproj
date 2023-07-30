@@ -39,6 +39,7 @@
 		79EE65492A650A5D0099F722 /* TransparentGroupBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */; };
 		79EE654B2A6515530099F722 /* FlowStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE654A2A6515530099F722 /* FlowStack.swift */; };
 		79EE654D2A6572DF0099F722 /* ClearTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE654C2A6572DF0099F722 /* ClearTextFieldStyle.swift */; };
+		79F932FE2A73612300BE0711 /* BlockOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F932FD2A73612300BE0711 /* BlockOptionView.swift */; };
 		79F9A9F32A6203A100C6D920 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 79F9A9F22A6203A100C6D920 /* WrappingHStack */; };
 		B50AADC92A6E2D5300ED0E0B /* TeamSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50AADC82A6E2D5300ED0E0B /* TeamSelectedView.swift */; };
 		B51FC8622A729B0F0020B858 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51FC8612A729B0F0020B858 /* ButtonView.swift */; };
@@ -86,6 +87,7 @@
 		79EE65482A650A5D0099F722 /* TransparentGroupBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGroupBox.swift; sourceTree = "<group>"; };
 		79EE654A2A6515530099F722 /* FlowStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowStack.swift; sourceTree = "<group>"; };
 		79EE654C2A6572DF0099F722 /* ClearTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTextFieldStyle.swift; sourceTree = "<group>"; };
+		79F932FD2A73612300BE0711 /* BlockOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockOptionView.swift; sourceTree = "<group>"; };
 		B50AADC82A6E2D5300ED0E0B /* TeamSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectedView.swift; sourceTree = "<group>"; };
 		B51FC8612A729B0F0020B858 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		B51FC8632A729D6A0020B858 /* WorkFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkFieldView.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				79694F4A2A5AB904009F3C69 /* TeamView.swift */,
 				79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */,
 				791A324D2A63FABA004A61A1 /* TemplateView.swift */,
+				79F932FD2A73612300BE0711 /* BlockOptionView.swift */,
 			);
 			path = Window;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				7970C40E2A6A4FA300762041 /* OptionBlockSettingView.swift in Sources */,
 				628C517A2A67D3B6005292E3 /* Team+CoreDataProperties.swift in Sources */,
 				799243A72A697B0000E3DD7C /* View+OnLoadModifier.swift in Sources */,
+				79F932FE2A73612300BE0711 /* BlockOptionView.swift in Sources */,
 				799243A52A697A1800E3DD7C /* OnLoadModifier.swift in Sources */,
 				B51FC8642A729D6A0020B858 /* WorkFieldView.swift in Sources */,
 				79D78B8E2A5FEDE800B8AA79 /* TeamView.swift in Sources */,
@@ -505,7 +509,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = X32GZ3NKQ8;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -534,7 +538,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = X32GZ3NKQ8;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
