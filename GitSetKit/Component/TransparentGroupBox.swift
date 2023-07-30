@@ -14,7 +14,6 @@ struct TransparentGroupBox: GroupBoxStyle {
                 configuration.label
                 Spacer()
             }
-            .padding(.horizontal, 8)
             configuration.content
                 .background(
                     Color.clear
