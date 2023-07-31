@@ -43,6 +43,7 @@ fileprivate struct BlockTypeSelectView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(selected == type.type ? Colors.Background.primarySelected : Colors.Background.primary)
+                        .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
                 )
                 .onTapGesture {
                     self.selected = type.type

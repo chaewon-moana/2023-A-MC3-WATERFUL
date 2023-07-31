@@ -11,23 +11,56 @@ import SwiftUI
 struct BlockSettingView: View {
     @Binding var selected: Field?
     
+    @State private var title: String = ""
+    
     var body: some View {
-        if let selected = selected {
-            switch selected.wrappedType {
-            case .constant:
-                OptionBlockSettingView(field: $selected) //ConstantBlockSettingView 어디갔,,,
+        VStack {
+            if let selected = selected {
+                HStack {
+                    Text("block_setting_title")
+                        .font(.title2)
+                        .foregroundColor(Colors.Text.secondary)
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
                 
-            case .option:
-                OptionBlockSettingView(field: $selected)
+                TextField("", text: $title)
+                    .textFieldStyle(.plain)
+                    .padding(8)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Colors.Background.primary)
+                            .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
+                    )
+                    .onAppear {
+                        title = selected.name ?? ""
+                    }
+                    .onChange(of: selected) { newValue in
+                        title = selected.name ?? ""
+                    }
+                    .onSubmit {
+                        let field = PersistenceController.shared.updateField(field: selected, name: title)
+                        self.selected = nil
+                        self.selected = field
+                    }
+                    
                 
-            case .input:
-                InputBlockSettingView(field: $selected)
-                
-            case .date:
-                DateBlockSettingView(field: $selected)
+                switch selected.wrappedType {
+                case .constant:
+                    OptionBlockSettingView(field: $selected) //ConstantBlockSettingView 어디갔,,,
+                    
+                case .option:
+                    OptionBlockSettingView(field: $selected)
+                    
+                case .input:
+                    InputBlockSettingView(field: $selected)
+                    
+                case .date:
+                    DateBlockSettingView(field: $selected)
+                }
+            } else {
+                Spacer()
             }
-        } else {
-            Spacer()
         }
     }
 }

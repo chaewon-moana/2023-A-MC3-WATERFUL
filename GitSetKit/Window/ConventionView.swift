@@ -13,43 +13,42 @@ struct ConventionView: View {
     @State var selectedField: Field?
     
     var body: some View {
-        GeometryReader { proxy in
-            VStack(spacing: 20) {
-                // MARK: - Template View
-                // Field들이 나열되는 View
+        VStack(spacing: 20) {
+            // MARK: - Template View
+            // Field들이 나열되는 View
+            GroupBox {
+                TemplateView(team: $selectedTeam, selected: $selectedField)
+            } label: {
+                Text("convention_section_template")
+                    .font(.title2.bold())
+            }
+            .groupBoxStyle(TransparentGroupBox())
+            .frame(height: 160)
+            // : - Template View
+            
+            // MARK: - Block Option View
+            if selectedTeam != nil && selectedField != nil {
                 GroupBox {
-                    TemplateView(team: $selectedTeam, selected: $selectedField)
+                    VStack {
+                        BlockOptionView(selectedTeam: $selectedTeam, selectedField: $selectedField)
+                            .padding(.top, 16)
+                        BlockSettingView(selected: $selectedField)
+                            .padding(.top, 16)
+                    }
                 } label: {
-                    Text("convention_section_template")
+                    Text("convention_section_block")
                         .font(.title2.bold())
                 }
                 .groupBoxStyle(TransparentGroupBox())
-                .frame(height: proxy.size.height / 10 * 3)
-                // : - Template View
-                
-                // MARK: - Block Option View
-                if selectedTeam != nil && selectedField != nil {
-                    GroupBox {
-                        VStack {
-                            BlockOptionView(selectedTeam: $selectedTeam, selectedField: $selectedField)
-                                .padding(.top, 16)
-                            BlockSettingView(selected: $selectedField)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .fill(Color.black)
-                                )
-                        }
-                    } label: {
-                        Text("convention_section_block")
-                            .font(.title2.bold())
-                    }
-                    .groupBoxStyle(TransparentGroupBox())
-                    .frame(height: proxy.size.height / 10 * 6)
-                }
-                // : - Inspector View
             }
+            // : - Inspector View
+            
+            Spacer()
         }
         .padding()
+        .background(
+            Colors.Background.secondary
+        )
         .navigationTitle(Text(selectedTeam?.wrappedName ?? "app_name".localized))
     }
 }

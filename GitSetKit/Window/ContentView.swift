@@ -31,7 +31,7 @@ struct ContentView: View {
                 NavigationStack {
                     ConventionView(selectedTeam: $selected)
                 }
-                .frame(minWidth: 600)
+                .frame(minWidth: 600, minHeight: 560)
                 
             } else {
                 // 팀 선택이 없는 경우 (= 팀이 없는 경우)
@@ -52,7 +52,7 @@ struct ContentView: View {
                         PersistenceController.shared.saveContext()
                     }
                 }
-                .frame(minWidth: 600)
+                .frame(minWidth: 600, minHeight: 560)
             }
             //: - Detail
         }
