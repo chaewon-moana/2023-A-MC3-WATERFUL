@@ -189,10 +189,6 @@ struct TeamView: View {
             }
             .buttonStyle(.plain)
             .padding(8)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Colors.Gray.secondary)
-            )
             //-: Add Team
         }
         .listStyle(.sidebar)
