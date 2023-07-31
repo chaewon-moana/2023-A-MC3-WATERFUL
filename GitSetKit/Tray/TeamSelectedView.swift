@@ -23,13 +23,14 @@ struct TeamSelectedView: View {
     var body: some View {
         HStack{
             Image("tray_icon")
-                .frame(width:24, height:24)
+                .frame(width: 30, height: 30)
                 .onTapGesture {
                     isWindowOpen.toggle()
                 }
 
             Text("GitSetKit")
                 .foregroundColor(.black)
+                .font(.system(size: 16))
             
             Spacer()
             
@@ -50,7 +51,7 @@ struct TeamSelectedView: View {
            
             
         }//Hstack
-        .frame(width: 316, height: 24)
+        .frame(width: 316, height: 36)
         .padding(EdgeInsets(top: 9, leading: 9, bottom: 15, trailing: 9))
         .sheet(isPresented: $isWindowOpen){
             ContentView()

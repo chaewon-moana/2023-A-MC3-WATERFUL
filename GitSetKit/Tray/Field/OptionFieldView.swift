@@ -12,74 +12,52 @@ import WrappingHStack
 
 struct OptionFieldView: View {
     
-    @State var selectedOptionValue: String!
+    
     @Binding var outputMessage: [String]
     @Binding var selectedFieldIndex: Int
     @Binding var selectedField: Field?
     @Binding var selectedOptions: [Option]
     
-    //@State var selectedOptions: [Option] = []
-    
+    @State var selectedOptionValue: String!
     @State private var optionList: [Option] = []
     @State private var value: [String] = [""]
     @State private var shortDesc: [String] = [""]
     @State private var detailDesc: [String] = [""]
     
+    @State private var isHoverButtons: [Int: Bool] = [:]
+    @State private var selectedButtonIndex: Int = 0
+    
+    
     var body: some View {
         ScrollView {
-            WrappingHStack(selectedOptions, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) {opt in
-              
+            WrappingHStack(Array(selectedOptions.enumerated()), id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 0) { idx, opt in
+                
                 Button(action: {
                     let selectedOptionValue = opt.value ?? "optionField 오류"
                     outputMessage[selectedFieldIndex] = selectedOptionValue
                 }, label: {
                     Text(opt.value ?? "optionField 오류")
                 })
-                .buttonStyle(.plain)
-                //.frame(width: 72, height: 40)
-                .frame(width: 72, height: selectedOptions.count > 8 ? 34 : 40)
-                .background(Color.white)
-                .cornerRadius(8)
-                //.padding(.bottom, selectedOptions.count > 8 ? 0.4 : 100)
 
+                .onHover { isHover in
+                    isHoverButtons[idx] = isHover
+                }
+                .onAppear{
+                    isHoverButtons[0] = true
+                }
+                .buttonStyle(.plain)
+                .frame(width: 72, height: 40)
+                .background(isHoverButtons[idx] ?? false ? Color.blue: Color.white)
+                .cornerRadius(8)
+                .padding(.bottom, selectedOptions.count > 8 ? 2 : 4)
             }//WrappingHstack
-            
             .foregroundColor(.black)
+           
         }//ScrollView
         .frame(width: 300, height: 88)
-
-        
-//OptionsBlockSettingview - 참고자료
-//        .onChange(of: selectedFieldIndex) { newValue in
-//            if let options = selectedField?.wrappedOptions {
-//                optionList = options
-//                
-//                for idx in 0..<optionList.count {
-//                    value.append(optionList[idx].value ?? "")
-//                    print(optionList[idx].value)
-//                    shortDesc.append(optionList[idx].shortDesc ?? "")
-//                    detailDesc.append(optionList[idx].detailDesc ?? "")
-//                    //isHover.append(false)
-//                }
-//            }
-//        }
-        
-//
-        .onChange(of: selectedField){ newValue in
-            if newValue?.wrappedType.rawValue == 2 {
-                selectedOptions = newValue!.wrappedOptions
-            }
-            print(selectedOptions)
-        }
-        
-        
         
         
     }
-    
-    
-    
-    
     
     
     
