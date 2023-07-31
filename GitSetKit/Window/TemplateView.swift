@@ -62,11 +62,6 @@ struct TemplateView: View {
                     .padding()
                 
                 Spacer()
-                
-                // Field를 선택했을 때 해당 Field의 옵션을 변경하는 View
-                if selected != nil {
-                    blockOptionView
-                }
             }
             .background(
                 RoundedRectangle(cornerRadius: 8)
@@ -214,76 +209,6 @@ struct TemplateView: View {
         }
     }
     
-    // MARK: - Block Option View
-    @State private var blockType: Field.FieldType = .input
-    @State private var title: String = ""
-    @State private var fieldChanged: Bool = false
-    
-    var blockOptionView: some View {
-        HStack {
-            // MARK: Block Title
-            VStack(alignment: .leading) {
-                Text("option_block_title")
-                    .foregroundColor(Colors.Text.primary)
-                TextField("", text: $title)
-                    .textFieldStyle(.plain)
-                    .padding(2)
-                    .background(
-                        RoundedRectangle(cornerRadius: 4)
-                            .fill(.white)
-                            .shadow(radius: 1)
-                    )
-                    .onSubmit {
-                        if let selected = selected {
-                            PersistenceController.shared.updateField(field: selected, name: title)
-                        }
-                    }
-            }
-            .frame(maxWidth: 120)
-            // MARK: Block Type
-            VStack(alignment: .leading) {
-                Text("option_block_type")
-                    .foregroundColor(Colors.Text.primary)
-                    .padding(.leading, 6)
-                Picker("", selection: $blockType) {
-                    Text("􀌀 "+"option_block_type_text".localized)
-                        .tag(Field.FieldType.input)
-                    Text("􀇷 "+"option_block_type_option".localized)
-                        .tag(Field.FieldType.option)
-                    Text("􀉉 "+"option_block_type_date".localized)
-                        .tag(Field.FieldType.date)
-                    Text("􀅯 "+"option_block_type_constant".localized)
-                        .tag(Field.FieldType.constant)
-                }
-                .shadow(radius: 1)
-                .onChange(of: selected, perform: { newValue in
-                    self.fieldChanged = true
-                })
-                .onChange(of: blockType, perform: { newValue in
-                    if let selected = selected, !fieldChanged {
-                        PersistenceController.shared.updateField(field: selected, type: blockType.rawValue, typeBasedString: "")
-                        self.selected = nil
-                    }
-                    self.fieldChanged = false
-                })
-            }
-            .frame(maxWidth: 120)
-            
-            Spacer()
-        }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Colors.Gray.secondary)
-        )
-        .onChange(of: selected) { newValue in
-            if let selected = selected {
-                blockType = Field.FieldType(rawValue: selected.type) ?? .input
-                title = selected.name ?? "option_block_title_empty".localized
-            }
-        }
-    }
-    //: - Block Option View
 }
 //: - TemplateView
 

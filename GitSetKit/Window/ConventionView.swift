@@ -14,44 +14,42 @@ struct ConventionView: View {
     
     var body: some View {
         GeometryReader { proxy in
-            VStack(spacing: 0) {
+            VStack(spacing: 20) {
                 // MARK: - Template View
                 // Field들이 나열되는 View
                 GroupBox {
                     TemplateView(team: $selectedTeam, selected: $selectedField)
                 } label: {
                     Text("convention_section_template")
-                        .font(.title2)
+                        .font(.title2.bold())
                 }
                 .groupBoxStyle(TransparentGroupBox())
-                .padding()
-                .frame(height: proxy.size.height / 2)
+                .frame(height: proxy.size.height / 10 * 3)
                 // : - Template View
                 
-                // MARK: - Inspector View
-                // 선택된 Field(= Block)을 수정하는 View
-                // 선택된 Field가 없거나 블럭 타입이 Constant인 경우 빈 칸으로 표시
-                if let type = selectedField?.type, type != Field.FieldType.constant.rawValue {
+                // MARK: - Block Option View
+                if selectedTeam != nil && selectedField != nil {
                     GroupBox {
-                        BlockSettingView(selected: $selectedField)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color.black)
-                            )
-                        
+                        VStack {
+                            BlockOptionView(selectedTeam: $selectedTeam, selectedField: $selectedField)
+                                .padding(.top, 16)
+                            BlockSettingView(selected: $selectedField)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(Color.black)
+                                )
+                        }
                     } label: {
                         Text("convention_section_block")
-                            .font(.title2)
+                            .font(.title2.bold())
                     }
                     .groupBoxStyle(TransparentGroupBox())
-                    .padding()
-                    .frame(height: proxy.size.height / 2)
-                } else {
-                    Spacer()
+                    .frame(height: proxy.size.height / 10 * 6)
                 }
                 // : - Inspector View
             }
         }
+        .padding()
         .navigationTitle(Text(selectedTeam?.wrappedName ?? "app_name".localized))
     }
 }

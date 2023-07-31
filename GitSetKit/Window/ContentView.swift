@@ -21,6 +21,7 @@ struct ContentView: View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // MARK: Side Bar
             TeamView(selected: $selected)
+                .frame(minWidth: 240)
             
             //: Side Bar
         } detail: {
@@ -30,6 +31,7 @@ struct ContentView: View {
                 NavigationStack {
                     ConventionView(selectedTeam: $selected)
                 }
+                .frame(minWidth: 600)
                 
             } else {
                 // 팀 선택이 없는 경우 (= 팀이 없는 경우)
@@ -50,6 +52,7 @@ struct ContentView: View {
                         PersistenceController.shared.saveContext()
                     }
                 }
+                .frame(minWidth: 600)
             }
             //: - Detail
         }
