@@ -21,7 +21,7 @@ struct WorkFieldView: View {
     var body: some View {
         VStack{
             ScrollView {
-                WrappingHStack(Array(selectedFields.enumerated()), id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) { index, block in
+                WrappingHStack(Array(selectedFields.enumerated()), id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 12) { index, block in
                     
                     if gitCommitOn && index == 0 {
                         Text(commitMessage)
@@ -29,7 +29,6 @@ struct WorkFieldView: View {
                             .font(.custom("SourceCodePro-Light", size: 13))
                             .foregroundColor(.white)
                     }
-                    
                     
                     if block.type == 1 {
                         Text(block.wrappedName)
@@ -39,19 +38,23 @@ struct WorkFieldView: View {
                             selectedFieldIndex = index
                             
                         }, label: {
-                            Text("   \(outputMessage[index])   ")
-                                .padding(.horizontal, 8)
+                            Text(outputMessage[index])
+                                .lineLimit(nil)
+                                .padding(.leading, 8)
+                                .padding(.trailing, 8)
                                 .foregroundColor(Color.white)
                         })
+                        .lineLimit(nil)
+                        .padding(.leading, 4)
+                        .padding(.trailing, 4)
                         .buttonStyle(.plain)
                         .frame(height: 18)
                         .background(Colors.Fill.codeBlockB)
                         .cornerRadius(4)
-                        .padding(.leading, 4)
-                        .padding(.trailing, 4)
+                        
                     }//else
                     
-                    if index == (selectedFields.count-1) && gitCommitOn{
+                    if index == (selectedFields.count-1) && gitCommitOn {
                         Text("\"")
                             .frame(width: 10)
                             .font(.custom("SourceCodePro-Light", size: 13))

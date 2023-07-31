@@ -21,7 +21,7 @@ struct InputFieldView: View {
         TextEditor(text: $inputText)
             .background(Color("quaternary"))
             .foregroundColor(.black)
-            .frame(width:300, height: 88)
+            .frame(width: 300, height: 88)
             .textFieldStyle(.plain)
             .multilineTextAlignment(.leading)
             .scrollContentBackground(.hidden)
