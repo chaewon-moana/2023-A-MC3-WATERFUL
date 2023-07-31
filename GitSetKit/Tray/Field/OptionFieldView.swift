@@ -59,25 +59,6 @@ struct OptionFieldView: View {
         
     }
     
-    func handleKeyPress(_ event: NSEvent) {
-           switch event.keyCode {
-           case 123:
-               selectPreviousButton()
-           case 124:
-               selectNextButton()
-           default:
-               break
-           }
-       }
-
-       func selectPreviousButton() {
-           selectedButtonIndex = (selectedButtonIndex - 1 + selectedOptions.count) % selectedOptions.count
-            }
-
-      func selectNextButton() {
-           selectedButtonIndex = (selectedButtonIndex + 1) % selectedOptions.count
-       }
-    
     
     
 }

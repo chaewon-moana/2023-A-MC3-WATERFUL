@@ -33,20 +33,21 @@ struct WorkFieldView: View {
                     if block.type == 1 {
                         Text(block.wrappedName)
                             .foregroundColor(Color.white)
+                            .fixedSize()
+
                     } else {
                         Button(action: {
                             selectedFieldIndex = index
-                            
                         }, label: {
                             Text(outputMessage[index])
-                                .lineLimit(nil)
                                 .padding(.leading, 8)
                                 .padding(.trailing, 8)
                                 .foregroundColor(Color.white)
                         })
+                        .fixedSize()
+//                        .padding(.leading, 4)
+//                        .padding(.trailing, 4)
                         .lineLimit(nil)
-                        .padding(.leading, 4)
-                        .padding(.trailing, 4)
                         .buttonStyle(.plain)
                         .frame(height: 18)
                         .background(Colors.Fill.codeBlockB)
@@ -61,10 +62,11 @@ struct WorkFieldView: View {
                             .foregroundColor(.white)
                     }
                 }//WrappingHStack
-                .frame(alignment: .topLeading)
+                .frame(width: 280, alignment: .center)
                 .padding(12)
-            }//scrollView
-            .frame(width: 316, height: 100, alignment: .center)
+                .padding(.trailing, 30)
+                }//scrollView
+            .frame(width: 280, height: 100, alignment: .center)
             
             HStack{
                 Toggle(isOn: $gitCommitOn){
