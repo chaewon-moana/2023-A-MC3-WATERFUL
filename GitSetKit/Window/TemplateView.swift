@@ -157,7 +157,9 @@ struct TemplateView: View {
                         self.selected = updatedField
                     }
                     .onTapGesture {
-                        selected = d
+                        withAnimation {
+                            selected = d
+                        }
                     }
                     .contextMenu {
                         contextMenuBuilder(d)
