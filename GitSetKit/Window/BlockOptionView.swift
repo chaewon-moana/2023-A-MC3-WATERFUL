@@ -93,7 +93,10 @@ struct BlockOptionView: View {
                 }
                 .onChange(of: blockType) { newValue in
                     if let selectedField = selectedField, !fieldChanged {
-                        PersistenceController.shared.updateField(field: selectedField, type: blockType.rawValue, typeBasedString: "")
+                        let field = PersistenceController.shared.updateField(field: selectedField, type: blockType.rawValue, typeBasedString: "")
+                        self.selectedField = nil
+                        self.selectedField = field
+                        
                     }
                     fieldChanged = false
                 }

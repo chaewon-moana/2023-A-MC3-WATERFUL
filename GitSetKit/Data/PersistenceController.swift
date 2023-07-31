@@ -142,7 +142,7 @@ extension PersistenceController {
         return results
     }
     
-    func updateField(field: Field, name: String? = nil, type: Int16? = nil, typeBasedString: String? = nil, options: [Option]? = nil) {
+    func updateField(field: Field, name: String? = nil, type: Int16? = nil, typeBasedString: String? = nil, options: [Option]? = nil) -> Field {
         var hasChanges: Bool = false
         
         if name != nil {
@@ -165,6 +165,8 @@ extension PersistenceController {
         if hasChanges {
             saveContext()
         }
+        
+        return field
     }
     
     func deleteField(_ field: Field) {
