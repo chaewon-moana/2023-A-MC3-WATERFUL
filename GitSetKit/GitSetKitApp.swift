@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AppKit
 
 @main
 struct GitSetKitApp: App {
@@ -44,3 +45,10 @@ struct GitSetKitApp: App {
         case window
     }
 }
+
+
+
+
+
+
+
