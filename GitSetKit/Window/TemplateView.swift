@@ -13,24 +13,55 @@ fileprivate struct BlockCell: View {
     @StateObject var field: Field
     var selected: Bool = false
     
+    @State private var editMode: Bool = false
+    @State private var title: String = ""
+    
+    var onNameChanged: ((_ updatedField: Field) -> Void)? = nil
+    
     var body: some View {
-        Text(field.wrappedName)
-            .font(.custom("SourceCodePro-Light", size: 17)) // FIXME: 폰트 적용 안되는 문제
-            .foregroundColor(Color.white)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 4)
-            .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Colors.Fill.codeBlockB)
-                    
-                    if selected {
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color.accentColor, lineWidth: 2)
+        ZStack {
+            if editMode {
+                TextField("", text: $title)
+                    .textFieldStyle(.plain)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: 84)
+                    .onSubmit {
+                        let newField = PersistenceController.shared.updateField(field: field, name: title)
+                        if let onNameChanged = onNameChanged {
+                            onNameChanged(newField)
+                        }
+                        editMode = false
                     }
+                
+            } else {
+                Text(field.wrappedName)
+                    .font(.custom("SourceCodePro-Light", size: 17)) // FIXME: 폰트 적용 안되는 문제
+                    .foregroundColor(Color.white)
+                    .onTapGesture(count: 2) {
+                        editMode = true
+                    }
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 4)
+        .background(
+            ZStack {
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Colors.Fill.codeBlockB)
+                
+                if selected {
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color.accentColor, lineWidth: 2)
                 }
-            )
-            .padding(2)
+            }
+        )
+        .padding(2)
+        .onAppear(perform: {
+            self.title = field.name ?? ""
+        })
+        .onChange(of: field) { newValue in
+            self.title = field.name ?? ""
+        }
     }
 }
 
@@ -96,7 +127,6 @@ struct TemplateView: View {
                             let field = Field(context: managedObjectContext)
                             field.name = "block_new_field_name".localized
                             field.type = Field.FieldType.constant.rawValue
-//                            field.order = 0
                             field.typeBasedString = ""
                             
                             var fields = self.team!.wrappedFields
@@ -123,13 +153,15 @@ struct TemplateView: View {
                     }
                 } else if let d = d as? Field {
                     // data가 Field이면 Block으로 표시
-                    BlockCell(field: d, selected: selected?.id == d.id)
-                        .onTapGesture {
-                            selected = d
-                        }
-                        .contextMenu {
-                            contextMenuBuilder(d)
-                        }
+                    BlockCell(field: d, selected: selected?.id == d.id) { updatedField in
+                        self.selected = updatedField
+                    }
+                    .onTapGesture {
+                        selected = d
+                    }
+                    .contextMenu {
+                        contextMenuBuilder(d)
+                    }
                 }
             }
             

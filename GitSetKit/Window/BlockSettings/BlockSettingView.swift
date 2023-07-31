@@ -22,28 +22,7 @@ struct BlockSettingView: View {
                         .foregroundColor(Colors.Text.secondary)
                     Spacer()
                 }
-                .padding(.horizontal, 16)
-                
-                TextField("", text: $title)
-                    .textFieldStyle(.plain)
-                    .padding(8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Colors.Background.primary)
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
-                    )
-                    .onAppear {
-                        title = selected.name ?? ""
-                    }
-                    .onChange(of: selected) { newValue in
-                        title = selected.name ?? ""
-                    }
-                    .onSubmit {
-                        let field = PersistenceController.shared.updateField(field: selected, name: title)
-                        self.selected = nil
-                        self.selected = field
-                    }
-                    
+                .padding(.horizontal, 16)     
                 
                 switch selected.wrappedType {
                 case .constant:
