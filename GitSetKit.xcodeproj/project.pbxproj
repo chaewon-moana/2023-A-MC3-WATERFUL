@@ -43,7 +43,6 @@
 		79F932FE2A73612300BE0711 /* BlockOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F932FD2A73612300BE0711 /* BlockOptionView.swift */; };
 		79F9A9F32A6203A100C6D920 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 79F9A9F22A6203A100C6D920 /* WrappingHStack */; };
 		B50AADC92A6E2D5300ED0E0B /* TeamSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50AADC82A6E2D5300ED0E0B /* TeamSelectedView.swift */; };
-		B51FC8622A729B0F0020B858 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51FC8612A729B0F0020B858 /* ButtonView.swift */; };
 		B51FC8642A729D6A0020B858 /* WorkFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51FC8632A729D6A0020B858 /* WorkFieldView.swift */; };
 		B543D7392A6E44A50002C1CC /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543D7382A6E44A50002C1CC /* InputFieldView.swift */; };
 		B543D73B2A6E44CA0002C1CC /* OptionFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543D73A2A6E44CA0002C1CC /* OptionFieldView.swift */; };
@@ -91,7 +90,6 @@
 		79EE654C2A6572DF0099F722 /* ClearTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTextFieldStyle.swift; sourceTree = "<group>"; };
 		79F932FD2A73612300BE0711 /* BlockOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockOptionView.swift; sourceTree = "<group>"; };
 		B50AADC82A6E2D5300ED0E0B /* TeamSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectedView.swift; sourceTree = "<group>"; };
-		B51FC8612A729B0F0020B858 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		B51FC8632A729D6A0020B858 /* WorkFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkFieldView.swift; sourceTree = "<group>"; };
 		B543D7382A6E44A50002C1CC /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		B543D73A2A6E44CA0002C1CC /* OptionFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionFieldView.swift; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 				B5AF6A5C2A6815800043303B /* FieldView.swift */,
 				B543D73E2A6E452F0002C1CC /* Field */,
 				B50AADC82A6E2D5300ED0E0B /* TeamSelectedView.swift */,
-				B51FC8612A729B0F0020B858 /* ButtonView.swift */,
 				B51FC8632A729D6A0020B858 /* WorkFieldView.swift */,
 			);
 			path = Tray;
@@ -384,7 +381,6 @@
 				79D78B8E2A5FEDE800B8AA79 /* TeamView.swift in Sources */,
 				B5AF6A5E2A6815800043303B /* FieldView.swift in Sources */,
 				791A32542A63FEA8004A61A1 /* BlockSettingView.swift in Sources */,
-				B51FC8622A729B0F0020B858 /* ButtonView.swift in Sources */,
 				B543D73D2A6E45180002C1CC /* DateFieldView.swift in Sources */,
 				79D78B8F2A5FEDE800B8AA79 /* ConventionView.swift in Sources */,
 				7970C4142A6A503B00762041 /* DateBlockSettingView.swift in Sources */,
@@ -521,7 +517,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = X32GZ3NKQ8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -550,7 +546,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = X32GZ3NKQ8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

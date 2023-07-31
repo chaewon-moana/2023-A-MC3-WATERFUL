@@ -25,9 +25,12 @@ struct OptionFieldView: View {
     @State private var shortDesc: [String] = [""]
     @State private var detailDesc: [String] = [""]
     
+    @State private var isHoverButtons: [Int: Bool] = [:]
+
+    
     var body: some View {
         ScrollView {
-            WrappingHStack(selectedOptions, id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 8) {opt in
+            WrappingHStack(Array(selectedOptions.enumerated()), id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 0) { idx, opt in
               
                 Button(action: {
                     let selectedOptionValue = opt.value ?? "optionField 오류"
@@ -35,53 +38,47 @@ struct OptionFieldView: View {
                 }, label: {
                     Text(opt.value ?? "optionField 오류")
                 })
+                .focusable()
+//                .onFocusChange { isFocused in
+//                    isHoverButtons[idx] = isFocused
+//                    print("변경")
+//                    
+//                }
+                .onHover { isHover in
+                    isHoverButtons[idx] = isHover
+                }
+                .onAppear{
+                        isHoverButtons[0] = true
+                }
+                
                 .buttonStyle(.plain)
-                //.frame(width: 72, height: 40)
-                .frame(width: 72, height: selectedOptions.count > 8 ? 34 : 40)
-                .background(Color.white)
+                .frame(width: 72, height: 40)
+//                .background(isHoverButtons[idx] ?? false ? Colors.Gray.quaternary : Color.white)
+                .background(isHoverButtons[idx] ?? false ? Color.blue: Color.white)
                 .cornerRadius(8)
-                //.padding(.bottom, selectedOptions.count > 8 ? 0.4 : 100)
-
+                .padding(.bottom, selectedOptions.count > 8 ? 2 : 4)
             }//WrappingHstack
-            
             .foregroundColor(.black)
         }//ScrollView
         .frame(width: 300, height: 88)
-
-        
-//OptionsBlockSettingview - 참고자료
-//        .onChange(of: selectedFieldIndex) { newValue in
-//            if let options = selectedField?.wrappedOptions {
-//                optionList = options
-//                
-//                for idx in 0..<optionList.count {
-//                    value.append(optionList[idx].value ?? "")
-//                    print(optionList[idx].value)
-//                    shortDesc.append(optionList[idx].shortDesc ?? "")
-//                    detailDesc.append(optionList[idx].detailDesc ?? "")
-//                    //isHover.append(false)
+//        .onReceive(NotificationCenter.default.publisher(for: NSView.keyDownEvent)) { event in
+//                    // 방향키로 Hover 상태 변경하기
+//                    if let keyEvent = event as? NSEvent,
+//                       keyEvent.keyCode == 125 { // Down Arrow Key
+//                        changeHoverButton(index: selectedFieldIndex + 1)
+//                    } else if let keyEvent = event as? NSEvent,
+//                              keyEvent.keyCode == 126 { // Up Arrow Key
+//                        changeHoverButton(index: selectedFieldIndex - 1)
+//                    }
 //                }
-//            }
-//        }
-        
-//
+
         .onChange(of: selectedField){ newValue in
             if newValue?.wrappedType.rawValue == 2 {
                 selectedOptions = newValue!.wrappedOptions
             }
-            print(selectedOptions)
         }
-        
-        
-        
-        
+ 
     }
-    
-    
-    
-    
-    
-    
-    
+
 }
 

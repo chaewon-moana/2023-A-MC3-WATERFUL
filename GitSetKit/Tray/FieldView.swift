@@ -16,9 +16,8 @@ struct FieldView: View {
     @Binding var selectedField: Field?
     @Binding var outputMessage: [String]
     @Binding var selectedFieldIndex: Int
-    @Binding var fieldName: String
-    
-    @State var selectedOptions: [Option] = []
+    @Binding var selectedOptions: [Option]
+    @Binding var selectedDate: String
     
     var body: some View {
         NavigationView{
@@ -31,19 +30,13 @@ struct FieldView: View {
                     
                     selectedFieldView(selectedFields: selectedFields, selectedFieldIndex: selectedFieldIndex)
                         .frame(width: 300, height: 88)
-                    //                        .onChange(of: selectedFieldIndex) { newValue in
-                    //                            if selectedFields[selectedFieldIndex].wrappedType.rawValue == 1 {
-                    //                                selectedFieldIndex += 1
-                    //                            }
-                    //                        }
                         .onChange(of:selectedFieldIndex){ newValue in
                             if selectedFields[selectedFieldIndex].wrappedType.rawValue == 1 {
                                 selectedFieldIndex += 1
-                                // print(selectedField)
-                            } else if selectedFields[selectedFieldIndex].wrappedType.rawValue == 2 {
-                                selectedOptions = selectedFields[selectedFieldIndex].wrappedOptions
-                                print(selectedOptions)
-                                print("dd")
+//                     } else if selectedFields[selectedFieldIndex].wrappedType.rawValue == 2 {
+//                           selectedOptions = selectedFields[selectedFieldIndex].wrappedOptions
+//                           print(selectedOptions)
+//                           }
                             }
                             
                         }
@@ -59,15 +52,15 @@ struct FieldView: View {
             let currentField = selectedFields[selectedFieldIndex].wrappedType.rawValue
             
             switch currentField {
-                //            case 1: //constant
-                //                return AnyView(Text(""))
+                //case 1: //constant
+                //return AnyView(Text(""))
             case 2:
                 return AnyView(OptionFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex, selectedField: $selectedField, selectedOptions: $selectedOptions))
                 
             case 3:
                 return AnyView(InputFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex))
             case 4:
-                return AnyView(DateFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex))
+                return AnyView(DateFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex, selectedDate: $selectedDate))
             default:
                 return AnyView(InputFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex))
             }
