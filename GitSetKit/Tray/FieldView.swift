@@ -30,16 +30,20 @@ struct FieldView: View {
                     
                     selectedFieldView(selectedFields: selectedFields, selectedFieldIndex: selectedFieldIndex)
                         .frame(width: 300, height: 88)
-                        .onChange(of:selectedFieldIndex){ newValue in
-                            if selectedFields[selectedFieldIndex].wrappedType.rawValue == 1 {
-                                selectedFieldIndex += 1
-//                     } else if selectedFields[selectedFieldIndex].wrappedType.rawValue == 2 {
-//                           selectedOptions = selectedFields[selectedFieldIndex].wrappedOptions
-//                           print(selectedOptions)
-//                           }
+                        .onChange(of: self.selectedFieldIndex){ [selectedFieldIndex] (newValue) in
+                            if selectedFields[newValue].wrappedType.rawValue == 1 {
+                                if newValue >= selectedFieldIndex {
+                                    self.selectedFieldIndex += 1
+                                } else {
+                                    self.selectedFieldIndex -= 1
+                                }
                             }
-                            
-                        }
+                            else if selectedFields[newValue].wrappedType.rawValue == 2 {
+                                selectedOptions = selectedFields[newValue].wrappedOptions
+                                print(selectedOptions)
+                            }
+                        }//onChange
+                    
                 }//ZStack
                 .frame(width: 316, height: 104)
             } //VStack
