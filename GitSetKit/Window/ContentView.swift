@@ -28,10 +28,8 @@ struct ContentView: View {
             // MARK: Detail
             // 팀 선택된 경우
             if let selected = selected {
-                NavigationStack {
-                    ConventionView(selectedTeam: $selected)
-                }
-                .frame(minWidth: 600, minHeight: 560)
+                ConventionView(selectedTeam: $selected)
+                    .frame(minWidth: 600, minHeight: 560)
                 
             } else {
                 // 팀 선택이 없는 경우 (= 팀이 없는 경우)
