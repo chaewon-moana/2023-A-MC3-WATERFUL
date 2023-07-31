@@ -16,13 +16,21 @@ fileprivate struct BlockCell: View {
     var body: some View {
         Text(field.wrappedName)
             .font(.custom("SourceCodePro-Light", size: 17)) // FIXME: 폰트 적용 안되는 문제
-            .foregroundColor(selected ? Color.black : Color.white)
+            .foregroundColor(Color.white)
             .padding(.horizontal, 16)
             .padding(.vertical, 4)
             .background(
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(selected ? Colors.Gray.quaternary : Colors.Gray.secondary)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Colors.Fill.codeBlockB)
+                    
+                    if selected {
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.accentColor, lineWidth: 2)
+                    }
+                }
             )
+            .padding(2)
     }
 }
 
