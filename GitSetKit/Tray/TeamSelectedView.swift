@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 struct TeamSelectedView: View {
-    @State var selectedTeamIndex: String = ""
+
     @State private var isWindow = false
     
     @Binding var teamNames: [Team]
