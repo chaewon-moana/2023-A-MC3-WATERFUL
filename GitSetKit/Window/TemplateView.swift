@@ -139,14 +139,14 @@ struct TemplateView: View {
                             reloadData()
                             
                         } label: {
-                            Text("+")
+                            Image(systemName: "plus")
                                 .foregroundColor(.white)
                         }
                         .buttonStyle(.plain)
                         .frame(width: 24, height: 24)
                         .background(
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.gray)
+                            Circle()
+                                .fill(Color.accentColor)
                         )
                     } else {
                         TextCell(text: d)

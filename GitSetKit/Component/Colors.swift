@@ -34,6 +34,7 @@ class Colors {
         static let secondary = Color("ColorSecondaryBackground")
         static let tertiary = Color("ColorTertiaryBackground")
         static let primarySelected = Color("ColorPrimarySelectedBackground")
+        static let selected = Color("ColorSelectedBackground")
     }
     
 }

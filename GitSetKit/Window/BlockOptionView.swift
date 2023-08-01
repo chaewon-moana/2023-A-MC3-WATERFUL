@@ -7,49 +7,57 @@
 
 import SwiftUI
 
-fileprivate struct BlockType: Identifiable {
-    var title: LocalizedStringKey
-    var desc: LocalizedStringKey
-    var type: Field.FieldType
-    
-    var id: Field.FieldType {
-        self.type
-    }
-}
-
 fileprivate struct BlockTypeSelectView: View {
-    var blockTypes: [BlockType]
     @Binding var selected: Field.FieldType
     
     var body: some View {
         HStack(spacing: 8) {
-            ForEach(blockTypes) { type in
-                VStack {
-                    HStack {
-                        Spacer()
-                        Text(type.title)
-                            .font(.title2.bold())
-                        Spacer()
-                    }
-                    HStack {
-                        Spacer()
-                        Text(type.desc)
-                            .foregroundColor(Colors.Text.secondary)
-                        Spacer()
-                    }
+            makeCell(title: "option_block_type_option", icon: Image(systemName: "square.grid.2x2"), type: .option)
+            makeCell(title: "option_block_type_text", icon: Image(systemName: "text.alignleft"), type: .input)
+            makeCell(title: "option_block_type_date", icon: Image(systemName: "calendar"), type: .date)
+            Divider()
+                .frame(height: 48)
+            makeCell(title: "option_block_type_constant", type: .constant)
+        }
+    }
+    
+    @ViewBuilder private func makeCell(title: LocalizedStringKey, icon: Image? = nil, type: Field.FieldType) -> some View {
+            HStack {
+                Spacer()
+                if let icon = icon {
+                    icon
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 16, height: 16)
                 }
-                .padding(.vertical, 16)
-                .padding(.horizontal, 4)
-                .background(
+                Text(title)
+                    .font(.system(size: 16))
+                Spacer()
+            }
+            .padding(.vertical, 16)
+            .padding(.horizontal, 4)
+            .foregroundColor(selected == type ? .accentColor : Colors.Text.primary)
+            .background {
+                if selected == type {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(
+                                Colors.Background.selected
+                                    .shadow(.inner(color: .accentColor.opacity(0.5), radius: 4, x: 0, y: 2))
+                            )
+                            .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.accentColor, lineWidth: 2)
+                    }
+                } else {
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(selected == type.type ? Colors.Background.primarySelected : Colors.Background.primary)
+                        .fill(Colors.Background.primary)
                         .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
-                )
-                .onTapGesture {
-                    self.selected = type.type
                 }
             }
-        }
+            .onTapGesture {
+                self.selected = type
+            }
     }
 }
 
@@ -61,14 +69,6 @@ struct BlockOptionView: View {
     @State private var fieldChanged: Bool = false
     
     @State private var blockType: Field.FieldType = .input
-    private var blockTypes: [BlockType] {
-        [
-            BlockType(title: "option_block_type_option", desc: "option_block_type_option_desc", type: .option),
-            BlockType(title: "option_block_type_constant", desc: "option_block_type_constant_desc", type: .constant),
-            BlockType(title: "option_block_type_text", desc: "option_block_type_text_desc", type: .input),
-            BlockType(title: "option_block_type_date", desc: "option_block_type_date_desc", type: .date)
-        ]
-    }
     
     var body: some View {
         VStack {
@@ -80,7 +80,7 @@ struct BlockOptionView: View {
             }
             .padding(.horizontal, 16)
             
-            BlockTypeSelectView(blockTypes: blockTypes, selected: $blockType)
+            BlockTypeSelectView(selected: $blockType)
                 .onAppear(perform: {
                     if let selectedField = selectedField {
                         blockType = selectedField.wrappedType
