@@ -69,8 +69,10 @@ struct TrayView: View {
                         .foregroundColor(.black)
                         .font(.system(size:16))
                         .onChange(of: selectedFieldIndex){ newValue in
-                   
+                            
+                            if newValue >= 0 && newValue < selectedFieldsCount {
                                 fieldName = selectedFields[newValue].wrappedName
+                            }
                             
                         }
                     
@@ -80,7 +82,7 @@ struct TrayView: View {
                             selectedFieldIndex = 0
                             selectedFields = newValue!.wrappedFields
                         }
-
+                    
                     
                         .frame(width: 316, height: 104)
                         .cornerRadius(4)
@@ -159,7 +161,7 @@ struct TrayView: View {
                             return event
                         }
                     }
-
+                    
                 }//HStack - Previous, Next Button View
                 .frame(width: 316, height: 16)
             }
