@@ -58,7 +58,7 @@ struct ConventionView: View {
         }
         .padding()
         .background(
-            Colors.Background.secondary
+            Colors.Background.primary
         )
         .navigationTitle(Text(selectedTeam?.wrappedName ?? "app_name".localized))
     }

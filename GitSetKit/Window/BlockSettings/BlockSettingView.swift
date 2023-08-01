@@ -18,10 +18,11 @@ struct BlockSettingView: View {
             if let selected = selected {
                 switch selected.wrappedType {
                 case .constant:
-                    OptionBlockSettingView(field: $selected) //ConstantBlockSettingView 어디갔,,,
+                    Spacer()
                     
                 case .option:
-                    OptionBlockSettingView(field: $selected)
+//                    OptionBlockSettingView(field: $selected)
+                    NewOptionBlockSettingView(field: $selected)
                     
                 case .input:
                     InputBlockSettingView(field: $selected)
