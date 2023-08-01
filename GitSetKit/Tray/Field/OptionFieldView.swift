@@ -11,8 +11,7 @@ import SwiftUI
 import WrappingHStack
 
 struct OptionFieldView: View {
-    
-    
+
     @Binding var outputMessage: [String]
     @Binding var selectedFieldIndex: Int
     @Binding var selectedField: Field?
@@ -38,12 +37,9 @@ struct OptionFieldView: View {
                 }, label: {
                     Text(opt.value ?? "optionField 오류")
                 })
-
+                
                 .onHover { isHover in
                     isHoverButtons[idx] = isHover
-                }
-                .onAppear{
-                    isHoverButtons[0] = true
                 }
                 .buttonStyle(.plain)
                 .frame(width: 72, height: 40)
@@ -52,14 +48,10 @@ struct OptionFieldView: View {
                 .padding(.bottom, selectedOptions.count > 8 ? 2 : 4)
             }//WrappingHstack
             .foregroundColor(.black)
-           
+            
         }//ScrollView
         .frame(width: 300, height: 88)
-        
-        
     }
-    
-    
     
 }
 

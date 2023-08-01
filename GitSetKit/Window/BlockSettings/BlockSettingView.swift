@@ -16,20 +16,13 @@ struct BlockSettingView: View {
     var body: some View {
         VStack {
             if let selected = selected {
-                HStack {
-                    Text("block_setting_title")
-                        .font(.title2)
-                        .foregroundColor(Colors.Text.secondary)
-                    Spacer()
-                }
-                .padding(.horizontal, 16)     
-                
                 switch selected.wrappedType {
                 case .constant:
-                    OptionBlockSettingView(field: $selected) //ConstantBlockSettingView 어디갔,,,
+                    Spacer()
                     
                 case .option:
-                    OptionBlockSettingView(field: $selected)
+//                    OptionBlockSettingView(field: $selected)
+                    NewOptionBlockSettingView(field: $selected)
                     
                 case .input:
                     InputBlockSettingView(field: $selected)
