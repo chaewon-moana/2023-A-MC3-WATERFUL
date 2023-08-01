@@ -140,6 +140,7 @@ struct TeamView: View {
     ) var teams: FetchedResults<Team>
     
     @Binding var selected: Team?
+    @StateObject var fileHelper: FileHelper = FileHelper()
     
     // 팀 데이터 수정 시 List를 다시 로드하기 위한 UUID
     @State private var renderId: UUID = UUID()
@@ -196,7 +197,7 @@ struct TeamView: View {
         .onChange(of: selected) { newValue in
             if let selected = selected {
                 PersistenceController.shared.updateTeam(team: selected, touch: Date())
-                
+                FileHelper.selectTeam = selected
             }
         }
         .onLoad {
