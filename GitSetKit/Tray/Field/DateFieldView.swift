@@ -22,7 +22,7 @@ struct DateFieldView: View {
             selection: $date,
             displayedComponents: [.date]
         )
-        .frame(width: 300, height: 88, alignment: .leading)
+        .frame(width: 300, height: 88, alignment: .topLeading)
         .foregroundColor(.black)
         .datePickerStyle(.field)
         .onChange(of: date) { newValue in

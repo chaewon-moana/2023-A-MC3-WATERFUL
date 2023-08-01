@@ -11,13 +11,15 @@ import WrappingHStack
 import CoreData
 
 struct FieldView: View {
-    //@Binding var selectTeam: Team?
+    @Binding var selectedTeam: Team?
     @Binding var selectedFields: [Field]
     @Binding var selectedField: Field?
     @Binding var outputMessage: [String]
     @Binding var selectedFieldIndex: Int
     @Binding var selectedOptions: [Option]
     @Binding var selectedDate: String
+    
+    @State private var inputText = ""
     
     var body: some View {
         NavigationView{
@@ -28,52 +30,83 @@ struct FieldView: View {
                         .background(Color(red: 246/255, green: 246/255, blue: 246/255))
                         .opacity(0.48)
                     
-                    selectedFieldView(selectedFields: selectedFields, selectedFieldIndex: selectedFieldIndex)
-                        .frame(width: 300, height: 88)
-                        .onChange(of: self.selectedFieldIndex){ [selectedFieldIndex] (newValue) in
-                            if selectedFields[newValue].wrappedType.rawValue == 1 {
-                                if newValue >= selectedFieldIndex {
-                                    self.selectedFieldIndex += 1
-                                } else {
-                                    self.selectedFieldIndex -= 1
-                                }
-                            }
-                            else if selectedFields[newValue].wrappedType.rawValue == 2 {
-                                selectedOptions = selectedFields[newValue].wrappedOptions
-                                print(selectedOptions)
-                            }
-                        }//onChange
+                    if selectedFieldIndex >= 0 && selectedFieldIndex < selectedFields.count {
+                        let currentField = selectedFields[selectedFieldIndex].wrappedType.rawValue
+                        
+                        switch currentField {
+                        case 2:
+                            OptionFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex, selectedField: $selectedField, selectedOptions: $selectedOptions)
+                        case 3:
+                            InputFieldView(inputText: $inputText, outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex)
+                        case 4:
+                            DateFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex, selectedDate: $selectedDate)
+                        default:
+                            InputFieldView(inputText: $inputText, outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex)
+                        }
+                    } else {
+                        Text("Field 찾을 수 없음")
+                    }
                     
-                }//ZStack
-                .frame(width: 316, height: 104)
-            } //VStack
-        }//navigationView
-        
-    }
-    
-    func selectedFieldView(selectedFields: [Field], selectedFieldIndex: Int) -> some View {
-        if selectedFieldIndex >= 0 && selectedFieldIndex < selectedFields.count {
-            let currentField = selectedFields[selectedFieldIndex].wrappedType.rawValue
-            
-            switch currentField {
-                //case 1: //constant
-                //return AnyView(Text(""))
-            case 2:
-                return AnyView(OptionFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex, selectedField: $selectedField, selectedOptions: $selectedOptions))
-                
-            case 3:
-                return AnyView(InputFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex))
-            case 4:
-                return AnyView(DateFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex, selectedDate: $selectedDate))
-            default:
-                return AnyView(InputFieldView(outputMessage: $outputMessage, selectedFieldIndex: $selectedFieldIndex))
+                }
+                .onChange(of: selectedTeam){ newValue in
+                    selectedFieldIndex = 0
+                    if selectedFields[selectedFieldIndex].wrappedType.rawValue == 2 {
+                        selectedOptions = selectedFields[selectedFieldIndex].wrappedOptions
+                    } else if selectedFields[selectedFieldIndex].wrappedType.rawValue == 3 {
+                        inputText = selectedField?.wrappedName ?? ""
+                    }
+                    selectedFields = newValue!.wrappedFields
+                    outputMessage = addOutput(selectedFields: selectedFields)
             }
+            .onChange(of: selectedFieldIndex){ [selectedFieldIndex] newValue in
+                if newValue >= 0 && newValue < selectedFields.count{
+                    if selectedFields[newValue].wrappedType.rawValue == 1 {
+                        if newValue > selectedFieldIndex {
+                            self.selectedFieldIndex += 1
+                        } else if newValue < selectedFieldIndex {
+                            self.selectedFieldIndex -= 1
+                        }
+                    }
+                    
+                    else if selectedFields[newValue].wrappedType.rawValue == 2 {
+                        selectedOptions = selectedFields[newValue].wrappedOptions
+                    }
+                    else if selectedFields[newValue].wrappedType.rawValue == 3 {
+                        inputText = selectedField?.wrappedName ?? ""
+
+                    }
+                }
+            }
+            
+            
+            
+            
+        }//ZStack
+        .frame(width: 316, height: 104)
+    } //VStack
+}//navigationView
+
+func addOutput(selectedFields: [Field]) -> [String] {
+    var outputMessage: [String] = []
+    var tmp: String
+    
+    for field in selectedFields {
+        if field.type == 4 {
+            let today = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "\(field.wrappedTypeBasedString)"
+            selectedDate = "\(field.wrappedTypeBasedString)"
+            let dateString = dateFormatter.string(from: today)
+            
+            tmp = dateString
         } else {
-            return AnyView(Text("Field 찾을 수 없음"))
+            tmp = "\(field.wrappedName)"
         }
-    }//func - selectedFieldView
-    
-    
+        outputMessage.append(tmp)
+    }
+    return outputMessage
+}
+
 }
 
 
