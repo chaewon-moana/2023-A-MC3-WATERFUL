@@ -23,8 +23,8 @@ struct TeamCell: View {
     @State private var editing: Bool = false
     // 팀 이름 수정 임시 변수
     @State private var newName: String = ""
-    // 팀 이모티콘 수정 임시 변수
-    @State private var newEmoticon: String = ""
+    // 팀 이모티콘 수정 Popover 호출 변수
+    @State private var showEmoticonPicker: Bool = false
     
     // TextField 포커스 변수
     @FocusState private var field: Field?
@@ -35,24 +35,11 @@ struct TeamCell: View {
         // 팀 이름 수정 모드
         if editing {
             HStack {
-                // 이모티콘 수정 필드
-                TextField("", text: $newEmoticon)
-                    .focused($field, equals: .edit)
-                    .onSubmit {
-                        PersistenceController.shared.updateTeam(team: team, emoticon: newEmoticon.isEmpty ? (team.emoticon ?? "😀") : newEmoticon)
-                        PersistenceController.shared.updateTeam(team: team, name: newName.isEmpty ? (team.name ?? "Unknown") : newName)
-                        
-                        editing = false
-                        
-                        renderId = UUID()
-                    }
-                    .frame(maxWidth: 24)
-                
                 // 이름 수정 필드
                 TextField("", text: $newName)
                     .focused($field, equals: .edit)
                     .onSubmit {
-                        PersistenceController.shared.updateTeam(team: team, emoticon: newEmoticon.isEmpty ? (team.emoticon ?? "😀") : newEmoticon)
+//                        PersistenceController.shared.updateTeam(team: team, emoticon: newEmoticon.isEmpty ? (team.emoticon ?? "😀") : newEmoticon)
                         PersistenceController.shared.updateTeam(team: team, name: newName.isEmpty ? (team.name ?? "Unknown") : newName)
                         
                         editing = false
@@ -63,7 +50,17 @@ struct TeamCell: View {
         } else {
             HStack {
                 HStack {
-                    Text(team.emoticon ?? " ")
+                    Button {
+                        showEmoticonPicker = true
+                        
+                    } label: {
+                        Text(team.emoticon ?? " ")
+                    }
+                    .popover(isPresented: $showEmoticonPicker, attachmentAnchor: .rect(.bounds), arrowEdge: .top) {
+                        EmoticonPickerView(team: $team, renderId: $renderId)
+                    }
+                    .buttonStyle(.plain)
+                        
                     Text(team.name ?? "Unknown")
                         .font(.body)
                 }
@@ -101,7 +98,6 @@ struct TeamCell: View {
                 Button(role: .none) {
                     editing = true
                     newName = team.name ?? ""
-                    newEmoticon = team.emoticon ?? "😂"
                     field = .edit
                 } label: {
                     Label("edit", systemImage: "pencil")
@@ -193,10 +189,6 @@ struct TeamView: View {
             }
             .buttonStyle(.plain)
             .padding(8)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Colors.Gray.secondary)
-            )
             //-: Add Team
         }
         .listStyle(.sidebar)
