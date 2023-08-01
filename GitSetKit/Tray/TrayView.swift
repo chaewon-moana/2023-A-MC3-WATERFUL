@@ -69,7 +69,9 @@ struct TrayView: View {
                         .foregroundColor(.black)
                         .font(.system(size:16))
                         .onChange(of: selectedFieldIndex){ newValue in
-                            fieldName = selectedFields[newValue].wrappedName
+                   
+                                fieldName = selectedFields[newValue].wrappedName
+                            
                         }
                     
                     
@@ -127,6 +129,7 @@ struct TrayView: View {
                     
                     
                     Button(action: {
+                        print(selectedFieldIndex)
                         print(outputMessage)
                         selectedFieldIndex += 1
                     }, label: {
@@ -145,7 +148,7 @@ struct TrayView: View {
                             if event.modifierFlags.contains(.shift) {
                                 NSEvent.addLocalMonitorForEvents(matching: .keyDown) { innerEvent in
                                     if innerEvent.keyCode == 124 {
-                                        if selectedFieldIndex <= selectedFieldsCount {
+                                        if selectedFieldIndex < selectedFieldsCount {
                                             selectedFieldIndex += 1
                                         }
                                         return nil
@@ -156,9 +159,7 @@ struct TrayView: View {
                             return event
                         }
                     }
-                    
-                    
-                    
+
                 }//HStack - Previous, Next Button View
                 .frame(width: 316, height: 16)
             }

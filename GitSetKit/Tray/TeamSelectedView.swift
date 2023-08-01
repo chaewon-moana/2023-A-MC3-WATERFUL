@@ -16,7 +16,8 @@ struct TeamSelectedView: View {
     @Binding var teamNames: [Team]
     @Binding var selectedTeam: Team?
     @Binding var outputMessage: [String]
-
+    
+    
     
     @State private var isWindowOpen = false
     
@@ -27,7 +28,7 @@ struct TeamSelectedView: View {
                 .onTapGesture {
                     isWindowOpen.toggle()
                 }
-
+            
             Text("GitSetKit")
                 .foregroundColor(.black)
                 .font(.system(size: 16))
@@ -39,16 +40,17 @@ struct TeamSelectedView: View {
                     Button {
                         selectedTeam = team
                     } label: {
-                        Text(team.wrappedName)
+                        Text(team.wrappedEmoticon + team.wrappedName)
                             .foregroundColor(Color.black)
+                        
                     }
                 }
             } label: {
-                Text(selectedTeam?.wrappedName ?? "팀 선택")
+                Text("\(selectedTeam?.wrappedEmoticon ?? "") \(selectedTeam?.wrappedName ?? "팀 선택")")
             }
             
-            .frame(width:100, alignment: .trailing)
-           
+            .frame(width: 120, alignment: .trailing)
+            
             
         }//Hstack
         .frame(width: 316, height: 36)

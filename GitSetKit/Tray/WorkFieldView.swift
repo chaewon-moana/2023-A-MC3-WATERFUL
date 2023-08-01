@@ -21,7 +21,7 @@ struct WorkFieldView: View {
     var body: some View {
         VStack{
             ScrollView {
-                WrappingHStack(Array(selectedFields.enumerated()), id: \.self, alignment: .leading, spacing: .constant(4), lineSpacing: 12) { index, block in
+                WrappingHStack(Array(selectedFields.enumerated()), id: \.self, alignment: .leading, spacing: .constant(8), lineSpacing: 12) { index, block in
                     
                     if gitCommitOn && index == 0 {
                         Text(commitMessage)
@@ -40,13 +40,13 @@ struct WorkFieldView: View {
                             selectedFieldIndex = index
                         }, label: {
                             Text(outputMessage[index])
+                                .frame(maxWidth: 272)
                                 .padding(.leading, 8)
                                 .padding(.trailing, 8)
                                 .foregroundColor(Color.white)
+                                .truncationMode(.middle)
                         })
                         .fixedSize()
-//                        .padding(.leading, 4)
-//                        .padding(.trailing, 4)
                         .lineLimit(nil)
                         .buttonStyle(.plain)
                         .frame(height: 18)
@@ -67,6 +67,12 @@ struct WorkFieldView: View {
                 .padding(.trailing, 30)
                 }//scrollView
             .frame(width: 280, height: 100, alignment: .center)
+            
+            
+            
+            
+            
+            
             
             HStack{
                 Toggle(isOn: $gitCommitOn){
