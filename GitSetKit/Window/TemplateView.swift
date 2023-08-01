@@ -123,21 +123,31 @@ struct TemplateView: View {
                 if let d = d as? String {
                     // data가 String이고, 값이 '+'이면 추가 버튼
                     if d == "+" {
-                        Button {
-                            let field = Field(context: managedObjectContext)
-                            field.name = "block_new_field_name".localized
-                            field.type = Field.FieldType.constant.rawValue
-                            field.typeBasedString = ""
+                        Menu {
+                            Button {
+                                generateNewField(type: .option)
+                            } label: {
+                                Label("option_block_type_option", systemImage: "square.grid.2x2")
+                            }
                             
-                            var fields = self.team!.wrappedFields
-                            fields.append(field)
+                            Button {
+                                generateNewField(type: .input)
+                            } label: {
+                                Label("option_block_type_text", systemImage: "text.alignleft")
+                            }
                             
-                            team!.fields = NSOrderedSet(array: fields)
+                            Button {
+                                generateNewField(type: .date)
+                            } label: {
+                                Label("option_block_type_date", systemImage: "calendar")
+                            }
                             
-                            PersistenceController.shared.saveContext()
-                            
-                            reloadData()
-                            
+                            Button {
+                                generateNewField(type: .constant)
+                            } label: {
+                                Text("option_block_type_constant")
+                            }
+
                         } label: {
                             Image(systemName: "plus")
                                 .foregroundColor(.white)
@@ -148,6 +158,7 @@ struct TemplateView: View {
                             Circle()
                                 .fill(Color.accentColor)
                         )
+                        
                     } else {
                         TextCell(text: d)
                     }
@@ -173,7 +184,26 @@ struct TemplateView: View {
     }
     //: - Blocks View
     
-    // MARK: - Reload Data
+    // MARK: - Functions
+    
+    func generateNewField(type: Field.FieldType) {
+        let field = Field(context: managedObjectContext)
+        field.name = "block_new_field_name".localized
+        field.type = type.rawValue
+        field.typeBasedString = ""
+        
+        var fields = self.team!.wrappedFields
+        fields.append(field)
+        
+        team!.fields = NSOrderedSet(array: fields)
+        
+        PersistenceController.shared.saveContext()
+        
+        reloadData()
+        
+        selected = field
+    }
+    
     func reloadData() {
         guard let fields = team?.wrappedFields else {
             return
@@ -188,7 +218,7 @@ struct TemplateView: View {
         
         renderId = UUID()
     }
-    //: - Reload Data
+    //: - Functions
     
     // MARK: Context Menu
     @ViewBuilder
