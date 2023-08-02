@@ -68,6 +68,13 @@ struct OptionBlockSettingView: View {
                         LazyVGrid(columns: column, alignment: .leading, spacing: 8) {
                             ForEach(field.wrappedOptions) { option in
                                 OptionBlockCell(option: option, selected: $selected)
+                                    .onTapGesture(count: 2) {
+                                        selected = option
+                                        dialogObject = option
+                                        dialogValue = option.value ?? ""
+                                        dialogDesc = option.shortDesc ?? ""
+                                        showOptionDialog = true
+                                    }
                                     .onTapGesture {
                                         selected = option
                                     }
@@ -75,6 +82,9 @@ struct OptionBlockSettingView: View {
                             .id(renderId)
                         }
                         .padding()
+                    }
+                    .onTapGesture {
+                        selected = nil
                     }
                 }
                 
@@ -88,17 +98,15 @@ struct OptionBlockSettingView: View {
         }
     }
     
+    @State private var dialogObject: Option?
+    @State private var showOptionDialog: Bool = false
+    @State private var dialogValue: String = ""
+    @State private var dialogDesc: String = ""
+    
     var toolbar: some View {
         HStack(spacing: 4) {
             Button {
-                let newOption = Option(context: managedObjectContext)
-                newOption.value = ""
-                newOption.detailDesc = ""
-                newOption.shortDesc = ""
-                
-                self.field?.addToOptions(newOption)
-                
-                PersistenceController.shared.saveContext()
+                showOptionDialog = true
                 
                 renderId = UUID()
                 
@@ -107,22 +115,49 @@ struct OptionBlockSettingView: View {
             }
             .buttonStyle(.plain)
             .frame(width: 24, height: 24)
+            .alert("option_block_field_new", isPresented: $showOptionDialog) {
+                LabeledContent("option_block_field_new_value") {
+                    TextField("option_block_field_new_value", text: $dialogValue)
+                }
+                
+                LabeledContent("option_block_field_new_desc") {
+                    TextField("option_block_field_new_desc", text: $dialogDesc)
+                }
+                
+                Button("add", role: .none) {
+                    if let dialogObject = dialogObject {
+                        PersistenceController.shared.updateOption(option: dialogObject, value: dialogValue, shortDesc: dialogDesc)
+                        
+                    } else {
+                        let newOption = Option(context: managedObjectContext)
+                        newOption.value = dialogValue
+                        newOption.detailDesc = ""
+                        newOption.shortDesc = dialogDesc
+                        
+                        self.field?.addToOptions(newOption)
+                    }
+                    
+                    PersistenceController.shared.saveContext()
+                    
+                    clearDialog()
+                    
+                    renderId = UUID()
+                }
+                
+                Button("cancel", role: .cancel) {
+                    clearDialog()
+                }
+            }
             
             Divider()
                 .frame(height: 24)
             
             Button {
-                if let field = field, let options = field.options, let selected = selected {
-                    let index = options.index(of: selected)
-                    var options = field.wrappedOptions
-                    options.remove(at: index)
-                    
-                    self.field!.options = NSOrderedSet(array: options)
-                    
-                    PersistenceController.shared.deleteOption(selected)
-                    
-                    renderId = UUID()
+                if let selected = selected {
+                   deleteOption(option: selected)
                 }
+                
+                selected = nil
             } label: {
                 Image(systemName: "minus")
             }
@@ -136,4 +171,30 @@ struct OptionBlockSettingView: View {
             Colors.Background.tertiary
         )
     }
+    
+    private func clearDialog() {
+        selected = nil
+        dialogObject = nil
+        dialogValue = ""
+        dialogDesc = ""
+        showOptionDialog = false
+    }
+    
+    private func deleteOption(option: Option) {
+        if let options = field?.options, var wrappedOptions = field?.wrappedOptions {
+            let index = options.index(of: option)
+            wrappedOptions.remove(at: index)
+            
+            self.field!.options = NSOrderedSet(array: wrappedOptions)
+            
+            PersistenceController.shared.deleteOption(option)
+        }
+        
+        renderId = UUID()
+    }
+}
+
+fileprivate struct OptionDialogObject {
+    var title: String
+    var desc: String
 }
