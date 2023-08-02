@@ -21,10 +21,9 @@
 		79238C2E2A69040A006137BD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79238C2D2A69040A006137BD /* String+Extension.swift */; };
 		79238C312A69049D006137BD /* DefaultDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79238C302A69049D006137BD /* DefaultDataGenerator.swift */; };
 		793C53E82A7793FD002BB231 /* EmoticonPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793C53E72A7793FD002BB231 /* EmoticonPickerView.swift */; };
-		793C53EA2A78EF94002BB231 /* NewOptionBlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793C53E92A78EF94002BB231 /* NewOptionBlockSettingView.swift */; };
+		793C53EA2A78EF94002BB231 /* OptionBlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793C53E92A78EF94002BB231 /* OptionBlockSettingView.swift */; };
 		79694F392A5AB090009F3C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79694F382A5AB090009F3C69 /* Assets.xcassets */; };
 		79694F4D2A5AB936009F3C69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79694F4C2A5AB936009F3C69 /* Localizable.strings */; };
-		7970C40E2A6A4FA300762041 /* OptionBlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7970C40D2A6A4FA300762041 /* OptionBlockSettingView.swift */; };
 		7970C4122A6A502E00762041 /* InputBlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7970C4112A6A502E00762041 /* InputBlockSettingView.swift */; };
 		7970C4142A6A503B00762041 /* DateBlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7970C4132A6A503B00762041 /* DateBlockSettingView.swift */; };
 		799243A52A697A1800E3DD7C /* OnLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799243A42A697A1800E3DD7C /* OnLoadModifier.swift */; };
@@ -72,7 +71,7 @@
 		7926C1ED2A5E8420003B7D36 /* GitSetKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitSetKit.xcdatamodel; sourceTree = "<group>"; };
 		7926C2092A5E8CDB003B7D36 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersistenceController.swift; path = Data/PersistenceController.swift; sourceTree = "<group>"; };
 		793C53E72A7793FD002BB231 /* EmoticonPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmoticonPickerView.swift; sourceTree = "<group>"; };
-		793C53E92A78EF94002BB231 /* NewOptionBlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOptionBlockSettingView.swift; sourceTree = "<group>"; };
+		793C53E92A78EF94002BB231 /* OptionBlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionBlockSettingView.swift; sourceTree = "<group>"; };
 		79694F312A5AB08F009F3C69 /* GitSetKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitSetKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79694F342A5AB08F009F3C69 /* GitSetKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitSetKitApp.swift; sourceTree = "<group>"; };
 		79694F362A5AB08F009F3C69 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,7 +80,6 @@
 		79694F4A2A5AB904009F3C69 /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
 		79694F4C2A5AB936009F3C69 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		79694F4E2A5ABF8A009F3C69 /* ConventionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConventionView.swift; sourceTree = "<group>"; };
-		7970C40D2A6A4FA300762041 /* OptionBlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionBlockSettingView.swift; sourceTree = "<group>"; };
 		7970C4112A6A502E00762041 /* InputBlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputBlockSettingView.swift; sourceTree = "<group>"; };
 		7970C4132A6A503B00762041 /* DateBlockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBlockSettingView.swift; sourceTree = "<group>"; };
 		799243A42A697A1800E3DD7C /* OnLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLoadModifier.swift; sourceTree = "<group>"; };
@@ -208,8 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				791A32532A63FEA8004A61A1 /* BlockSettingView.swift */,
-				793C53E92A78EF94002BB231 /* NewOptionBlockSettingView.swift */,
-				7970C40D2A6A4FA300762041 /* OptionBlockSettingView.swift */,
+				793C53E92A78EF94002BB231 /* OptionBlockSettingView.swift */,
 				7970C4112A6A502E00762041 /* InputBlockSettingView.swift */,
 				7970C4132A6A503B00762041 /* DateBlockSettingView.swift */,
 			);
@@ -371,7 +368,7 @@
 				79D78B8B2A5FEDE800B8AA79 /* PersistenceController.swift in Sources */,
 				793C53E82A7793FD002BB231 /* EmoticonPickerView.swift in Sources */,
 				79D78B8C2A5FEDE800B8AA79 /* FileHelper.swift in Sources */,
-				793C53EA2A78EF94002BB231 /* NewOptionBlockSettingView.swift in Sources */,
+				793C53EA2A78EF94002BB231 /* OptionBlockSettingView.swift in Sources */,
 				628C517D2A67D3B6005292E3 /* Field+CoreDataClass.swift in Sources */,
 				628C517E2A67D3B6005292E3 /* Field+CoreDataProperties.swift in Sources */,
 				79238C2E2A69040A006137BD /* String+Extension.swift in Sources */,
@@ -379,7 +376,6 @@
 				79D78B8D2A5FEDE800B8AA79 /* ContentView.swift in Sources */,
 				628C51802A67D71B005292E3 /* Field+Converted.swift in Sources */,
 				B5AF6A5D2A6815800043303B /* TrayView.swift in Sources */,
-				7970C40E2A6A4FA300762041 /* OptionBlockSettingView.swift in Sources */,
 				628C517A2A67D3B6005292E3 /* Team+CoreDataProperties.swift in Sources */,
 				799243A72A697B0000E3DD7C /* View+OnLoadModifier.swift in Sources */,
 				79F932FE2A73612300BE0711 /* BlockOptionView.swift in Sources */,

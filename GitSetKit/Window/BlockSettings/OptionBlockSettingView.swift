@@ -1,163 +1,131 @@
 //
-//  OptionBlockSettingView.swift
+//  NewOptionBlockSettingView.swift
 //  GitSetKit
 //
-//  Created by 최명근 on 2023/07/21.
+//  Created by 최명근 on 2023/08/01.
 //
 
 import SwiftUI
+import WrappingHStack
 
-struct OptionBlockSettingView: View {
-    @Binding var field: Field?
-    @State private var optionList: [Option] = []
-    @State private var value: [String] = [""]
-    @State private var shortDesc: [String] = [""]
-    @State private var detailDesc: [String] = [""]
-    @State private var isHover: [Bool] = [false]
+struct OptionBlockCell: View {
+    var option: Option
+    
+    @Binding var selected: Option?
     
     var body: some View {
-        ScrollView(.vertical) {
-            inputField(idx: 0)
-            Spacer()
-            Spacer()
-            ForEach(1..<optionList.count + 1, id: \.self) { idx in
-                inputField(idx: idx)
-            }
-        }
-        .scrollIndicators(.hidden)
-        .shadow(radius: 1)
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 4)
-                .fill(Colors.Gray.quaternary)
-        )
-        .onAppear {
-            if let options = field?.wrappedOptions {
-                optionList = options
-                
-                for idx in 0..<optionList.count {
-                    value.append(optionList[idx].value ?? "")
-                    shortDesc.append(optionList[idx].shortDesc ?? "")
-                    detailDesc.append(optionList[idx].detailDesc ?? "")
-                    isHover.append(false)
+        VStack(spacing: 4) {
+            if let value = option.value, let shortDesc = option.shortDesc {
+                HStack {
+                    Spacer()
+                    Text(value)
+                        .font(.body.bold())
+                        .lineLimit(1)
+                    Spacer()
+                }
+                HStack {
+                    Spacer()
+                    Text(shortDesc)
+                        .font(.system(size: 11))
+                        .foregroundColor(Colors.Text.secondary)
+                        .lineLimit(1)
+                    Spacer()
                 }
             }
         }
-    }
-    
-    func inputField(idx: Int) -> some View {
-        return HStack {
-            Group {
-                TextField("", text: $value[idx], prompt: Text("option_block_field_value"))
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.center)
-                    .onChange(of: value[idx]) { newValue in
-                        if idx != 0 {
-                            optionList[idx - 1].value = newValue
-                            PersistenceController.shared.updateField(field: field!, options: optionList)
-                        }
-                    }
-                Divider()
-                TextField("", text: $shortDesc[idx], prompt: Text("option_block_field_short"))
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.center)
-                    .onChange(of: shortDesc[idx]) { newValue in
-                        if idx != 0 {
-                            optionList[idx - 1].shortDesc = newValue
-                            PersistenceController.shared.updateField(field: field!, options: optionList)
-                        }
-                    }
-                Divider()
-                TextField("", text: $detailDesc[idx], prompt: Text("option_block_field_detail"))
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.center)
-                    .onChange(of: detailDesc[idx]) { newValue in
-                        if idx != 0 {
-                            optionList[idx - 1].detailDesc = newValue
-                            PersistenceController.shared.updateField(field: field!, options: optionList)
-                        }
-                    }
-            }
-            
-            
-            if idx == 0 {
-                Button {
-                    createOption(idx)
-                } label: {
-                    Image(systemName: "plus")
-                        .foregroundColor(.white)
-                }
-                .buttonStyle(.plain)
-                .frame(width: 24, height: 24)
-                .background(
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.accentColor)
-                        .onTapGesture {
-                            createOption(idx)
-                        }
-                )
-            }
-            else {
-                Button {
-                    deleteOption(idx)
-                } label: {
-                    Image(systemName: "minus")
-                        .foregroundColor(isHover[idx] ? .white : .red)
-                }
-                .buttonStyle(.plain)
-                .frame(width: 24, height: 24)
-                .background(
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(isHover[idx] ? .red : Colors.Gray.quaternary)
-                        .onTapGesture {
-                            deleteOption(idx)
-                        }
-                )
-                .onHover { newHover in
-                    if idx != optionList.count + 1 {
-                        isHover[idx] = newHover
-                    }
-                }
-            }
-        }
-        .padding(4)
+        .padding(8)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color.white)
+                .fill(selected?.id == option.id ? Color.accentColor : Colors.Background.primary)
+                .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 2)
         )
-    }
-    
-    func createOption(_ idx: Int) {
-        let count = optionList.count
-        let newOption = PersistenceController.shared.createOption(value: value[0], shortDesc: shortDesc[0], detailDesc: detailDesc[0])
-        
-        optionList.append(newOption)
-        
-        value.append(optionList[count].value ?? "")
-        shortDesc.append(optionList[count].shortDesc ?? "")
-        detailDesc.append(optionList[count].detailDesc ?? "")
-        isHover.append(false)
-        
-        PersistenceController.shared.updateField(field: field!, options: optionList)
-    }
-    
-    func deleteOption(_ idx: Int) {
-        DispatchQueue.main.async {
-            optionList.remove(at: idx - 1)
-            
-            value.remove(at: idx)
-            shortDesc.remove(at: idx)
-            detailDesc.remove(at: idx)
-            isHover.remove(at: idx)
-            
-            PersistenceController.shared.updateField(field: field!, options: optionList)
-        }
     }
 }
 
-//struct OptionBlockSettingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        OptionBlockSettingView()
-//        
-//    }
-//}
+struct OptionBlockSettingView: View {
+    @Binding var field: Field?
+    
+    @State private var selected: Option? = nil
+    
+    @State private var renderId: UUID = UUID()
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    var body: some View {
+        if let field = field {
+            VStack(spacing: 0) {
+                ScrollView {
+                    let item = GridItem(.adaptive(minimum: 120, maximum: 180), spacing: 8)
+                    let column = [item]
+                    LazyVGrid(columns: column, alignment: .leading, spacing: 8) {
+                        ForEach(field.wrappedOptions) { option in
+                            OptionBlockCell(option: option, selected: $selected)
+                                .onTapGesture {
+                                    selected = option
+                                }
+                        }
+                        .id(renderId)
+                    }
+                    .padding()
+                }
+                .background(Colors.Background.secondary)
+                
+                Divider()
+                
+                toolbar
+            }
+            .background(Colors.Background.secondary)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
+        }
+    }
+    
+    var toolbar: some View {
+        HStack(spacing: 4) {
+            Button {
+                let newOption = Option(context: managedObjectContext)
+                newOption.value = ""
+                newOption.detailDesc = ""
+                newOption.shortDesc = ""
+                
+                self.field?.addToOptions(newOption)
+                
+                PersistenceController.shared.saveContext()
+                
+                renderId = UUID()
+                
+            } label: {
+                Image(systemName: "plus")
+            }
+            .buttonStyle(.plain)
+            .frame(width: 24, height: 24)
+            
+            Divider()
+                .frame(height: 24)
+            
+            Button {
+                if let field = field, let options = field.options, let selected = selected {
+                    let index = options.index(of: selected)
+                    var options = field.wrappedOptions
+                    options.remove(at: index)
+                    
+                    self.field!.options = NSOrderedSet(array: options)
+                    
+                    PersistenceController.shared.deleteOption(selected)
+                    
+                    renderId = UUID()
+                }
+            } label: {
+                Image(systemName: "minus")
+            }
+            .buttonStyle(.plain)
+            .frame(width: 24, height: 24)
+            
+            Spacer()
+        }
+        .padding(4)
+        .background(
+            Colors.Background.tertiary
+        )
+    }
+}

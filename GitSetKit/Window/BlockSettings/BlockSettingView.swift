@@ -21,8 +21,7 @@ struct BlockSettingView: View {
                     Spacer()
                     
                 case .option:
-//                    OptionBlockSettingView(field: $selected)
-                    NewOptionBlockSettingView(field: $selected)
+                    OptionBlockSettingView(field: $selected)
                     
                 case .input:
                     InputBlockSettingView(field: $selected)
