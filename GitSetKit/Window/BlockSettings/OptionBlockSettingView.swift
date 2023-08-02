@@ -35,9 +35,15 @@ struct OptionBlockCell: View {
         }
         .padding(8)
         .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(selected?.id == option.id ? Color.accentColor : Colors.Background.primary)
-                .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 2)
+            ZStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Colors.Background.primary)
+                    .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 2)
+                if selected == option {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.accentColor, lineWidth: 2)
+                }
+            }
         )
     }
 }
