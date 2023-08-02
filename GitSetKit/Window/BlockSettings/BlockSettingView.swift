@@ -13,6 +13,8 @@ struct BlockSettingView: View {
     
     @State private var title: String = ""
     
+    @State private var renderId: UUID = UUID()
+    
     var body: some View {
         VStack {
             if let selected = selected {
@@ -21,8 +23,7 @@ struct BlockSettingView: View {
                     Spacer()
                     
                 case .option:
-//                    OptionBlockSettingView(field: $selected)
-                    NewOptionBlockSettingView(field: $selected)
+                    OptionBlockSettingView(field: $selected)
                     
                 case .input:
                     InputBlockSettingView(field: $selected)
@@ -33,6 +34,10 @@ struct BlockSettingView: View {
             } else {
                 Spacer()
             }
+        }
+        .id(renderId)
+        .onChange(of: selected) { newValue in
+            self.renderId = UUID()
         }
     }
 }

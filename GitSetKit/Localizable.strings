@@ -11,6 +11,9 @@
 // MARK: - General Texts
 "delete" = "삭제";
 "edit" = "수정";
+"add" = "추가";
+"cancel" = "취소";
+"save" = "저장";
 
 // MARK: - Default Texts
 "default_team_name" = "새로운 팀";
@@ -70,6 +73,10 @@
 "option_block_field_value" = "Value";
 "option_block_field_short" = "Short Desc";
 "option_block_field_detail" = "Detail Description";
+"option_block_field_empty" = "+ 버튼을 눌러 새 옵션을 추가해주세요.";
+"option_block_field_new" = "새 옵션";
+"option_block_field_new_value" = "값";
+"option_block_field_new_desc" = "설명";
 // MARK: InputBlockSettingView
 "input_block_field_text" = "이곳에 입력되는 내용들은 Placeholder로 표시돼요";
 "input_block_field_placeholder" = "# 1. 제목은 변경사항이 무엇인지 명확히 작성
@@ -78,7 +85,7 @@
 # ex) feat: 로그인 기능 추가";
 
 // MARK: DateBlockSettingView
-"date_block_field_text" = "날짜 유형을 선택해주세요";
+"date_block_field_text" = "날짜 유형을 선택해주세요. ex>";
 
 // MARK: - TemplateView
 "block_new_field_name" = "새 블록";

@@ -56,6 +56,9 @@ struct ConventionView: View {
             
             Spacer()
         }
+        .onChange(of: selectedTeam, perform: { newValue in
+            selectedField = nil
+        })
         .padding()
         .background(
             Colors.Background.primary

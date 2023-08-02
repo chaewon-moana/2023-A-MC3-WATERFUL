@@ -192,11 +192,11 @@ struct TemplateView: View {
             
         }
         .id(renderId)
+        .onTapGesture {
+            selected = nil
+        }
         .onLoad {
             reloadData()
-        }
-        .onTapGesture {
-            focus = nil
         }
     }
     //: - Blocks View

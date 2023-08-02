@@ -18,20 +18,23 @@ struct DateBlockSettingView: View {
             .fill(Colors.Gray.quaternary)
             .overlay(
                 VStack(alignment: .leading) {
-                    Text("date_block_field_text")
+                    Text("date_block_field_text".localized + formattedDate(format: dateFormat[value]))
                         .foregroundColor(Colors.Gray.tertiary)
                         .padding(.leading, 16)
                         .padding(.top, 16)
                     
                     Picker(selection: $value) {
                         ForEach(0..<dateFormat.count, id: \.self) { idx in
-                            Text("\(dateFormat[idx])")
+                            Text("\(formattedDate(format: dateFormat[idx]))")
                                 .foregroundColor(Colors.Gray.primary)
                                 .padding(.top)
                         }
                     } label: { }
                         .pickerStyle(.radioGroup)
                         .padding(.leading, 8)
+                        .onChange(of: value) { newValue in
+                            self.field = PersistenceController.shared.updateField(field: bindedField!, typeBasedString: dateFormatter(value: value))
+                        }
                 }
                 , alignment: .topLeading
             )
@@ -40,9 +43,15 @@ struct DateBlockSettingView: View {
                 bindedField = field
                 value = dateConverter(typeBasedString: string)
             }
-            .onDisappear {
-                PersistenceController.shared.updateField(field: bindedField!, typeBasedString: dateFormatter(value: value))
-            }
+    }
+    
+    func formattedDate(format: String) -> String {
+        let date = DateFormatter()
+        date.locale = Locale(identifier: Locale.current.identifier)
+        date.timeZone = TimeZone(identifier: TimeZone.current.identifier)
+        date.dateFormat = format
+        
+        return date.string(from: Date())
     }
     
     func dateFormatter(value: Int) -> String {
