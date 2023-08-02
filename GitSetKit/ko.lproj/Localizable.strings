@@ -51,14 +51,14 @@
 // MARK: OptionView
 "option_block_section" = "블럭 설정";
 "option_block_type" = "블럭 유형";
-"option_block_type_constant" = "고정 텍스트형";
-"option_block_type_constant_desc" = "ConstType";
-"option_block_type_text" = "텍스트형";
-"option_block_type_text_desc" = "TextType";
-"option_block_type_date" = "날짜형";
-"option_block_type_date_desc" = "DateType";
-"option_block_type_option" = "선택형";
-"option_block_type_option_desc" = "OptionType";
+"option_block_type_constant" = "고정 텍스트";
+"option_block_type_constant_desc" = "고정 텍스트: 특정 위치에 문자를 고정시킬 수 있는 블럭이에요.";
+"option_block_type_text" = "텍스트";
+"option_block_type_text_desc" = "입력: 사용자가 직접 문자를 입력할 수 있는 블럭이에요.";
+"option_block_type_date" = "날짜";
+"option_block_type_date_desc" = "날짜: 컨벤션에 맞는 날짜 형식을 입력해주는 블럭이에요.";
+"option_block_type_option" = "선택";
+"option_block_type_option_desc" = "선택: 버튼형 옵션을 선택할 수 있는 블럭이에요.";
 "option_block_title" = "블럭 제목";
 "option_block_title_empty" = "이름 없는 필드";
 "option_block_desc" = "Block Description";
