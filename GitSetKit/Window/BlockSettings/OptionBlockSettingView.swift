@@ -54,21 +54,29 @@ struct OptionBlockSettingView: View {
     var body: some View {
         if let field = field {
             VStack(spacing: 0) {
-                ScrollView {
-                    let item = GridItem(.adaptive(minimum: 120, maximum: 180), spacing: 8)
-                    let column = [item]
-                    LazyVGrid(columns: column, alignment: .leading, spacing: 8) {
-                        ForEach(field.wrappedOptions) { option in
-                            OptionBlockCell(option: option, selected: $selected)
-                                .onTapGesture {
-                                    selected = option
-                                }
-                        }
-                        .id(renderId)
+                if field.wrappedOptions.isEmpty {
+                    VStack {
+                        Spacer()
+                        Text("option_block_field_empty")
+                        Spacer()
                     }
-                    .padding()
+                    .padding(.top, 8)
+                } else {
+                    ScrollView {
+                        let item = GridItem(.adaptive(minimum: 120, maximum: 180), spacing: 8)
+                        let column = [item]
+                        LazyVGrid(columns: column, alignment: .leading, spacing: 8) {
+                            ForEach(field.wrappedOptions) { option in
+                                OptionBlockCell(option: option, selected: $selected)
+                                    .onTapGesture {
+                                        selected = option
+                                    }
+                            }
+                            .id(renderId)
+                        }
+                        .padding()
+                    }
                 }
-                .background(Colors.Background.secondary)
                 
                 Divider()
                 
