@@ -25,9 +25,7 @@ struct FieldView: View {
         NavigationView{
             VStack{
                 ZStack{
-                    RoundedRectangle(cornerRadius: 4)
-                        .frame(width: 320, height: 104)
-                        .background(Color(red: 246/255, green: 246/255, blue: 246/255))
+                    Colors.Background.primary
                         .opacity(0.48)
                     
                     if selectedFieldIndex >= 0 && selectedFieldIndex < selectedFields.count {
@@ -47,7 +45,7 @@ struct FieldView: View {
                         Text("Field 찾을 수 없음")
                     }
                     
-                }
+                }//ZStack
                 .onChange(of: selectedTeam){ newValue in
                     selectedFieldIndex = 0
                     if selectedFields[selectedFieldIndex].wrappedType.rawValue == 2 {
@@ -57,56 +55,56 @@ struct FieldView: View {
                     }
                     selectedFields = newValue!.wrappedFields
                     outputMessage = addOutput(selectedFields: selectedFields)
-            }
-            .onChange(of: selectedFieldIndex){ [selectedFieldIndex] newValue in
-                if newValue >= 0 && newValue < selectedFields.count{
-                    if selectedFields[newValue].wrappedType.rawValue == 1 {
-                        if newValue > selectedFieldIndex {
-                            self.selectedFieldIndex += 1
-                        } else if newValue < selectedFieldIndex {
-                            self.selectedFieldIndex -= 1
+                }
+                .onChange(of: selectedFieldIndex){ [selectedFieldIndex] newValue in
+                    if newValue >= 0 && newValue < selectedFields.count{
+                        if selectedFields[newValue].wrappedType.rawValue == 1 {
+                            if newValue > selectedFieldIndex {
+                                self.selectedFieldIndex += 1
+                            } else if newValue < selectedFieldIndex {
+                                self.selectedFieldIndex -= 1
+                            }
+                        }
+                        
+                        else if selectedFields[newValue].wrappedType.rawValue == 2 {
+                            selectedOptions = selectedFields[newValue].wrappedOptions
+                        }
+                        else if selectedFields[newValue].wrappedType.rawValue == 3 {
+                            inputText = selectedField?.wrappedName ?? ""
+                            
                         }
                     }
-                    
-                    else if selectedFields[newValue].wrappedType.rawValue == 2 {
-                        selectedOptions = selectedFields[newValue].wrappedOptions
-                    }
-                    else if selectedFields[newValue].wrappedType.rawValue == 3 {
-                        inputText = selectedField?.wrappedName ?? ""
-
-                    }
                 }
-            }
-            
-            
-            
-            
-        }//ZStack
-        .frame(width: 316, height: 104)
-    } //VStack
-}//navigationView
+                
+                
+            }//VStack
+            .frame(width: 316, height: 104)
 
-func addOutput(selectedFields: [Field]) -> [String] {
-    var outputMessage: [String] = []
-    var tmp: String
-    
-    for field in selectedFields {
-        if field.type == 4 {
-            let today = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "\(field.wrappedTypeBasedString)"
-            selectedDate = "\(field.wrappedTypeBasedString)"
-            let dateString = dateFormatter.string(from: today)
             
-            tmp = dateString
-        } else {
-            tmp = "\(field.wrappedName)"
-        }
-        outputMessage.append(tmp)
+        }//navigationView
     }
-    return outputMessage
-}
-
+    
+    func addOutput(selectedFields: [Field]) -> [String] {
+        var outputMessage: [String] = []
+        var tmp: String
+        
+        for field in selectedFields {
+            if field.type == 4 {
+                let today = Date()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "\(field.wrappedTypeBasedString)"
+                selectedDate = "\(field.wrappedTypeBasedString)"
+                let dateString = dateFormatter.string(from: today)
+                
+                tmp = dateString
+            } else {
+                tmp = "\(field.wrappedName)"
+            }
+            outputMessage.append(tmp)
+        }
+        return outputMessage
+    }
+    
 }
 
 

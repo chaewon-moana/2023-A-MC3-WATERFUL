@@ -11,7 +11,6 @@ import CoreData
 
 struct TrayView: View {
     
-    
     @Environment(\.managedObjectContext) var managedObjectContext
     
     let shared = PersistenceController.shared
@@ -30,17 +29,20 @@ struct TrayView: View {
     
     var body: some View {
         ZStack{
-            RoundedRectangle(cornerRadius: 4)
-                .frame(width:340,height:390)
-                .opacity(0.5)
-                .ignoresSafeArea()
+            Colors.Background.primary
+                .opacity(0.6)
+                .edgesIgnoringSafeArea(.all)
+            //            RoundedRectangle(cornerRadius: 4)
+            //                .frame(width: 340, height: 390)
+            //                .background(Color(red: 246/255, green: 246/255, blue: 246/255))
+            //                .opacity(0.6)
+            //                .ignoresSafeArea()
             
             VStack{
                 TeamSelectedView(teamNames: $teamNames, selectedTeam: $selectedTeam, outputMessage: $outputMessage)
                     .onChange(of: selectedTeam){ newValue in
                         selectedFieldIndex = 0
                         selectedFieldsCount = selectedFields.count
-                       // outputMessage = addOutput(selectedFields: selectedFields)
                         if let fields = selectedTeam?.wrappedFields {
                             selectedFields = fields
                             fieldName = fields[0].wrappedName
@@ -163,7 +165,11 @@ struct TrayView: View {
                     
                 }//HStack - Previous, Next Button View
                 .frame(width: 316, height: 16)
+                
             }
+            .frame(width: 340, height: 390)
+            
+            
         }
         .onAppear {
             teamNames = shared.readTeam()
