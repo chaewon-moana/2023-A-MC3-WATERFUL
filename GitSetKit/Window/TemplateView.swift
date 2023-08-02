@@ -32,7 +32,6 @@ fileprivate struct BlockCell: View {
                         }
                         editMode = false
                     }
-                
             } else {
                 Text(field.wrappedName)
                     .font(.custom("SourceCodePro-Light", size: 17)) // FIXME: 폰트 적용 안되는 문제

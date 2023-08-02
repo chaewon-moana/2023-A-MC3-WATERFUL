@@ -42,22 +42,20 @@ struct TeamSelectedView: View {
                     } label: {
                         Text(team.wrappedEmoticon + team.wrappedName)
                             .foregroundColor(Color.black)
-                        
                     }
                 }
             } label: {
                 Text("\(selectedTeam?.wrappedEmoticon ?? "") \(selectedTeam?.wrappedName ?? "팀 선택")")
+                    .foregroundColor(Color.black)
             }
-            
             .frame(width: 120, alignment: .trailing)
             
-            
         }//Hstack
-        .frame(width: 316, height: 36)
-        .padding(EdgeInsets(top: 9, leading: 9, bottom: 15, trailing: 9))
+        .frame(width: 316, height: 32)
+        .padding(EdgeInsets(top: 9, leading: 9, bottom: 9, trailing: 9))
         .sheet(isPresented: $isWindowOpen){
             ContentView()
-                .frame(width: 850, height: 518)
+                .frame(width: 850, height: 700)
         }
     }
 }

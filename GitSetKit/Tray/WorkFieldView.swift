@@ -64,6 +64,7 @@ struct WorkFieldView: View {
                 }//WrappingHStack
                 .frame(width: 280, alignment: .center)
                 .padding(12)
+                .padding(.leading, 20)
                 .padding(.trailing, 30)
                 }//scrollView
             .frame(width: 280, height: 100, alignment: .center)
@@ -110,6 +111,7 @@ struct WorkFieldView: View {
             .offset(x:0, y: -30)
             
         }//WorkFieldView
+        .frame(maxWidth: 280)
     }
     
     //git commit message copied function
