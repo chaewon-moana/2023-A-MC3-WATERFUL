@@ -13,6 +13,7 @@
 "edit" = "수정";
 "add" = "추가";
 "cancel" = "취소";
+"save" = "저장";
 
 // MARK: - Default Texts
 "default_team_name" = "새로운 팀";

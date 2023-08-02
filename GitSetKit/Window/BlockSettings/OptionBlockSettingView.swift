@@ -116,15 +116,10 @@ struct OptionBlockSettingView: View {
             .buttonStyle(.plain)
             .frame(width: 24, height: 24)
             .alert("option_block_field_new", isPresented: $showOptionDialog) {
-                LabeledContent("option_block_field_new_value") {
-                    TextField("option_block_field_new_value", text: $dialogValue)
-                }
+                TextField("option_block_field_new_value", text: $dialogValue)
+                TextField("option_block_field_new_desc", text: $dialogDesc)
                 
-                LabeledContent("option_block_field_new_desc") {
-                    TextField("option_block_field_new_desc", text: $dialogDesc)
-                }
-                
-                Button("add", role: .none) {
+                Button(dialogObject == nil ? "add" : "save", role: .none) {
                     if let dialogObject = dialogObject {
                         PersistenceController.shared.updateOption(option: dialogObject, value: dialogValue, shortDesc: dialogDesc)
                         
