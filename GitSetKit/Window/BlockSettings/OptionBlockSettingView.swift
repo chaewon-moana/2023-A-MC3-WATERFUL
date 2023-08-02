@@ -64,6 +64,7 @@ struct OptionBlockSettingView: View {
                     VStack {
                         Spacer()
                         Text("option_block_field_empty")
+                            .foregroundColor(Colors.Text.secondary)
                         Spacer()
                     }
                     .padding(.top, 8)
