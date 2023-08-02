@@ -9,41 +9,53 @@ import SwiftUI
 
 struct InputBlockSettingView: View {
     @Binding var field: Field?
-    @State var value: String = "input_block_field_placeholder".localized
+    @State var value: String = ""
     @State var typeBasedString: String?
     @State var bindedField: Field?
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("input_block_field_text")
-                .foregroundColor(Colors.Text.tertiary)
-                .padding(.leading, 16)
-                .padding(.top, 16)
-            RoundedRectangle(cornerRadius: 4)
-                .fill(Colors.Gray.tertiary)
-                .overlay {
-                    TextEditor(text: $value)
-                        .foregroundColor(Colors.Text.secondary)
-                        .textFieldStyle(.plain)
-                        .multilineTextAlignment(.leading)
-                        .scrollContentBackground(.hidden)
-                        .padding()
+            ZStack {
+                TextEditor(text: $value)
+                    .onChange(of: value, perform: { newValue in
+                        self.field = PersistenceController.shared.updateField(field: bindedField!, typeBasedString: value)
+                    })
+                    .foregroundColor(Colors.Text.secondary)
+                    .textFieldStyle(.plain)
+                    .font(.system(size: 15))
+                    .multilineTextAlignment(.leading)
+                    .scrollContentBackground(.hidden)
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Colors.Background.tertiary)
+                    }
+                
+                if value.isEmpty {
+                    VStack {
+                        HStack {
+                            Text("input_block_field_text")
+                                .foregroundColor(Colors.Text.tertiary)
+                                .font(.system(size: 15))
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                    .padding()
+                    .padding(.leading, 8)
                 }
-                .padding(.leading, 16)
-                .padding(.bottom)
-                .padding(.trailing)
+            }
+            .padding(8)
         }
         .background(
             RoundedRectangle(cornerRadius: 4)
-                .fill(Colors.Gray.quaternary)
+                .fill(Colors.Background.secondary)
+                .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
         )
         .onAppear {
             bindedField = field
             guard let string = bindedField?.wrappedTypeBasedString else { return }
             value = string
-        }
-        .onDisappear {
-            PersistenceController.shared.updateField(field: bindedField!, typeBasedString: value)
         }
     }
 }
