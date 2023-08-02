@@ -121,8 +121,8 @@ struct BlockOptionView: View {
                     }
                 })
                 .onChange(of: self.selectedField) { newValue in
+                    fieldChanged = true
                     if let selectedField = selectedField {
-                        fieldChanged = true
                         blockType = selectedField.wrappedType
                     }
                 }
