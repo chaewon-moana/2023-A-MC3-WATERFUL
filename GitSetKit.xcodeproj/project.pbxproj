@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		622ED4FB2A79712B001C6CC7 /* CodingUserInfoKey+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622ED4FA2A79712B001C6CC7 /* CodingUserInfoKey+Extension.swift */; };
 		628C51792A67D3B6005292E3 /* Team+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C51732A67D3B6005292E3 /* Team+CoreDataClass.swift */; };
 		628C517A2A67D3B6005292E3 /* Team+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C51742A67D3B6005292E3 /* Team+CoreDataProperties.swift */; };
 		628C517B2A67D3B6005292E3 /* Option+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628C51752A67D3B6005292E3 /* Option+CoreDataClass.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		622ED4FA2A79712B001C6CC7 /* CodingUserInfoKey+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+Extension.swift"; sourceTree = "<group>"; };
 		628C51732A67D3B6005292E3 /* Team+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataClass.swift"; sourceTree = "<group>"; };
 		628C51742A67D3B6005292E3 /* Team+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		628C51752A67D3B6005292E3 /* Option+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Option+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				79238C2D2A69040A006137BD /* String+Extension.swift */,
+				622ED4FA2A79712B001C6CC7 /* CodingUserInfoKey+Extension.swift */,
 				799243A62A697B0000E3DD7C /* View+OnLoadModifier.swift */,
 			);
 			path = Extension;
@@ -360,6 +363,7 @@
 				79238C312A69049D006137BD /* DefaultDataGenerator.swift in Sources */,
 				79E862672A6AB92000F929E1 /* Colors.swift in Sources */,
 				628C517B2A67D3B6005292E3 /* Option+CoreDataClass.swift in Sources */,
+				622ED4FB2A79712B001C6CC7 /* CodingUserInfoKey+Extension.swift in Sources */,
 				7970C4122A6A502E00762041 /* InputBlockSettingView.swift in Sources */,
 				79EE65492A650A5D0099F722 /* TransparentGroupBox.swift in Sources */,
 				791A324E2A63FABA004A61A1 /* TemplateView.swift in Sources */,
@@ -521,7 +525,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = X32GZ3NKQ8;
+				DEVELOPMENT_TEAM = VA3J8597P8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -550,7 +554,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = X32GZ3NKQ8;
+				DEVELOPMENT_TEAM = VA3J8597P8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

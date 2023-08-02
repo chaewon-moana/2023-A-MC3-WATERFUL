@@ -31,9 +31,6 @@ extension Field {
             return []
         }
         
-//        return options.sorted { o1, o2 in
-//            return o2 > o1.order
-//        }
         return options
     }
     

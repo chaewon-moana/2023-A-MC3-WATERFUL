@@ -28,8 +28,8 @@
 
 // MARK: - Commands
 "command_file_new_team" = "새 팀";
-"command_file_import" = "기존 팀 추가";
-"command_file_export" = "팀 추출";
+"command_file_import" = "들여오기";
+"command_file_export" = "내보내기";
 
 // MARK: - ContentView
 "add_team" = "팀 추가";

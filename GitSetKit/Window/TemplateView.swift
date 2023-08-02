@@ -10,11 +10,14 @@ import WrappingHStack
 
 // 선택 가능한 Block Cell
 fileprivate struct BlockCell: View {
+    
     @StateObject var field: Field
     var selected: Bool = false
     
     @State private var editMode: Bool = false
     @State private var title: String = ""
+    
+    var focus: FocusState<ObjectIdentifier?>.Binding
     
     var onNameChanged: ((_ updatedField: Field) -> Void)? = nil
     
@@ -22,15 +25,17 @@ fileprivate struct BlockCell: View {
         ZStack {
             if editMode {
                 TextField("", text: $title)
+                    .focused(focus, equals: field.id)
                     .textFieldStyle(.plain)
                     .foregroundColor(.white)
                     .frame(maxWidth: 84)
                     .onSubmit {
-                        let newField = PersistenceController.shared.updateField(field: field, name: title)
-                        if let onNameChanged = onNameChanged {
-                            onNameChanged(newField)
+                        saveEditedChange()
+                    }
+                    .onChange(of: focus.wrappedValue) { newValue in
+                        if focus.wrappedValue == nil {
+                            saveEditedChange()
                         }
-                        editMode = false
                     }
             } else {
                 Text(field.wrappedName)
@@ -38,6 +43,7 @@ fileprivate struct BlockCell: View {
                     .foregroundColor(Color.white)
                     .onTapGesture(count: 2) {
                         editMode = true
+                        focus.wrappedValue = field.id
                     }
             }
         }
@@ -61,6 +67,14 @@ fileprivate struct BlockCell: View {
         .onChange(of: field) { newValue in
             self.title = field.name ?? ""
         }
+    }
+    
+    func saveEditedChange() {
+        let newField = PersistenceController.shared.updateField(field: field, name: title)
+        if let onNameChanged = onNameChanged {
+            onNameChanged(newField)
+        }
+        editMode = false
     }
 }
 
@@ -86,6 +100,7 @@ struct TemplateView: View {
     
     // 선택된 Field
     @Binding var selected: Field?
+    @FocusState private var focus: ObjectIdentifier?
     
     // 데이터 변경 시 ScrollView 및 WrappingHstack을 다시 랜더링하기 위한 변수
     @State private var renderId: UUID = UUID()
@@ -163,7 +178,7 @@ struct TemplateView: View {
                     }
                 } else if let d = d as? Field {
                     // data가 Field이면 Block으로 표시
-                    BlockCell(field: d, selected: selected?.id == d.id) { updatedField in
+                    BlockCell(field: d, selected: selected?.id == d.id, focus: $focus) { updatedField in
                         self.selected = updatedField
                     }
                     .onTapGesture {
@@ -179,6 +194,9 @@ struct TemplateView: View {
         .id(renderId)
         .onLoad {
             reloadData()
+        }
+        .onTapGesture {
+            focus = nil
         }
     }
     //: - Blocks View
