@@ -27,18 +27,19 @@ struct ContentView: View {
         } detail: {
             // MARK: Detail
             // 팀 선택된 경우
-            if let selected = selected {
+            if let _ = selected {
                 ConventionView(selectedTeam: $selected)
                     .frame(minWidth: 600, minHeight: 560)
                 
             } else {
                 // 팀 선택이 없는 경우 (= 팀이 없는 경우)
-                VStack(spacing: 16) {
-                    Image(systemName: "tray")
+                VStack(spacing: 24) {
+                    Image("GitSetKitLogo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 64, height: 64)
+                        .frame(width: 86, height: 86)
                     Text("not_selected")
+                        .font(.title3.bold())
                     
                     Button("add_team") {
                         let generator = DefaultDataGenerator(managedObjectContext)
